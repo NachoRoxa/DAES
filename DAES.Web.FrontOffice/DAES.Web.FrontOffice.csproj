@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AsambleaExtraOrdinariaAsociacionController.cs" />
     <Compile Include="Controllers\AsociacionConsumidorController.cs" />
+    <Compile Include="Controllers\DisolucionController.cs" />
     <Compile Include="Controllers\DocumentoController.cs" />
     <Compile Include="Controllers\GPController.cs" />
     <Compile Include="Controllers\GPDocumentoVerificacionController.cs" />
@@ -460,6 +461,7 @@
     <Content Include="Views\InformacionSemestral\Index.cshtml" />
     <Content Include="Views\InformacionSemestral\Search.cshtml" />
     <Content Include="Views\AsociacionConsumidor\Index.cshtml" />
+    <Content Include="Views\Disolucion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />
