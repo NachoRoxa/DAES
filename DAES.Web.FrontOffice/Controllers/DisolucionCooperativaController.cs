@@ -46,8 +46,8 @@ namespace DAES.Web.FrontOffice.Controllers
             Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller = "DisolucionCooperativa";
             Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method = "Search";
 
-            //Global.CurrentClaveUnica.ClaveUnicaUser = new ClaveUnicaUser();
             //Global.CurrentClaveUnica.ClaveUnicaUser.name = new Name
+            //Global.CurrentClaveUnica.ClaveUnicaUser = new ClaveUnicaUser();
             //{
             //    nombres = new System.Collections.Generic.List<string> { "DESA", "DESA" },
             //    apellidos = new System.Collections.Generic.List<string> { "DESA", "DESA" }

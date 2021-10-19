@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DAES.Infrastructure.SistemaIntegrado;
 using DAES.Model.SistemaIntegrado;
 using System.ComponentModel.DataAnnotations;
+using DAES.Web.FrontOffice.Models;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -39,6 +40,27 @@ namespace DAES.Web.FrontOffice.Controllers
             return View(model);
         }
 
+        public ActionResult Start()
+        {
+            //Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller = "Disolucion";
+            //Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method = "Search";
+
+            Global.CurrentClaveUnica.ClaveUnicaUser.name = new Name
+            Global.CurrentClaveUnica.ClaveUnicaUser = new ClaveUnicaUser();
+            {
+                nombres = new System.Collections.Generic.List<string> { "DESA", "DESA" },
+                apellidos = new System.Collections.Generic.List<string> { "DESA", "DESA" }
+            };
+            Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico = new RolUnico
+            {
+                numero = 44444444,
+                DV = "4",
+                tipo = "RUN"
+            };
+            return RedirectToAction(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method, Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller);
+
+            return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);
+        }
 
         // GET: Disolucion
         public ActionResult Index()
