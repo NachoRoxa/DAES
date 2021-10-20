@@ -12,9 +12,11 @@ namespace DAES.Web.FrontOffice.Controllers
 {
     public class DisolucionController : Controller
     {
-        public class DTOSearch
+        private SistemaIntegradoContext _db = new SistemaIntegradoContext();
+        private BLL.Custom _custom = new BLL.Custom();
+        public class SearchModel
         {
-            public DTOSearch()
+            public SearchModel()
             {
                 Organizacions = new List<Organizacion>();
             }
@@ -26,15 +28,26 @@ namespace DAES.Web.FrontOffice.Controllers
             public List<Organizacion> Organizacions { get; set; }
         }
 
-        private SistemaIntegradoContext _db = new SistemaIntegradoContext();
+        // TODO: Modificar al integrar Clave Única
+        public ActionResult Search()
+        {            
+            /*if(!Global.CurrentClaveUnica.IsAutenticated)
+            {
+                return View("_Error", new Exception("Usuario no autenticado con Clave Única."));
+            }*/
+
+            return View(new SearchModel());
+        }
 
         [HttpPost]
         public ActionResult Search(string Filter)
         {
             IQueryable<Organizacion> query = _db.Organizacion;
             query = query.Where(q => q.EstadoId == (int)Infrastructure.Enum.Estado.Vigente);
+            query = query.Where(q => /*q.RazonSocial.Contains(Filter) || */q.NumeroRegistro.Contains(Filter)/* || q.Sigla.Contains(Filter)*/);
 
-            var model = new DTOSearch();
+            var model = new SearchModel();
+            model.Organizacions = query.OrderBy(q => q.NumeroRegistro).ToList();
             model.First = false;
 
             return View(model);
@@ -42,24 +55,101 @@ namespace DAES.Web.FrontOffice.Controllers
 
         public ActionResult Start()
         {
-            //Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller = "Disolucion";
-            //Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method = "Search";
+            Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller = "Disolucion";
+            Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method = "Search";
 
-            Global.CurrentClaveUnica.ClaveUnicaUser.name = new Name
-            Global.CurrentClaveUnica.ClaveUnicaUser = new ClaveUnicaUser();
+            /*Global.CurrentClaveUnica.ClaveUnicaUser.name = new Name
             {
                 nombres = new System.Collections.Generic.List<string> { "DESA", "DESA" },
                 apellidos = new System.Collections.Generic.List<string> { "DESA", "DESA" }
             };
+            Global.CurrentClaveUnica.ClaveUnicaUser = new ClaveUnicaUser();
+            
             Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico = new RolUnico
             {
                 numero = 44444444,
                 DV = "4",
                 tipo = "RUN"
-            };
-            return RedirectToAction(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method, Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller);
-
+            };*/
+            /*return RedirectToAction(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method,
+             * Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller);*/
             return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);
+        }
+
+        public ActionResult Create(int id)
+        {
+            if(!Global.CurrentClaveUnica.IsAutenticated)
+            {
+                return View("_Error", new Exception("Usuario no autenticado con Clave Única."));
+            }
+
+            var model = _db.Organizacion.FirstOrDefault(q => q.OrganizacionId == id);
+            if(model == null)
+            {
+                return View("_Error", new Exception("Organización no encontrada"));
+            }
+
+            ViewBag.CiudadId = new SelectList(_db.Ciudad.OrderBy(q => q.Nombre), "CiudadId", "Nombre", model.CiudadId);
+            ViewBag.ComunaId = new SelectList(_db.Comuna.OrderBy(q => q.Nombre), "ComunaId", "Nombre", model.ComunaId);
+            ViewBag.EstadoId = new SelectList(_db.Estado.OrderBy(q => q.Nombre), "EstadoId", "Nombre", model.EstadoId);
+            ViewBag.SituacionId = new SelectList(_db.Situacion.OrderBy(q => q.Nombre), "SituacionId", "Nombre", model.SituacionId);
+            ViewBag.RegionId = new SelectList(_db.Region.OrderBy(q => q.Nombre), "RegionId", "Nombre", model.RegionId);
+            ViewBag.TipoOrganizacionId = new SelectList(_db.TipoOrganizacion.OrderBy(q => q.Nombre), "TipoOrganizacionId", "Nombre", model.TipoOrganizacionId);
+            ViewBag.RegionSolicitanteId = new SelectList(_db.Region.OrderBy(q => q.Nombre), "RegionId", "Nombre");
+
+            return View(new Model.DTO.DTODisolucionCooperativa()
+            {
+                RUTSolicitante = string.Concat(Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.numero, Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.DV),
+                NombresSolicitante = string.Concat(" ", Global.CurrentClaveUnica.ClaveUnicaUser.name.nombres).ToUpper(),
+                ApellidosSolicitante = string.Concat(" ", Global.CurrentClaveUnica.ClaveUnicaUser.name.apellidos).ToUpper(),
+                OrganizacionId = model.OrganizacionId,
+                TipoOrganizacionId = model.TipoOrganizacionId,
+                TipoOrganizacion = model.TipoOrganizacion,
+                EstadoId = model.EstadoId,
+                Estado = model.Estado,
+                SituacionId = model.SituacionId,
+                Situacion = model.Situacion,
+                RubroId = model.RubroId,
+                Rubro = model.Rubro,
+                SubRubroId = model.SubRubroId,
+                SubRubro = model.SubRubro,
+                RegionId = model.RegionId,
+                Region = model.Region,
+                ComunaId = model.ComunaId,
+                Comuna = model.Comuna,
+                CiudadId = model.CiudadId,
+                Ciudad = model.Ciudad,
+                NumeroRegistro = model.NumeroRegistro,
+                RUT = !string.IsNullOrWhiteSpace(model.RUT) ? model.RUT.Replace(".", string.Empty).Replace("-", string.Empty) : string.Empty,
+                RazonSocial = model.RazonSocial,
+                Sigla = model.Sigla,
+                Direccion = model.Direccion,
+                Fono = model.Fono,
+                Fax = model.Fax,
+                Email = model.Email,
+                URL = model.URL,
+                NumeroSociosConstituyentes = model.NumeroSociosConstituyentes,
+                NumeroSocios = model.NumeroSocios,
+                NumeroSociosHombres = model.NumeroSociosHombres,
+                NumeroSociosMujeres = model.NumeroSociosMujeres,
+                MinistroDeFe = model.MinistroDeFe,
+                EsGeneroFemenino = model.EsGeneroFemenino,
+                CiudadAsamblea = model.CiudadAsamblea,
+                NombreContacto = model.NombreContacto,
+                DireccionContacto = model.DireccionContacto,
+                TelefonoContacto = model.TelefonoContacto,
+                EmailContacto = model.EmailContacto,
+                FechaCelebracion = model.FechaCelebracion,
+                FechaPubliccionDiarioOficial = model.FechaPubliccionDiarioOficial,
+                FechaActualizacion = model.FechaActualizacion,
+                EsImportanciaEconomica = model.EsImportanciaEconomica,
+                FechaVigente = model.FechaVigente,
+                FechaDisolucion = model.FechaDisolucion,
+                FechaConstitucion = model.FechaConstitucion,
+                FechaCancelacion = model.FechaCancelacion,
+                FechaInexistencia = model.FechaInexistencia,
+                FechaAsignacionRol = model.FechaAsignacionRol
+            });
         }
 
         // GET: Disolucion

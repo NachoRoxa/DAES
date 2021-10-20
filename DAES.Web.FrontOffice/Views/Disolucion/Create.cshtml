@@ -1,0 +1,86 @@
+﻿@model DAES.Model.DTO.DTODisolucionCooperativa
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">Sociedad Solicitada</h1>
+    </div>
+</div>
+@if (Model == null)
+{
+    return;
+}
+
+<div class="container my-3">
+    <div class="alert alert-primary" role="alert">
+        <b>Importante: </b>Todos los documentos solicitados deben incluir firma electrónica avanzada.
+    </div>
+
+    @using (Html.BeginForm("Create", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        // TODO Eliminar cuando funcione el Token
+        @*@Html.AntiForgeryToken()*@
+        @Html.HiddenFor(model => model.RUTSolicitante)
+        @Html.HiddenFor(model => model.NombresSolicitante)
+        @Html.HiddenFor(model => model.ApellidosSolicitante)
+        @Html.HiddenFor(model => model.OrganizacionId)
+        @Html.HiddenFor(model => model.NumeroRegistro)
+        @Html.HiddenFor(model => model.RazonSocial)
+        @Html.HiddenFor(model => model.TipoOrganizacionId)
+        @Html.HiddenFor(model => model.EstadoId)
+        @Html.HiddenFor(model => model.EsGeneroFemenino)
+        @Html.HiddenFor(model => model.EsImportanciaEconomica)
+        @Html.HiddenFor(model => model.EsGeneroFemenino)
+        @Html.HiddenFor(model => model.EsImportanciaEconomica)
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Organización</h5>
+                        <p class="card-title">Modifique los datos de la organización</p>
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.NumeroRegistro, new { @class = "font-weight-bold" })
+                            @Html.DisplayFor(m => Model.NumeroRegistro)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.RazonSocial, new { @class = "font-weight-bold" })
+                            @Html.DisplayFor(m => Model.RazonSocial)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.TipoOrganizacionId, new { @class = "font-weight-bold" })
+                            @Html.DisplayFor(m => Model.TipoOrganizacion.Nombre)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.EstadoId, new { @class = "font-weight-bold" })
+                            @Html.DisplayFor(m => Model.Estado.Nombre)
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => Model.RubroId, new { @class = "font-weight-bold" })
+                                    @Html.DisplayFor(m=> Model.Rubro.Nombre)
+                                    @Html.ValidationMessageFor(m=> Model.RubroId, "", new { @class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m=>Model.SubRubroId, new { @class = "font-weight-bodl"})
+                                    @Html.ValidationMessageFor(m=> Model.SubRubroId,"", new { @class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group"></div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

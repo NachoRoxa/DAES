@@ -462,6 +462,8 @@
     <Content Include="Views\InformacionSemestral\Search.cshtml" />
     <Content Include="Views\AsociacionConsumidor\Index.cshtml" />
     <Content Include="Views\Disolucion\Index.cshtml" />
+    <Content Include="Views\Disolucion\Search.cshtml" />
+    <Content Include="Views\Disolucion\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />
