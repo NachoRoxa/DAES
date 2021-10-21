@@ -94,6 +94,7 @@
     <Compile Include="DTO\DTOAsambleaExtraOrdinaria.cs" />
     <Compile Include="DTO\DTOAsambleaOrdinaria.cs" />
     <Compile Include="DTO\DTOConstitucion.cs" />
+    <Compile Include="DTO\DTODisolucion.cs" />
     <Compile Include="DTO\DTOInformacionSemestral.cs" />
     <Compile Include="DTO\DTORespuestaOficio.cs" />
     <Compile Include="DTO\DTOCreacionOrganizacion.cs" />

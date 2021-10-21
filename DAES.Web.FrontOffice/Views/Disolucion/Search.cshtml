@@ -1,7 +1,7 @@
 ﻿@model DAES.Web.FrontOffice.Controllers.DisolucionController.SearchModel
 <div class="jumbotron">
     <div class="container">
-        <h1>Disolucion</h1>
+        <h1>Disolución Asociaciones y Cooperativas</h1>
     </div>
 </div>
 <div class="container my-3">
@@ -26,7 +26,7 @@
     }
 </div>
 <div class="container my-3">
-    @if (!Model.First)
+   @if (!Model.First)
     {
         <div class="card">
             <div class="card-body">
@@ -41,7 +41,7 @@
                                     @Html.DisplayFor(modelItem => item.NumeroRegistro) - @Html.DisplayFor(modelItem => item.RazonSocial);
                                 </td>
                                 <td>
-                                    <a href = '@Url.Action("Create")' class=" btn btn-primary btn-rounded">Seleccionar</a>
+                                    <a href = '@Url.Action("Create", new { id = item.OrganizacionId})' class= "btn btn-primary btn-rounded">Seleccionar</a>
                                 </td>
                             </tr>
                         }

@@ -22,8 +22,8 @@ namespace DAES.Web.FrontOffice.Controllers
             }
             public bool First { get; set; } = true;
 
-            [Display(Name ="Ingrese numero de registro")]
-            [Required(ErrorMessage ="Es necesario especificar este dato")]
+            [Display(Name = "Ingrese numero de registro")]
+            [Required(ErrorMessage = "Es necesario especificar este dato")]
             public string Filter { get; set; }
             public List<Organizacion> Organizacions { get; set; }
         }
@@ -42,7 +42,7 @@ namespace DAES.Web.FrontOffice.Controllers
         [HttpPost]
         public ActionResult Search(string Filter)
         {
-            IQueryable<Organizacion> query = _db.Organizacion;
+                IQueryable<Organizacion> query = _db.Organizacion;
             query = query.Where(q => q.EstadoId == (int)Infrastructure.Enum.Estado.Vigente);
             query = query.Where(q => /*q.RazonSocial.Contains(Filter) || */q.NumeroRegistro.Contains(Filter)/* || q.Sigla.Contains(Filter)*/);
 
@@ -55,36 +55,34 @@ namespace DAES.Web.FrontOffice.Controllers
 
         public ActionResult Start()
         {
-            Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller = "Disolucion";
             Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method = "Search";
 
             /*Global.CurrentClaveUnica.ClaveUnicaUser.name = new Name
             {
-                nombres = new System.Collections.Generic.List<string> { "DESA", "DESA" },
-                apellidos = new System.Collections.Generic.List<string> { "DESA", "DESA" }
+                nombres = new System.Collections.Generic.List<string> { "IGNACIO", "ALFREDO" },
+                apellidos = new System.Collections.Generic.List<string> { "ROCHA", "PAVEZ" }
             };
             Global.CurrentClaveUnica.ClaveUnicaUser = new ClaveUnicaUser();
-            
+
             Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico = new RolUnico
             {
-                numero = 44444444,
-                DV = "4",
+                numero = 17957898,
+                DV = "0",
                 tipo = "RUN"
             };*/
-            /*return RedirectToAction(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method,
-             * Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller);*/
-            return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);
+            return RedirectToAction(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method, Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller);
+            /*return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);*/
         }
 
         public ActionResult Create(int id)
         {
-            if(!Global.CurrentClaveUnica.IsAutenticated)
+            /*if (!Global.CurrentClaveUnica.IsAutenticated)
             {
                 return View("_Error", new Exception("Usuario no autenticado con Clave Única."));
-            }
+            }*/
 
-            var model = _db.Organizacion.FirstOrDefault(q => q.OrganizacionId == id);
-            if(model == null)
+            var model = _db.Organizacion.FirstOrDefault(q => q.OrganizacionId == id );
+            if (model == null)
             {
                 return View("_Error", new Exception("Organización no encontrada"));
             }
@@ -97,11 +95,11 @@ namespace DAES.Web.FrontOffice.Controllers
             ViewBag.TipoOrganizacionId = new SelectList(_db.TipoOrganizacion.OrderBy(q => q.Nombre), "TipoOrganizacionId", "Nombre", model.TipoOrganizacionId);
             ViewBag.RegionSolicitanteId = new SelectList(_db.Region.OrderBy(q => q.Nombre), "RegionId", "Nombre");
 
-            return View(new Model.DTO.DTODisolucionCooperativa()
+            return View(new Model.DTO.DTODisolucion()
             {
-                RUTSolicitante = string.Concat(Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.numero, Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.DV),
+                /*RUTSolicitante = string.Concat(Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.numero, Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.DV),
                 NombresSolicitante = string.Concat(" ", Global.CurrentClaveUnica.ClaveUnicaUser.name.nombres).ToUpper(),
-                ApellidosSolicitante = string.Concat(" ", Global.CurrentClaveUnica.ClaveUnicaUser.name.apellidos).ToUpper(),
+                ApellidosSolicitante = string.Concat(" ", Global.CurrentClaveUnica.ClaveUnicaUser.name.apellidos).ToUpper(),*/
                 OrganizacionId = model.OrganizacionId,
                 TipoOrganizacionId = model.TipoOrganizacionId,
                 TipoOrganizacion = model.TipoOrganizacion,
@@ -152,6 +150,12 @@ namespace DAES.Web.FrontOffice.Controllers
             });
         }
 
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create()
+        {
+            return View();
+        }*/
         // GET: Disolucion
         public ActionResult Index()
         {
