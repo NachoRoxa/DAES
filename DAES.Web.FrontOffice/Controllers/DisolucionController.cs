@@ -95,9 +95,61 @@ namespace DAES.Web.FrontOffice.Controllers
             ViewBag.TipoOrganizacionId = new SelectList(_db.TipoOrganizacion.OrderBy(q => q.Nombre), "TipoOrganizacionId", "Nombre", model.TipoOrganizacionId);
             ViewBag.RegionSolicitanteId = new SelectList(_db.Region.OrderBy(q => q.Nombre), "RegionId", "Nombre");
 
-            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year < 2003)
+            var modelDTO = new Model.DTO.DTODisolucion()
             {
-                return View("CooperativaPrevia");
+                OrganizacionId = model.OrganizacionId,
+                TipoOrganizacionId = model.TipoOrganizacionId,
+                TipoOrganizacion = model.TipoOrganizacion,
+                EstadoId = model.EstadoId,
+                Estado = model.Estado,
+                SituacionId = model.SituacionId,
+                Situacion = model.Situacion,
+                RubroId = model.RubroId,
+                Rubro = model.Rubro,
+                SubRubroId = model.SubRubroId,
+                SubRubro = model.SubRubro,
+                RegionId = model.RegionId,
+                Region = model.Region,
+                ComunaId = model.ComunaId,
+                Comuna = model.Comuna,
+                CiudadId = model.CiudadId,
+                Ciudad = model.Ciudad,
+                NumeroRegistro = model.NumeroRegistro,
+                RUT = !string.IsNullOrWhiteSpace(model.RUT) ? model.RUT.Replace(".", string.Empty).Replace("-", string.Empty) : string.Empty,
+                RazonSocial = model.RazonSocial,
+                Sigla = model.Sigla,
+                Direccion = model.Direccion,
+                Fono = model.Fono,
+                Fax = model.Fax,
+                Email = model.Email,
+                URL = model.URL,
+                NumeroSociosConstituyentes = model.NumeroSociosConstituyentes,
+                NumeroSocios = model.NumeroSocios,
+                NumeroSociosHombres = model.NumeroSociosHombres,
+                NumeroSociosMujeres = model.NumeroSociosMujeres,
+                MinistroDeFe = model.MinistroDeFe,
+                EsGeneroFemenino = model.EsGeneroFemenino,
+                CiudadAsamblea = model.CiudadAsamblea,
+                NombreContacto = model.NombreContacto,
+                DireccionContacto = model.DireccionContacto,
+                TelefonoContacto = model.TelefonoContacto,
+                EmailContacto = model.EmailContacto,
+                FechaCelebracion = model.FechaCelebracion,
+                FechaPubliccionDiarioOficial = model.FechaPubliccionDiarioOficial,
+                FechaActualizacion = model.FechaActualizacion,
+                EsImportanciaEconomica = model.EsImportanciaEconomica,
+                FechaVigente = model.FechaVigente,
+                FechaDisolucion = model.FechaDisolucion,
+                FechaConstitucion = model.FechaConstitucion,
+                FechaCancelacion = model.FechaCancelacion,
+                FechaInexistencia = model.FechaInexistencia,
+                FechaAsignacionRol = model.FechaAsignacionRol
+            };
+
+
+            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year < 2003)
+            {
+                return View("CooperativaPrevia", modelDTO);
             }
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year > 2003)
             {
@@ -109,7 +161,7 @@ namespace DAES.Web.FrontOffice.Controllers
             }
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores)
             {
-                return View("AsociacionConsumidores");
+                return View("AsociacionConsumidores", modelDTO);
             }
 
             return View();

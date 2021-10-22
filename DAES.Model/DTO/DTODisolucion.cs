@@ -22,6 +22,20 @@ namespace DAES.Model.DTO
         public int TipoOrganizacionId { get; set; }
         public virtual TipoOrganizacion TipoOrganizacion { get; set; }
 
+        [Display(Name ="Número oficio")]
+        public string NumeroOficio { get; set; }
+        
+        [Display(Name ="Fecha de asamblea")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaAsamblea { get; set; }
+
+        [Display(Name = "Fecha de publicación diario oficial")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaPublicacion { get; set; }
+
+
         [Display(Name = "Estado")]
         public int? EstadoId { get; set; }
         public virtual Estado Estado { get; set; }

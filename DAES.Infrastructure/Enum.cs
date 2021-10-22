@@ -16,6 +16,13 @@
             RepresentanteOrganizacion = 10
         }
 
+        public enum TipoNorma
+        {
+            Decreto = 1,
+            DecretoSupremo = 2,
+            Resolucion = 3
+        }
+
         public enum Estado
         {
             EnConstitucion = 1,
