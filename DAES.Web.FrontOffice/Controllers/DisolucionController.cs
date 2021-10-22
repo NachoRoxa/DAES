@@ -95,11 +95,30 @@ namespace DAES.Web.FrontOffice.Controllers
             ViewBag.TipoOrganizacionId = new SelectList(_db.TipoOrganizacion.OrderBy(q => q.Nombre), "TipoOrganizacionId", "Nombre", model.TipoOrganizacionId);
             ViewBag.RegionSolicitanteId = new SelectList(_db.Region.OrderBy(q => q.Nombre), "RegionId", "Nombre");
 
-            return View(new Model.DTO.DTODisolucion()
+            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year < 2003)
             {
-                /*RUTSolicitante = string.Concat(Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.numero, Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.DV),
+                return View("CooperativaPrevia");
+            }
+            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year > 2003)
+            {
+                return View("CooperativaPosterior");
+            }
+            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
+            {
+                return View("AsociacionGremial");
+            }
+            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores)
+            {
+                return View("AsociacionConsumidores");
+            }
+
+            return View();
+
+            /*return View(new Model.DTO.DTODisolucion()
+            {
+                *//*RUTSolicitante = string.Concat(Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.numero, Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico.DV),
                 NombresSolicitante = string.Concat(" ", Global.CurrentClaveUnica.ClaveUnicaUser.name.nombres).ToUpper(),
-                ApellidosSolicitante = string.Concat(" ", Global.CurrentClaveUnica.ClaveUnicaUser.name.apellidos).ToUpper(),*/
+                ApellidosSolicitante = string.Concat(" ", Global.CurrentClaveUnica.ClaveUnicaUser.name.apellidos).ToUpper(),*//*
                 OrganizacionId = model.OrganizacionId,
                 TipoOrganizacionId = model.TipoOrganizacionId,
                 TipoOrganizacion = model.TipoOrganizacion,
@@ -147,7 +166,7 @@ namespace DAES.Web.FrontOffice.Controllers
                 FechaCancelacion = model.FechaCancelacion,
                 FechaInexistencia = model.FechaInexistencia,
                 FechaAsignacionRol = model.FechaAsignacionRol
-            });
+            });*/
         }
 
         /*[HttpPost]

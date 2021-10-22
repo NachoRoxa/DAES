@@ -464,6 +464,10 @@
     <Content Include="Views\Disolucion\Index.cshtml" />
     <Content Include="Views\Disolucion\Search.cshtml" />
     <Content Include="Views\Disolucion\Create.cshtml" />
+    <Content Include="Views\Disolucion\CooperativaPrevia.cshtml" />
+    <Content Include="Views\Disolucion\CooperativaPosterior.cshtml" />
+    <Content Include="Views\Disolucion\AsociacionGremial.cshtml" />
+    <Content Include="Views\Disolucion\AsociacionConsumidores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />
