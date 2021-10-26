@@ -43,7 +43,7 @@ namespace DAES.Web.FrontOffice.Controllers
             return RedirectToAction(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method, Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller);
 
             //activar en testing y produccion
-            return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);
+            /*return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);*/
         }
     }
 }

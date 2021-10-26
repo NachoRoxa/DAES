@@ -19,6 +19,9 @@ namespace DAES.Model.SistemaIntegrado
             Articulo91s = new List<Articulo91>();
             ModificacionEstatutos = new List<ModificacionEstatuto>();
             Disolucions = new List<Disolucion>();
+            DisolucionCooperativaPosterior = new List<DisolucionCooperativaPosterior>();
+            DisolucionCooperativaAnterior = new List<DisolucionCooperativaAnterior>();
+            DisolucionAsociacions = new List<DisolucionAsociacion>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -197,6 +200,9 @@ namespace DAES.Model.SistemaIntegrado
         public virtual List<DocumentoSinContenido> DocumentoSinContenidos { get; set; }
         public virtual List<Articulo91> Articulo91s { get; set; }
         public virtual List<ModificacionEstatuto> ModificacionEstatutos { get; set; }
+        public virtual List<DisolucionCooperativaPosterior> DisolucionCooperativaPosterior { get; set; }
+        public virtual List<DisolucionCooperativaAnterior> DisolucionCooperativaAnterior { get; set; }
+        public virtual List<DisolucionAsociacion> DisolucionAsociacions { get; set; }
         public virtual List<Disolucion> Disolucions { get; set; }
 
         [NotMapped]

@@ -460,13 +460,29 @@ namespace DAES.Web.BackOffice.Controllers
 
         public ActionResult DisolucionAdd(int OrganizacionId)
         {
-
+            
             db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
             db.SaveChanges();
 
             var model = db.Organizacion.Find(OrganizacionId);
 
-            return PartialView("_DisolucionEdit", model);
+            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year < 2003)
+            {
+                return PartialView("_DisolucionCooperativaAnterior", model);
+            }
+            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year > 2003)
+            {
+                return PartialView("_DisolucionCooperativaPosterior", model);
+            }
+            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
+            {
+                return PartialView("_DisolucionAsociacionGremial", model);
+            }
+            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores)
+            {
+                return PartialView("_DisolucionAsociacionConsumidores", model);
+            }
+            return PartialView("_ErrorMessage", model);
         }
 
         public ActionResult DisolucionDelete(int DisolucionId, int OrganizacionId)

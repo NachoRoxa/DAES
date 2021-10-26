@@ -120,6 +120,9 @@
     <Compile Include="SistemaIntegrado\ActaFiscalizacionFiscalizadorLegal.cs" />
     <Compile Include="SistemaIntegrado\ActaFiscalizacionFiscalizadorContable.cs" />
     <Compile Include="SistemaIntegrado\ActaFiscalizacionHechoLegal.cs" />
+    <Compile Include="SistemaIntegrado\DisolucionAsociacion.cs" />
+    <Compile Include="SistemaIntegrado\DisolucionCooperativaPosterior.cs" />
+    <Compile Include="SistemaIntegrado\DisolucionCooperativaAnterior.cs" />
     <Compile Include="SistemaIntegrado\Fiscalizacion\TipoOficio.cs" />
     <Compile Include="SistemaIntegrado\Fiscalizacion\TipoMateria.cs" />
     <Compile Include="SistemaIntegrado\Fiscalizacion\TipoCriterio.cs" />
@@ -157,6 +160,7 @@
     <Compile Include="SistemaIntegrado\OrganizacionLog.cs" />
     <Compile Include="SistemaIntegrado\Proceso.cs" />
     <Compile Include="SistemaIntegrado\TipoAprobacion.cs" />
+    <Compile Include="SistemaIntegrado\TipoNorma.cs" />
     <Compile Include="SistemaIntegrado\TipoPrivacidad.cs" />
     <Compile Include="SistemaIntegrado\TipoWorkflow.cs" />
     <Compile Include="SistemaIntegrado\Workflow.cs" />

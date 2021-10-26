@@ -1,0 +1,38 @@
+﻿@model DAES.Model.SistemaIntegrado.Organizacion
+
+<table class="table table-hover table-striped datatable">
+    Disolucion Cooperativa Anterior al año 2003
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().TipoNorma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().TipoNorma.NumeroNorma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().TipoNorma.FechaNorma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().FechaPublicacionDiarioOficial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().Autorizacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().FechaJuntaSocios)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.DisolucionCooperativaAnterior.Count(); i++)
+        {
+            <tr>
+                @Html.EditorFor(m => m.DisolucionCooperativaAnterior[i])
+                <td>
+                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionCooperativaAnterior.ToArray()[i].DisolucionCooperativaAnteriorId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
