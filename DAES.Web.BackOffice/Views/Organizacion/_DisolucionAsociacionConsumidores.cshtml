@@ -5,35 +5,55 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().NumeroOficio)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionConsumidores.FirstOrDefault().NumeroOficio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().FechaOficio)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionConsumidores.FirstOrDefault().FechaOficio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().FechaAsambleaSocios)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionConsumidores.FirstOrDefault().FechaAsambleaSocios)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().FechaEscrituraPublica)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionConsumidores.FirstOrDefault().FechaEscrituraPublica)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().FechaPublicacionDiarioOficial)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionConsumidores.FirstOrDefault().FechaPublicacionDiarioOficial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().NombreNotaria)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionConsumidores.FirstOrDefault().NombreNotaria)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().DatosNotario)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionConsumidores.FirstOrDefault().DatosNotario)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>
+                @Html.TextBoxFor(model=> Model.DisolucionAsociacionConsumidores.FirstOrDefault().NumeroOficio)
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+
             </th>
         </tr>
+
     </thead>
     <tbody>
-        @for (var i = 0; i < Model.DisolucionAsociacions.Count(); i++)
+        @for (var i = 0; i < Model.DisolucionAsociacionConsumidores.Count(); i++)
         {
             <tr>
-                @Html.EditorFor(m => m.DisolucionAsociacions[i])
+                @Html.EditorFor(m => m.DisolucionAsociacionConsumidores[i])
                 <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionAsociacions.ToArray()[i].DisolucionAsociacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionAsociacionConsumidores.ToArray()[i].DisolucionAsociacionConsumidoresId }, new AjaxOptions { UpdateTargetId = "disolucion" })
                 </td>
             </tr>
         }

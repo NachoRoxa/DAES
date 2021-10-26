@@ -53,11 +53,6 @@ namespace DAES.Web.FrontOffice.Controllers
         }
         public ActionResult Create(int id)
         {
-            /*if (!Global.CurrentClaveUnica.IsAutenticated)
-            {
-                return View("_Error", new Exception("Usuario no autenticado con Clave Única."));
-            }*/
-
             var model = _db.Organizacion.FirstOrDefault(q => q.OrganizacionId == id );
             if (model == null)
             {
@@ -130,11 +125,11 @@ namespace DAES.Web.FrontOffice.Controllers
             }
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year > 2003)
             {
-                return View("CooperativaPosterior");
+                return View("CooperativaPosterior", modelDTO);
             }
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
             {
-                return View("AsociacionGremial");
+                return View("AsociacionGremial", modelDTO);
             }
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores)
             {

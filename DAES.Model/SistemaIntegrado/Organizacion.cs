@@ -21,7 +21,8 @@ namespace DAES.Model.SistemaIntegrado
             Disolucions = new List<Disolucion>();
             DisolucionCooperativaPosterior = new List<DisolucionCooperativaPosterior>();
             DisolucionCooperativaAnterior = new List<DisolucionCooperativaAnterior>();
-            DisolucionAsociacions = new List<DisolucionAsociacion>();
+            DisolucionAsociacionConsumidores = new List<DisolucionAsociacionConsumidores>();
+            DisolucionAsociacionGremials = new List<DisolucionAsociacionGremial>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -202,7 +203,8 @@ namespace DAES.Model.SistemaIntegrado
         public virtual List<ModificacionEstatuto> ModificacionEstatutos { get; set; }
         public virtual List<DisolucionCooperativaPosterior> DisolucionCooperativaPosterior { get; set; }
         public virtual List<DisolucionCooperativaAnterior> DisolucionCooperativaAnterior { get; set; }
-        public virtual List<DisolucionAsociacion> DisolucionAsociacions { get; set; }
+        public virtual List<DisolucionAsociacionConsumidores> DisolucionAsociacionConsumidores { get; set; }
+        public virtual List<DisolucionAsociacionGremial> DisolucionAsociacionGremials { get; set; }
         public virtual List<Disolucion> Disolucions { get; set; }
 
         [NotMapped]

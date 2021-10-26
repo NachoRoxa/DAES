@@ -5,37 +5,55 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().NumeroOficio)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().NumeroOficio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().FechaOficio)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().FechaOficio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().FechaAsambleaSocios)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().FechaAsambleaSocios)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().FechaEscrituraPublica)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().FechaEscrituraPublica)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().FechaPublicacionDiarioOficial)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().FechaPublicacionDiarioOficial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().NombreNotaria)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().NombreNotaria)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacions.FirstOrDefault().DatosNotario)
+                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().DatosNotario)
             </th>
         </tr>
     </thead>
     <tbody>
-        @for (var i = 0; i < Model.DisolucionAsociacions.Count(); i++)
+        @for (var i = 0; i < Model.DisolucionAsociacionGremials.Count(); i++)
         {
             <tr>
-                @Html.EditorFor(m => m.DisolucionAsociacions[i])
+                @Html.EditorFor(m => m.DisolucionAsociacionGremials[i])
                 <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionAsociacions.ToArray()[i].DisolucionAsociacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionAsociacionGremials.ToArray()[i].DisolucionAsociacionGremialId }, new AjaxOptions { UpdateTargetId = "disolucion" })
                 </td>
             </tr>
         }
+        <tr>
+            <th>
+                @Html.EditorFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().NumeroOficio)
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+
+            </th>
+        </tr>
     </tbody>
 </table>
