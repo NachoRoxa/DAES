@@ -27,20 +27,24 @@ namespace DAES.Model.SistemaIntegrado
         public int NumeroOficio { get; set; }
 
         [Display(Name ="Fecha de Oficio")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime FechaOficio { get; set; }
+        public DateTime? FechaOficio { get; set; }
 
         [Display(Name ="Fecha de Asamble Extraordinario de Socios")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime FechaAsambleaSocios { get; set; }
+        public DateTime? FechaAsambleaSocios { get; set; }
 
         [Display(Name ="Fecha Escritura Publica")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime FechaEscrituraPublica { get; set; }
+        public DateTime? FechaEscrituraPublica { get; set; }
         
         [Display(Name = "Fecha de Publicación en el Diario Oficial")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime FechaPublicacionDiarioOficial { get; set; }
+        public DateTime? FechaPublicacionDiarioOficial { get; set; }
         
         [Display(Name = "Nombre de la Notaría")]
         public string NombreNotaria { get; set; }

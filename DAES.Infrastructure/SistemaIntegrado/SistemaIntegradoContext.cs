@@ -61,8 +61,13 @@ namespace DAES.Infrastructure.SistemaIntegrado
         public virtual DbSet<Periodo> Periodo { get; set; }
         public virtual DbSet<ModificacionEstatuto> ModificacionEstatutos { get; set; }
         public virtual DbSet<Disolucion> Disolucions { get; set; }
+        public virtual DbSet<DisolucionCooperativaAnterior> DisolucionCooperativaAnteriors { get; set; }
+        public virtual DbSet<DisolucionCooperativaPosterior> DisolucionCooperativaPosteriors { get; set; }
+        public virtual DbSet<DisolucionAsociacionConsumidores> DisolucionConsumidores { get; set; }
+        public virtual DbSet<DisolucionAsociacionGremial> DisolucionAsociacionGremials { get; set; }
         public virtual DbSet<Fiscalizacion> Fiscalizacion { get; set; }
         public virtual DbSet<Hallazgo> Hallazgo { get; set; }
+        public virtual DbSet<TipoNorma> TipoNormas { get; set; }
         public virtual DbSet<TipoFiscalizacion> TipoFiscalizacion { get; set; }
         public virtual DbSet<TipoHallazgo> TipoHallazgo { get; set; }
         public virtual DbSet<TipoMateria> TipoMateria { get; set; }

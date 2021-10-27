@@ -30,7 +30,8 @@
             <tr>
                 @Html.EditorFor(m => m.DisolucionCooperativaAnterior[i])
                 <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionCooperativaAnterior.ToArray()[i].DisolucionCooperativaAnteriorId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionCooperativaAnterior.ToArray()[i].DisolucionCooperativaAnteriorId,
+               Model.DisolucionCooperativaAnterior.ToArray()[i].OrganizacionId}, new AjaxOptions { UpdateTargetId = "disolucion" })
                 </td>
             </tr>
         }

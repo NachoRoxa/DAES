@@ -26,6 +26,9 @@
             <th>
                 @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().DatosCBR)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().ComisionLiquidadora)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -34,7 +37,8 @@
             <tr>
                 @Html.EditorFor(m => m.DisolucionCooperativaPosterior[i])
                 <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionCooperativaPosterior.ToArray()[i].DisolucionCooperativaPosteriorId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionCooperativaPosterior.ToArray()[i].DisolucionCooperativaPosteriorId,
+               Model.DisolucionCooperativaPosterior.ToArray()[i].OrganizacionId}, new AjaxOptions { UpdateTargetId = "disolucion" })
                 </td>
             </tr>
         }

@@ -1,59 +1,64 @@
 ﻿@model DAES.Model.SistemaIntegrado.Organizacion
 
-<table class="table table-hover table-striped datatable">
-    Disolucion Asociacion Gremial
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().NumeroOficio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().FechaOficio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().FechaAsambleaSocios)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().FechaEscrituraPublica)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().FechaPublicacionDiarioOficial)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().NombreNotaria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().DatosNotario)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (var i = 0; i < Model.DisolucionAsociacionGremials.Count(); i++)
-        {
-            <tr>
-                @Html.EditorFor(m => m.DisolucionAsociacionGremials[i])
-                <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionAsociacionGremials.ToArray()[i].DisolucionAsociacionGremialId }, new AjaxOptions { UpdateTargetId = "disolucion" })
-                </td>
-            </tr>
-        }
-        <tr>
-            <th>
-                @Html.EditorFor(model => Model.DisolucionAsociacionGremials.FirstOrDefault().NumeroOficio)
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
 
-            </th>
-        </tr>
-    </tbody>
-</table>
+<div class="panel panel-default">
+    <div class="panel-heading">Asociacion Gremial</div>
+    <div class="panel-body">
+        <table class="table table-hover table-striped datatable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => Model.DisolucionAsociacionGremials.First().NumeroOficio)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => Model.DisolucionAsociacionGremials.First().FechaOficio)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => Model.DisolucionAsociacionGremials.First().FechaAsambleaSocios)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => Model.DisolucionAsociacionGremials.First().FechaEscrituraPublica)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.EditorFor(m => Model.DisolucionAsociacionGremials.First().NumeroOficio, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    <td>@Html.EditorFor(m => Model.DisolucionAsociacionGremials.First().FechaOficio, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    <td>@Html.EditorFor(m => Model.DisolucionAsociacionGremials.First().FechaAsambleaSocios, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    <td>@Html.EditorFor(m => Model.DisolucionAsociacionGremials.First().FechaEscrituraPublica, new { htmlAttributes = new { @class = "form-control" } })</td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => Model.DisolucionAsociacionGremials.First().FechaPublicacionDiarioOficial)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => Model.DisolucionAsociacionGremials.First().NombreNotaria)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => Model.DisolucionAsociacionGremials.First().DatosNotario)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                    <td>@Html.EditorFor(m => Model.DisolucionAsociacionGremials.First().FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    <td>@Html.EditorFor(m => Model.DisolucionAsociacionGremials.First().NombreNotaria, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    <td>@Html.EditorFor(m => Model.DisolucionAsociacionGremials.First().DatosNotario, new { htmlAttributes = new { @class = "form-control" } })</td>
+                </tr>
+            </tbody>
+            @* @for (var i = 0; i < Model.DisolucionAsociacionGremials.Count(); i++)
+            {
+                <tr>
+                    @Html.EditorFor(m => m.DisolucionAsociacionGremials[i])
+                    <td>
+                        @Ajax.ActionLink("Eliminar", "DisolucionAGDelete", null, new { Model.DisolucionAsociacionGremials.ToArray()[i].DisolucionAsociacionGremialId, Model.DisolucionAsociacionGremials.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    </td>
+                </tr>
+            }*@
+        </table>
+    </div>
+</div>

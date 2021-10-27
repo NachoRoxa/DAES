@@ -27,25 +27,6 @@
             </th>
             <th></th>
         </tr>
-        <tr>
-            <th>
-                @Html.TextBoxFor(model=> Model.DisolucionAsociacionConsumidores.FirstOrDefault().NumeroOficio)
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-
-            </th>
-        </tr>
-
     </thead>
     <tbody>
         @for (var i = 0; i < Model.DisolucionAsociacionConsumidores.Count(); i++)
@@ -53,7 +34,8 @@
             <tr>
                 @Html.EditorFor(m => m.DisolucionAsociacionConsumidores[i])
                 <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionAsociacionConsumidores.ToArray()[i].DisolucionAsociacionConsumidoresId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionAsociacionConsumidores.ToArray()[i].DisolucionAsociacionConsumidoresId, 
+                   Model.DisolucionAsociacionConsumidores.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
                 </td>
             </tr>
         }

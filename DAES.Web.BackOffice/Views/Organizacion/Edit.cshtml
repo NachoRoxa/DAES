@@ -329,7 +329,7 @@
         <div class="panel-heading">Disolución</div>
         <div class="panel-body">
             <div id="disolucion">
-                @Html.Partial("_DisolucionEdit", Model)
+                @*@Html.Partial("_DisolucionEdit", Model)*@
             </div>
             @Ajax.ActionLink("Agregar disolución", "DisolucionAdd", null, new { Model.OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
         </div>

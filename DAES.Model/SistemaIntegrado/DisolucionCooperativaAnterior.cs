@@ -45,8 +45,9 @@ namespace DAES.Model.SistemaIntegrado
         public string Autorizacion { get; set; }
 
         [Display(Name ="Fecha de la Junta general de Socios")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime FechaJuntaSocios { get; set; }
+        public DateTime? FechaJuntaSocios { get; set; }
 
         [Display(Name ="Comision Liquidadora")]
         public bool ComisionLiquidadora { get; set; }

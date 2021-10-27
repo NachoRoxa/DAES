@@ -46,7 +46,7 @@ namespace DAES.Model.SistemaIntegrado
         [Display(Name ="Datos Conserbador Bienes Raices")]
         public string DatosCBR { get; set; }
 
-        [Display(Name ="Comision Liquidadora")]
+        [Display(Name ="Comisión Liquidadora")]
         public bool ComisionLiquidadora { get; set; }
     }
 }
