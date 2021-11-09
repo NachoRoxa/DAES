@@ -1,46 +1,42 @@
 ﻿
 @model DAES.Model.SistemaIntegrado.Organizacion
 
+
 <table class="table table-hover table-striped datatable">
-    Disolucion Cooperativa Posterior al año 2003
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().FechaJuntaSocios)
+                @Html.DisplayNameFor(m => Model.Disolucions.First().FechaJuntaSocios)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().FechaEscrituraPublica)
+                @Html.DisplayNameFor(m => Model.Disolucions.First().FechaEscrituraPublica)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().MinistroDeFe)
+                @Html.DisplayNameFor(m => Model.Disolucions.First().MinistroDeFe)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().FechaPublicacionDiarioOficial)
+                @Html.DisplayNameFor(m => Model.Disolucions.First().FechaPublicacionDiarioOficial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().NumeroFojas)
+                @Html.DisplayNameFor(m => Model.Disolucions.First().NumeroFojas)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().AñoInscripcion)
+                @Html.DisplayNameFor(m => Model.Disolucions.First().AñoInscripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().DatosCBR)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaPosterior.FirstOrDefault().ComisionLiquidadora)
+                @Html.DisplayNameFor(m => Model.Disolucions.First().DatosCBR)
             </th>
         </tr>
-    </thead>
+    </thead>    
     <tbody>
-        @for (var i = 0; i < Model.DisolucionCooperativaPosterior.Count(); i++)
+        @for (var i = 0; i < Model.Disolucions.Count(); i++)
         {
             <tr>
-                @Html.EditorFor(m => m.DisolucionCooperativaPosterior[i])
+                @Html.EditorFor(m => m.Disolucions[i])
                 <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionCooperativaPosterior.ToArray()[i].DisolucionCooperativaPosteriorId,
-               Model.DisolucionCooperativaPosterior.ToArray()[i].OrganizacionId}, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    @Ajax.ActionLink("Eliminar", "DisolucionCooperativaDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
                 </td>
             </tr>
-        }
+            }
     </tbody>
 </table>

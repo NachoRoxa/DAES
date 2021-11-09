@@ -144,12 +144,99 @@ namespace DAES.BLL
                 return returnValue;
             }
         }
-        public List<string> DisolucionUpdate(List<Disolucion> list)
+
+        /*
+         * TODO Crear Funcion Disolucion¬
+         * 
+         * Probar dejando solo una funcion para la disolucion y filtrar datos segun el tipo de organizacion
+         * asi se puede cambiar el estado de dicha organizacion
+         */
+
+        public List<string> DisolucionCooperativaUpdate(List<Disolucion> listCooperativa)
+        {
+            var returnValue = new List<string>();
+            using(SistemaIntegradoContext context = new SistemaIntegradoContext())
+            {
+                if(listCooperativa == null)
+                {
+                    return returnValue;
+                }
+                foreach(var item in listCooperativa)
+                {
+                    var disolucion = context.Disolucions.FirstOrDefault(q => q.DisolucionId == item.DisolucionId);
+                    if(disolucion != null)
+                    {
+                        disolucion.TipoNormaId = item.TipoNormaId;
+                        disolucion.NumeroNorma = item.NumeroNorma;
+                        disolucion.FechaNorma = item.FechaNorma;
+                        disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
+                        disolucion.Autorizacion = item.Autorizacion;
+                        disolucion.FechaJuntaSocios = item.FechaJuntaSocios;
+                        disolucion.Comision = item.Comision;
+                        disolucion.FechaDisolucion = item.FechaDisolucion;
+                        disolucion.NumeroOficio = item.NumeroOficio;
+                        disolucion.FechaOficio = item.FechaOficio;
+                        disolucion.FechaAsambleaSocios = item.FechaAsambleaSocios;
+                        disolucion.FechaEscrituraPublica = item.FechaEscrituraPublica;
+                        disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
+                        disolucion.NombreNotaria = item.NombreNotaria;
+                        disolucion.DatosCBR = item.DatosCBR;
+                        //TODO Agregar datos para la tabla Comision Liquidadora
+                        /*disolucion.ComisionLiquidadoraId = item.ComisionLiquidadoraId;*/
+                    }
+                }                
+
+                context.SaveChanges();
+                return returnValue;
+            }
+        }
+        
+        public List<string> DisolucionAsociacionUpdate(List<Disolucion> listAsociacion)
         {
             using (SistemaIntegradoContext context = new SistemaIntegradoContext())
             {
                 var returnValue = new List<string>();
 
+                if (context.Organizacion.FirstOrDefault().TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores ||
+                    context.Organizacion.FirstOrDefault().TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
+                {
+                    if (listAsociacion == null)
+                    {
+                        return returnValue;
+                    }
+                }
+                foreach (var item in listAsociacion)
+                {
+                    var disolucion = context.Disolucions.FirstOrDefault(q => q.DisolucionId == item.DisolucionId);
+                    if (disolucion != null)
+                    {
+                        disolucion.NumeroOficio = item.NumeroOficio;
+                        disolucion.FechaOficio = item.FechaOficio;
+                        disolucion.FechaAsambleaSocios = item.FechaAsambleaSocios;
+                        disolucion.FechaEscrituraPublica = item.FechaEscrituraPublica;
+                        disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
+                        disolucion.NombreNotaria = item.NombreNotaria;
+                        disolucion.DatosNotario = item.DatosNotario;
+                        disolucion.FechaDisolucion = item.FechaDisolucion;
+                        context.Organizacion.FirstOrDefault().FechaDisolucion = disolucion.FechaDisolucion;
+                        // en caso de que sea "automatico" el cambio de estado descomentar esta linea
+                        /*context.Organizacion.FirstOrDefault().EstadoId = (int)Infrastructure.Enum.Estado.Disuelta;*/
+                        /*disolucion.FechaDisolucion = DateTime.Today;*/
+                    }
+                }
+                context.SaveChanges();
+                return returnValue;
+            }
+        }
+
+        // TODO Modificar Update
+
+        /*public List<string> DisolucionUpdate(List<Disolucion> list)
+        {
+            using (SistemaIntegradoContext context = new SistemaIntegradoContext())
+            {
+                var returnValue = new List<string>();
+                
                 if (list == null)
                 {
                     return returnValue;
@@ -166,11 +253,11 @@ namespace DAES.BLL
                         disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
                     }
                 }
-
+                
                 context.SaveChanges();
                 return returnValue;
             }
-        }
+        }*/
 
         public void SignPDF(int documentoid, int TipoOrganizacionId, string NumeroFolio)
         {

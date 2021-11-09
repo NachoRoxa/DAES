@@ -1,0 +1,36 @@
+﻿@model DAES.Model.SistemaIntegrado.Disolucion
+@Html.HiddenFor(model=> model.DisolucionId)
+@Html.HiddenFor(model=>model.OrganizacionId)
+
+<td>
+    @Html.DropDownListFor(model => model.TipoNormaId, null, "Seleccione...", htmlAttributes: new { @class="form-control" })
+    @Html.ValidationMessageFor(model => model.TipoNormaId, "", new { @class = "text-danger" })
+</td>
+<td>
+    @Html.EditorFor(model => model.NumeroNorma, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.NumeroNorma, "", new { @class = "text-danger" })
+</td>
+<td>
+    @Html.EditorFor(model => model.FechaNorma, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.FechaNorma, "", new { @class = "text-danger" })
+</td>
+<td>
+    @Html.EditorFor(model => model.FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.FechaPublicacionDiarioOficial, "", new { @class = "text-danger" })
+</td>
+<td>
+    @Html.EditorFor(model => model.FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.FechaPublicacionDiarioOficial, "", new { @class = "text-danger" })
+</td>
+<td>
+    @Html.EditorFor(model => model.Autorizacion, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Autorizacion, "", new { @class = "text-danger" })
+</td>
+<td>
+    @Html.EditorFor(model => model.FechaJuntaSocios, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.FechaJuntaSocios, "", new { @class = "text-danger" })
+</td>
+<td>
+    @Html.EditorFor(model => model.ComisionLiquidadora, new { htmlAttributes = new { @class= "form-control" } })
+    @Html.ValidationMessageFor(model => model.ComisionLiquidadora, "", new { @class = "text-danger" })
+</td>

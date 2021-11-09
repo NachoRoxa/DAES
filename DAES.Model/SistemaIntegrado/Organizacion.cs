@@ -19,10 +19,8 @@ namespace DAES.Model.SistemaIntegrado
             Articulo91s = new List<Articulo91>();
             ModificacionEstatutos = new List<ModificacionEstatuto>();
             Disolucions = new List<Disolucion>();
-            DisolucionCooperativaPosterior = new List<DisolucionCooperativaPosterior>();
-            DisolucionCooperativaAnterior = new List<DisolucionCooperativaAnterior>();
-            DisolucionAsociacionConsumidores = new List<DisolucionAsociacionConsumidores>();
-            DisolucionAsociacionGremials = new List<DisolucionAsociacionGremial>();
+            /*DisolucionCooperativas = new List<DisolucionCooperativa>();
+            DisolucionAsociacions = new List<DisolucionAsociacion>();*/
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -150,7 +148,7 @@ namespace DAES.Model.SistemaIntegrado
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha publicación")]
         [DataType(DataType.Date)]
-        public DateTime? FechaPubliccionDiarioOficial { get; set; }
+        public DateTime? FechaPublicacionDiarioOficial { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha actualización")]
@@ -194,6 +192,9 @@ namespace DAES.Model.SistemaIntegrado
         public int? SituacionId { get; set; }
         public virtual Situacion Situacion { get; set; }
 
+        [NotMapped]
+        public string YearDisolucion { get; set; }
+
         public virtual List<Directorio> Directorios { get; set; }
         public virtual List<Proceso> Procesos { get; set; }
         public virtual List<ActaFiscalizacion> ActaFiscalizacions { get; set; }
@@ -201,10 +202,8 @@ namespace DAES.Model.SistemaIntegrado
         public virtual List<DocumentoSinContenido> DocumentoSinContenidos { get; set; }
         public virtual List<Articulo91> Articulo91s { get; set; }
         public virtual List<ModificacionEstatuto> ModificacionEstatutos { get; set; }
-        public virtual List<DisolucionCooperativaPosterior> DisolucionCooperativaPosterior { get; set; }
-        public virtual List<DisolucionCooperativaAnterior> DisolucionCooperativaAnterior { get; set; }
-        public virtual List<DisolucionAsociacionConsumidores> DisolucionAsociacionConsumidores { get; set; }
-        public virtual List<DisolucionAsociacionGremial> DisolucionAsociacionGremials { get; set; }
+        /*public virtual List<DisolucionCooperativa> DisolucionCooperativas { get; set; }
+        public virtual List<DisolucionAsociacion> DisolucionAsociacions { get; set; }*/
         public virtual List<Disolucion> Disolucions { get; set; }
 
         [NotMapped]

@@ -1,33 +1,118 @@
 ﻿@model DAES.Model.SistemaIntegrado.Organizacion
 
 <table class="table table-hover table-striped datatable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => Model.Disolucions.FirstOrDefault().Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.Disolucions.FirstOrDefault().NumeroOficio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.Disolucions.FirstOrDefault().FechaAsamblea)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial)
-            </th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (var i = 0; i < Model.Disolucions.Count(); i++)
+
+    @using (Html.BeginForm())
+    {
+        if (Model.Disolucions != null)
         {
-            <tr>
-                @Html.EditorFor(m => m.Disolucions[i])
-                <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
-                </td>
-            </tr>
+            if (Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores ||
+                Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
+            {
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().NumeroOficio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaOficio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaAsambleaSocios)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaEscrituraPublica)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().NombreNotaria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().DatosNotario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaDisolucion)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            }
+            else
+            {
+                if (Model.FechaDisolucion != null)
+                {
+                    if (Model.FechaDisolucion.Value.Year < 2003)
+                    {
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(m => Model.Disolucions.FirstOrDefault().TipoNorma.Nombre)
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().NumeroNorma, htmlAttributes: new { @class = "control-label" })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaNorma, htmlAttributes: new { @class = "control-label" })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Autorizacion, htmlAttributes: new { @class = "control-label" })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaJuntaSocios, htmlAttributes: new { @class = "control-label" })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Comision, htmlAttributes: new { @class = "control-label" })
+                                </th>
+                            </tr>
+                        </thead>
+                    }
+                    else
+                    {
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(m => Model.Disolucions.First().FechaJuntaSocios)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => Model.Disolucions.First().FechaEscrituraPublica)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => Model.Disolucions.First().MinistroDeFe)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => Model.Disolucions.First().FechaPublicacionDiarioOficial)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => Model.Disolucions.First().NumeroFojas)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => Model.Disolucions.First().AñoInscripcion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => Model.Disolucions.First().DatosCBR)
+                                </th>
+                            </tr>
+                        </thead>
+                    }
+                }
+
+            }
         }
-    </tbody>
+        <tbody>
+            @for (var i = 0; i < Model.Disolucions.Count(); i++)
+            {
+                <tr>
+                    @Html.EditorFor(m => m.Disolucions[i])
+                    <td>
+                        @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
 </table>

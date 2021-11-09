@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAES.Model.SistemaIntegrado
 {
+    [Table("TipoNorma")]
     public class TipoNorma
     {
         public TipoNorma()
@@ -23,11 +24,8 @@ namespace DAES.Model.SistemaIntegrado
         [Display(Name ="Tipo Documento")]
         public string Nombre { get; set; }
 
-        [Display(Name ="Número de Norma")]
-        public int NumeroNorma { get; set; }
-
-        [Display(Name ="Fecha de Norma")]
-        public DateTime FechaNorma { get; set; }
+        /*[Display(Name ="Fecha de Norma")]
+        public DateTime FechaNorma { get; set; }*/
 
 
     }

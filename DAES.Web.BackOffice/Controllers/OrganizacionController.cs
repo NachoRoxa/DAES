@@ -270,6 +270,8 @@ namespace DAES.Web.BackOffice.Controllers
             ViewBag.SituacionId = new SelectList(db.Situacion.OrderBy(q => q.Nombre), "SituacionId", "Nombre", organizacion.SituacionId);
             ViewBag.CargoId = new SelectList(db.Cargo.OrderBy(q => q.Nombre), "CargoId", "Nombre");
             ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre), "GeneroId", "Nombre");
+            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
+
 
             return View(organizacion);
         }
@@ -286,7 +288,9 @@ namespace DAES.Web.BackOffice.Controllers
                 db.SaveChanges();
                 _custom.DirectorioUpdate(model.Directorios);
                 _custom.ModificacionUpdate(model.ModificacionEstatutos);
-                _custom.DisolucionUpdate(model.Disolucions);
+                /*_custom.DisolucionUpdate(model.Disolucions);*/
+                _custom.DisolucionCooperativaUpdate(model.Disolucions);
+                _custom.DisolucionAsociacionUpdate(model.Disolucions);                
 
                 TempData["Message"] = Properties.Settings.Default.Success;
                 return RedirectToAction("Edit", new { id = model.OrganizacionId });
@@ -302,6 +306,7 @@ namespace DAES.Web.BackOffice.Controllers
             ViewBag.SituacionId = new SelectList(db.Situacion.OrderBy(q => q.Nombre), "SituacionId", "Nombre", model.SituacionId);
             ViewBag.CargoId = new SelectList(db.Cargo.OrderBy(q => q.Nombre), "CargoId", "Nombre");
             ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre), "GeneroId", "Nombre");
+            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
 
             return View("Edit", model);
         }
@@ -376,7 +381,7 @@ namespace DAES.Web.BackOffice.Controllers
                 worksheet.Cells[fila, 29].Value = organizacion.EmailContacto;
                 worksheet.Cells[fila, 30].Value = organizacion.FechaCreacion;
                 worksheet.Cells[fila, 31].Value = organizacion.FechaCelebracion;
-                worksheet.Cells[fila, 32].Value = organizacion.FechaPubliccionDiarioOficial;
+                worksheet.Cells[fila, 32].Value = organizacion.FechaPublicacionDiarioOficial;
                 worksheet.Cells[fila, 33].Value = organizacion.EsImportanciaEconomica;
                 worksheet.Cells[fila, 34].Value = organizacion.FechaActualizacion;
             }
@@ -404,7 +409,7 @@ namespace DAES.Web.BackOffice.Controllers
 
 
 
-
+        #region Directorio
         public ActionResult DirectorioAdd(int OrganizacionId)
         {
             db.Directorio.Add(new Directorio() { OrganizacionId = OrganizacionId, NombreCompleto = "?", GeneroId = (int)DAES.Infrastructure.Enum.Genero.SinGenero, CargoId = 135 });
@@ -433,7 +438,9 @@ namespace DAES.Web.BackOffice.Controllers
 
             return PartialView("_DirectorioEdit", model);
         }
+        #endregion
 
+        #region Modificacion
         public ActionResult ModificacionAdd(int OrganizacionId)
         {
             db.ModificacionEstatutos.Add(new ModificacionEstatuto() { OrganizacionId = OrganizacionId });
@@ -457,41 +464,55 @@ namespace DAES.Web.BackOffice.Controllers
 
             return PartialView("_ModificacionEdit", model);
         }
+        #endregion
 
+        #region Disolucion
         public ActionResult DisolucionAdd(int OrganizacionId)
         {
-            
-            /*db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
+
+           /* db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
             db.SaveChanges();*/
 
             var model = db.Organizacion.Find(OrganizacionId);
 
-            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year < 2003)
+            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa)
             {
-                db.DisolucionCooperativaAnteriors.Add(new DisolucionCooperativaAnterior() { OrganizacionId = OrganizacionId });
+                ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
+                db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
                 db.SaveChanges();
-                return PartialView("_DisolucionCooperativaAnterior", model);
+                return PartialView("_DisolucionCooperativaAdd", model);
             }
-            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year > 2003)
+            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial ||
+                model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores)
             {
-                db.DisolucionCooperativaPosteriors.Add(new DisolucionCooperativaPosterior() { OrganizacionId = OrganizacionId });
+                db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId= model.TipoOrganizacionId});
                 db.SaveChanges();
-                return PartialView("_DisolucionCooperativaPosterior", model);
-            }
-            if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
-            {
-                db.DisolucionAsociacionGremials.Add(new DisolucionAsociacionGremial() { OrganizacionId = OrganizacionId });
-                db.SaveChanges();
-                return PartialView("_DisolucionAsociacionGremial", model);
-            }
-            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores)
-            {
-                db.DisolucionConsumidores.Add(new DisolucionAsociacionConsumidores() { OrganizacionId = OrganizacionId });
-                db.SaveChanges();
-                return PartialView("_DisolucionAsociacionConsumidores", model);
+                return PartialView("_DisolucionAsociacionAdd", model);
             }
             return PartialView("_ErrorMessage", model);
         }
+
+
+        //TODO DELETE THIS SHITS
+        /*public ActionResult Anterior(int OrganizacionId)
+        {
+            var model = db.Organizacion.Find(OrganizacionId);
+
+            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaID", "Nombre");
+            db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
+            db.SaveChanges();
+            return PartialView("_DisolucionCooperativaAnterior", model);
+        }
+
+
+        public ActionResult Posterior(int OrganizacionId)
+        {
+            var model = db.Organizacion.Find(OrganizacionId);
+
+            db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
+            db.SaveChanges();
+            return PartialView("_DisolucionCoopertivaPosterior", model);
+        }*/
 
         public ActionResult DisolucionDelete(int DisolucionId, int OrganizacionId)
         {
@@ -503,66 +524,43 @@ namespace DAES.Web.BackOffice.Controllers
             }
 
             var model = db.Organizacion.Find(OrganizacionId);
+            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
             return PartialView("_DisolucionEdit", model);
         }
-        /*Metodo para eliminar una Disolucion de una Cooperativa Anterior al año 2003 de la lista en el View*/
-        public ActionResult DisolucionCoopAntDelete(int OrganizacionId, int DisolucionCooperativaAnteriorId)
-        {
-            var disolucionCooperativaAnterior = db.DisolucionCooperativaAnteriors.FirstOrDefault(q => q.DisolucionCooperativaAnteriorId == DisolucionCooperativaAnteriorId);
 
-            if (disolucionCooperativaAnterior != null)
+        /*Metodo para eliminar una Disolucion de una Cooperativa de la lista en el View*/
+        public ActionResult DisolucionCooperativaDelete(int OrganizacionId, int DisolucionId)
+        {
+            var disolucionCooperativa = db.Disolucions.FirstOrDefault(q => q.DisolucionId == DisolucionId);
+
+            if (disolucionCooperativa != null)
             {
-                db.DisolucionCooperativaAnteriors.Remove(disolucionCooperativaAnterior);
+                db.Disolucions.Remove(disolucionCooperativa);
                 db.SaveChanges();
             }
 
             var model = db.Organizacion.Find(OrganizacionId);
-            return PartialView("_DisolucionCooperativaAnterior", model);
+            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
+            return PartialView("_DisolucionCooperativaAdd", model);
         }
 
-        /*Metodo para eliminar una Disolucion de una Cooperativa Posterior al año 2003 de la lista en el View*/
-        public ActionResult DisolucionCoopPostDelete(int OrganizacionId, int DisolucionCooperativaPosteriorId)
+        
+        /*Metodo para eliminar cualquiera de los dos tipos de Asociaciones*/
+        public ActionResult DisolucionAsociacionDelete(int OrganizacionId, int DisolucionId)
         {
-            var disolucionCooperativaPosterior = db.DisolucionCooperativaPosteriors.FirstOrDefault(q => q.DisolucionCooperativaPosteriorId == DisolucionCooperativaPosteriorId);
-            if (disolucionCooperativaPosterior != null)
+            var disolucionAsociacion = db.Disolucions.FirstOrDefault(q => q.DisolucionId == DisolucionId);
+
+            if (disolucionAsociacion != null)
             {
-                db.DisolucionCooperativaPosteriors.Remove(disolucionCooperativaPosterior);
+                db.Disolucions.Remove(disolucionAsociacion);
                 db.SaveChanges();
             }
 
             var model = db.Organizacion.Find(OrganizacionId);
-            return PartialView("_DisolucionCooperativaPosterior", model);
+            return PartialView("_DisolucionAsociacionAdd", model);
         }
 
-        /*Metodo para eliminar una Disolución de una Asociación Gremial de la lista en el view*/
-        public ActionResult DisolucionAGDelete(int OrganizacionId, int DisolucionAsociacionGremialId)
-        {
-            var disolucionAsociacionGremial = db.DisolucionAsociacionGremials.FirstOrDefault(q => q.DisolucionAsociacionGremialId == DisolucionAsociacionGremialId);
-
-            if (disolucionAsociacionGremial != null)
-            {
-                db.DisolucionAsociacionGremials.Remove(disolucionAsociacionGremial);
-                db.SaveChanges();
-            }
-
-            var model = db.Organizacion.Find(OrganizacionId);
-            return PartialView("_DisolucionAsociacionGremial", model);
-        }
-
-        /*Metodo para eliminar una Disolución de una Asociación de Consumidores de la lista en el view*/
-        public ActionResult DisolucionACDelete(int OrganizacionId, int DisolucionAsociacionConsumidoresId)
-        {
-            var disolucionAsociacionConsumidores = db.DisolucionConsumidores.FirstOrDefault(q => q.DisolucionAsociacionConsumidoresId == DisolucionAsociacionConsumidoresId);
-
-            if (disolucionAsociacionConsumidores != null)
-            {
-                db.DisolucionConsumidores.Remove(disolucionAsociacionConsumidores);
-                db.SaveChanges();
-            }
-            var model = db.Organizacion.Find(OrganizacionId);
-            return PartialView("_DisolucionAsociacionConsumidores", model);
-        }
-
+        #endregion
         protected override void Dispose(bool disposing)
         {
             if (disposing)

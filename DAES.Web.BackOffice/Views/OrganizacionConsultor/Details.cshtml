@@ -9,7 +9,16 @@
 @Html.Partial("_OrganizacionDocumento", Model.DocumentoSinContenidos)
 @Html.Partial("_OrganizacionProceso", Model.Procesos)
 @Html.Partial("_OrganizacionModificacion", Model.ModificacionEstatutos)
-@Html.Partial("_OrganizacionDisolucion", Model.Disolucions)
+@if (Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores
+    || Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
+{
+    @Html.Partial("_OrganizacionDisolucionAsociaciones", Model.DisolucionAsociacions)
+}
+else
+{
+    @Html.Partial("_OrganizacionDisolucionCooperativa", Model.DisolucionCooperativas)
+}
+
 <p>
     <a href="javascript:void(0);" onclick="history.go(-1);">Volver a la lista</a>
 </p>

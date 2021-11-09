@@ -26,6 +26,9 @@ namespace DAES.Model.SistemaIntegrado
         [Display(Name ="Numero de Oficio")]
         public int NumeroOficio { get; set; }
 
+        public int TipoOrganizacionId { get; set; }
+        public virtual TipoOrganizacion TipoOrganizacion { get; set; }
+
         [Display(Name ="Fecha de Oficio")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

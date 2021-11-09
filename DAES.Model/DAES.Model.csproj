@@ -120,8 +120,11 @@
     <Compile Include="SistemaIntegrado\ActaFiscalizacionFiscalizadorLegal.cs" />
     <Compile Include="SistemaIntegrado\ActaFiscalizacionFiscalizadorContable.cs" />
     <Compile Include="SistemaIntegrado\ActaFiscalizacionHechoLegal.cs" />
+    <Compile Include="SistemaIntegrado\ComisionLiquidadora.cs" />
+    <Compile Include="SistemaIntegrado\DisolucionAsociacion.cs" />
     <Compile Include="SistemaIntegrado\DisolucionAsociacionGremial.cs" />
     <Compile Include="SistemaIntegrado\DisolucionAsociacionConsumidores.cs" />
+    <Compile Include="SistemaIntegrado\DisolucionCooperativa.cs" />
     <Compile Include="SistemaIntegrado\DisolucionCooperativaPosterior.cs" />
     <Compile Include="SistemaIntegrado\DisolucionCooperativaAnterior.cs" />
     <Compile Include="SistemaIntegrado\Fiscalizacion\TipoOficio.cs" />

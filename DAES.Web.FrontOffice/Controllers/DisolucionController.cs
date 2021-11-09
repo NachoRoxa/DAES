@@ -135,7 +135,7 @@ namespace DAES.Web.FrontOffice.Controllers
                 TelefonoContacto = model.TelefonoContacto,
                 EmailContacto = model.EmailContacto,
                 FechaCelebracion = model.FechaCelebracion,
-                FechaPubliccionDiarioOficial = model.FechaPubliccionDiarioOficial,
+                FechaPublicacionDiarioOficial = model.FechaPublicacionDiarioOficial,
                 FechaActualizacion = model.FechaActualizacion,
                 EsImportanciaEconomica = model.EsImportanciaEconomica,
                 FechaVigente = model.FechaVigente,
@@ -147,11 +147,11 @@ namespace DAES.Web.FrontOffice.Controllers
             };
 
 
-            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year < 2003)
+            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPublicacionDiarioOficial.Value.Year < 2003)
             {
                 return View("CooperativaPrevia", modelDTO);
             }
-            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPubliccionDiarioOficial.Value.Year > 2003)
+            if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && model.FechaPublicacionDiarioOficial.Value.Year > 2003)
             {
                 return View("CooperativaPosterior");
             }
@@ -209,7 +209,7 @@ namespace DAES.Web.FrontOffice.Controllers
                 TelefonoContacto = model.TelefonoContacto,
                 EmailContacto = model.EmailContacto,
                 FechaCelebracion = model.FechaCelebracion,
-                FechaPubliccionDiarioOficial = model.FechaPubliccionDiarioOficial,
+                FechaPublicacionDiarioOficial = model.FechaPublicacionDiarioOficial,
                 FechaActualizacion = model.FechaActualizacion,
                 EsImportanciaEconomica = model.EsImportanciaEconomica,
                 FechaVigente = model.FechaVigente,

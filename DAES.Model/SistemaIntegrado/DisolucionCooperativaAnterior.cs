@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +9,7 @@ namespace DAES.Model.SistemaIntegrado
     public class DisolucionCooperativaAnterior
     {
         public DisolucionCooperativaAnterior()
-        {
+        {            
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -23,18 +24,13 @@ namespace DAES.Model.SistemaIntegrado
         public int? TipoNormaId { get; set; }
         public virtual TipoNorma TipoNorma { get; set; }
 
-        /*[Display(Name = "Fecha")]
+        [Display(Name = "Número de Norma")]
+        public int NumeroNorma { get; set; }
+
+        [Display(Name = "Fecha Norma")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Fecha { get; set; }*/
-
-        /*[Display(Name = "Número oficio")]
-        public string NumeroOficio { get; set; }*/
-
-        /*[Display(Name = "Fecha de asamblea")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaAsamblea { get; set; }*/
+        public DateTime? FechaNorma { get; set; }
 
         [Display(Name = "Fecha publicación diario oficial")]
         [DataType(DataType.Date)]

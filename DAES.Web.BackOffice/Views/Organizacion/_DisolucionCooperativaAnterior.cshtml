@@ -1,39 +1,39 @@
 ﻿@model DAES.Model.SistemaIntegrado.Organizacion
 
-<table class="table table-hover table-striped datatable">
-    Disolucion Cooperativa Anterior al año 2003
+<table class="table table-hover table-striped dataTable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().TipoNorma)
+                @Html.DisplayNameFor(m => Model.Disolucions.FirstOrDefault().TipoNorma.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().TipoNorma.NumeroNorma)
+                @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().NumeroNorma, htmlAttributes: new { @class = "control-label" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().TipoNorma.FechaNorma)
+                @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaNorma, htmlAttributes: new { @class = "control-label" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().FechaPublicacionDiarioOficial)
+                @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().Autorizacion)
+                @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Autorizacion, htmlAttributes: new { @class = "control-label" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => Model.DisolucionCooperativaAnterior.FirstOrDefault().FechaJuntaSocios)
+                @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaJuntaSocios, htmlAttributes: new { @class = "control-label" })
+            </th>
+            <th>
+                @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().ComisionLiquidadora, htmlAttributes: new { @class = "control-label" })
             </th>
         </tr>
     </thead>
     <tbody>
-        @for (var i = 0; i < Model.DisolucionCooperativaAnterior.Count(); i++)
+        @for (var i = 0; i < Model.Disolucions.Count(); i++)
         {
             <tr>
-                @Html.EditorFor(m => m.DisolucionCooperativaAnterior[i])
+                @Html.EditorFor(m => m.Disolucions[i])
                 <td>
-                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.DisolucionCooperativaAnterior.ToArray()[i].DisolucionCooperativaAnteriorId,
-               Model.DisolucionCooperativaAnterior.ToArray()[i].OrganizacionId}, new AjaxOptions { UpdateTargetId = "disolucion" })
+                    @Ajax.ActionLink("Eliminar", "DisolucionCooperativaDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
                 </td>
             </tr>
         }
-    </tbody>
 </table>
