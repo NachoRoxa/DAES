@@ -6,16 +6,16 @@
             <th>
                 <label>¿Disolución previa al año 2003?</label>
                 <input type="checkbox" name="anterior" id="anterior" value="Anterior al 2003" />                
-            </th>        
-            
+            </th>
         </tr>
     </table>
     <div style="display:none" id="divAnterior" name="divAnterior">
+        @*@Html.Partial("_OrganizacionDisolucionCooperativa", Model.Disolucions)*@ @*Testing change of partials*@
         <table class="table table-hover table-striped dataTable">
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(m => Model.Disolucions.FirstOrDefault().TipoNorma.Nombre)
+                        @Html.DisplayNameFor(m => Model.Disolucions.FirstOrDefault().TipoNorma.Nombre)                        
                     </th>
                     <th>
                         @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().NumeroNorma, htmlAttributes: new { @class = "control-label" })

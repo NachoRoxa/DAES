@@ -1,13 +1,12 @@
-﻿@model IEnumerable<DAES.Model.SistemaIntegrado.DisolucionCooperativa>
+﻿@model IEnumerable<DAES.Model.SistemaIntegrado.Disolucion>
 @using GridMvc.Html
 
 
 <div class="panel panel-defaul"t>
     <div class="panel-heading"></div>
     <div class="panel-body">
-        <table class="table table-hover table-striped dataTable">
-            @if(Model.FirstOrDefault().Organizacion.FechaPublicacionDiarioOficial.Value.Year < 2003)
-            {
+        <div id="divAnterior" name="divAnterior">
+            <table class="table table-hover table-striped dataTable">
                 <thead>
                     <tr>
                         <th>
@@ -18,7 +17,7 @@
                         <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FechaPublicacionDiarioOficial)</th>
                         <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Autorizacion)</th>
                         <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FechaJuntaSocios)</th>
-                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().ComisionLiquidadora)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Comision)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +28,7 @@
                                 @Html.DisplayFor(model => model.FirstOrDefault().TipoNorma.Nombre)
                             </td>
                             <td>
-                                @Html.DisplayFor(model=> item.NumeroNorma)
+                                @Html.DisplayFor(model => item.NumeroNorma)
                             </td>
                             <td>
                                 @string.Format("{0:dd-MM-yyyy}", item.FechaNorma)
@@ -44,14 +43,15 @@
                                 @string.Format("{0:dd-MM-yyyy}", item.FechaJuntaSocios)
                             </td>
                             <td>
-                                @Html.DisplayFor(model=>item.ComisionLiquidadora)
+                                @Html.DisplayFor(model => item.Comision)
                             </td>
                         </tr>
                     }
                 </tbody>
-            }
-            else
-            {
+            </table>
+        </div>
+        <div id="divPosterior" name="divPosterior">
+            <table class="table table-hover table-striped dataTable">
                 <thead>
                     <tr>
                         <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FechaJuntaSocios)</th>
@@ -61,7 +61,7 @@
                         <th>@Html.DisplayNameFor(model => model.FirstOrDefault().NumeroFojas)</th>
                         <th>@Html.DisplayNameFor(model => model.FirstOrDefault().AñoInscripcion)</th>
                         <th>@Html.DisplayNameFor(model => model.FirstOrDefault().DatosCBR)</th>
-                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().ComisionLiquidadora)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Comision)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,12 +88,12 @@
                                 @Html.DisplayFor(model => item.DatosCBR)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => item.ComisionLiquidadora)
+                                @Html.DisplayFor(model => item.Comision)
                             </td>
                         </tr>
                     }
                 </tbody>
-            }
-        </table>
+            </table>
+        </div>
     </div>
 </div>

@@ -1,4 +1,48 @@
-﻿@model DAES.Model.SistemaIntegrado.Organizacion
+﻿@model IEnumerable<DAES.Model.SistemaIntegrado.Disolucion>
+@Html.HiddenFor(model => model.DisolucionId)
+@Html.HiddenFor(model => model.OrganizacionId)
+
+
+<table class="table table-hover dataTable">
+    <tbody>
+        <tr>
+            <td>
+                @Html.EditorFor(model => model.NumeroOficio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumeroOficio, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.FechaOficio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaOficio, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.FechaAsambleaSocios, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaAsambleaSocios, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.FechaEscrituraPublica, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaEscrituraPublica, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaPublicacionDiarioOficial, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.NombreNotaria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NombreNotaria, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.DatosNotario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DatosNotario, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.FechaDisolucion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaDisolucion, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+    </tbody>        
+</table>
+
+@*@model DAES.Model.SistemaIntegrado.Organizacion
 
 <table class="table table-hover table-striped dataTable">
     <thead>
@@ -22,7 +66,7 @@
                 @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaJuntaSocios, htmlAttributes: new { @class = "control-label" })
             </th>
             <th>
-                @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().ComisionLiquidadora, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Comision, htmlAttributes: new { @class = "control-label" })
             </th>
         </tr>
     </thead>
@@ -36,4 +80,4 @@
                 </td>
             </tr>
         }
-</table>
+</table>*@

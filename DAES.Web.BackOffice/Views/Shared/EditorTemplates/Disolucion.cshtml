@@ -5,7 +5,7 @@
 @if (Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores ||
         Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
 {   
-    <tr>
+    
         <td>
             @Html.EditorFor(model => model.NumeroOficio, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.NumeroOficio, "", new { @class = "text-danger" })
@@ -38,7 +38,6 @@
             @Html.EditorFor(model => model.FechaDisolucion, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.FechaDisolucion, "", new { @class = "text-danger" })
         </td>
-    </tr>
 }
 else
 {   
@@ -70,9 +69,7 @@ else
         @Html.EditorFor(model => model.FechaDisolucion, new { htmlAttributes = new { @class = "form-control", @style = "width: 170px;" } })
         @Html.ValidationMessageFor(model => model.FechaDisolucion, "", new { @class = "text-danger" })
     </td>
-    @*<div id="divPosterior" name="divPosterior">
-        <tr>
-            <td>
+            @*<td>
                 @Html.EditorFor(model => model.FechaJuntaSocios, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FechaJuntaSocios, "", new { @class = "text-danger" })
             </td>
@@ -103,9 +100,7 @@ else
             <td>
                 @Html.EditorFor(model => model.FechaDisolucion, new { htmlAttributes = new { @class = "form-control", @style = "width: 170px;" } })
                 @Html.ValidationMessageFor(model => model.FechaDisolucion, "", new { @class = "text-danger" })
-            </td>
-        </tr>
-    </div>   *@
+            </td>*@
 }
 @*<td>
         @Ajax.ActionLink("Eliminar", "DisolucionDelete", "Organizacion", new { Model.DisolucionId }, new AjaxOptions { UpdateTargetId = "Disolucion" })

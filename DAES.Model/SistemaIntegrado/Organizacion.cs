@@ -192,9 +192,6 @@ namespace DAES.Model.SistemaIntegrado
         public int? SituacionId { get; set; }
         public virtual Situacion Situacion { get; set; }
 
-        [NotMapped]
-        public string YearDisolucion { get; set; }
-
         public virtual List<Directorio> Directorios { get; set; }
         public virtual List<Proceso> Procesos { get; set; }
         public virtual List<ActaFiscalizacion> ActaFiscalizacions { get; set; }

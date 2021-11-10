@@ -152,7 +152,7 @@ namespace DAES.BLL
          * asi se puede cambiar el estado de dicha organizacion
          */
 
-        public List<string> DisolucionCooperativaUpdate(List<Disolucion> listCooperativa)
+        public List<string> DisolucionUpdate(List<Disolucion> listCooperativa)
         {
             var returnValue = new List<string>();
             using(SistemaIntegradoContext context = new SistemaIntegradoContext())
@@ -180,6 +180,7 @@ namespace DAES.BLL
                         disolucion.FechaEscrituraPublica = item.FechaEscrituraPublica;
                         disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
                         disolucion.NombreNotaria = item.NombreNotaria;
+                        disolucion.DatosNotario = item.DatosNotario;
                         disolucion.DatosCBR = item.DatosCBR;
                         //TODO Agregar datos para la tabla Comision Liquidadora
                         /*disolucion.ComisionLiquidadoraId = item.ComisionLiquidadoraId;*/
@@ -191,7 +192,7 @@ namespace DAES.BLL
             }
         }
         
-        public List<string> DisolucionAsociacionUpdate(List<Disolucion> listAsociacion)
+        /*public List<string> DisolucionAsociacionUpdate(List<Disolucion> listAsociacion)
         {
             using (SistemaIntegradoContext context = new SistemaIntegradoContext())
             {
@@ -220,14 +221,14 @@ namespace DAES.BLL
                         disolucion.FechaDisolucion = item.FechaDisolucion;
                         context.Organizacion.FirstOrDefault().FechaDisolucion = disolucion.FechaDisolucion;
                         // en caso de que sea "automatico" el cambio de estado descomentar esta linea
-                        /*context.Organizacion.FirstOrDefault().EstadoId = (int)Infrastructure.Enum.Estado.Disuelta;*/
-                        /*disolucion.FechaDisolucion = DateTime.Today;*/
+                        *//*context.Organizacion.FirstOrDefault().EstadoId = (int)Infrastructure.Enum.Estado.Disuelta;*/
+                        /*disolucion.FechaDisolucion = DateTime.Today;*//*
                     }
                 }
                 context.SaveChanges();
                 return returnValue;
             }
-        }
+        }*/
 
         // TODO Modificar Update
 
