@@ -152,17 +152,22 @@ namespace DAES.BLL
          * asi se puede cambiar el estado de dicha organizacion
          */
 
-        public List<string> DisolucionUpdate(List<Disolucion> listCooperativa)
+        public List<string> DisolucionUpdate(List<Disolucion> listDisolucion /*, List<ComisionLiquidadora> liquidadoras*/)
         {
             var returnValue = new List<string>();
             using(SistemaIntegradoContext context = new SistemaIntegradoContext())
             {
-                if(listCooperativa == null)
+                if(listDisolucion == null)
                 {
                     return returnValue;
                 }
-                foreach(var item in listCooperativa)
+                /*if(liquidadoras == null)
                 {
+                    return returnValue;
+                }*/
+                foreach(var item in listDisolucion)
+                {
+                    var comisionLiquidadoras = context.Disolucions.Where(q => q.Comision == true);
                     var disolucion = context.Disolucions.FirstOrDefault(q => q.DisolucionId == item.DisolucionId);
                     if(disolucion != null)
                     {
@@ -182,6 +187,7 @@ namespace DAES.BLL
                         disolucion.NombreNotaria = item.NombreNotaria;
                         disolucion.DatosNotario = item.DatosNotario;
                         disolucion.DatosCBR = item.DatosCBR;
+                        /*disolucion.ComisionLiquidadoras = item.ComisionLiquidadoras;*/
                         //TODO Agregar datos para la tabla Comision Liquidadora
                         /*disolucion.ComisionLiquidadoraId = item.ComisionLiquidadoraId;*/
                     }
@@ -334,6 +340,8 @@ namespace DAES.BLL
                 write.PageEvent = ev;
                 Chunk SaltoLinea = Chunk.NEWLINE;
 
+                var aux = organizacion.Disolucions.FirstOrDefault();
+
                 string parrafo_uno = string.Format(configuracioncertificado.Parrafo1);
                 if (!string.IsNullOrEmpty(organizacion.NumeroRegistro))
                 {
@@ -354,6 +362,99 @@ namespace DAES.BLL
                 {
                     parrafo_uno = parrafo_uno.Replace("[DOMICIOSOCIAL]", organizacion.Direccion);
                 }
+
+                #region Parrafo 1 Test Rocha
+
+                if(aux.NumeroOficio.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[NUMEROOFICIO]", aux.NumeroOficio.ToString());
+                }
+
+                if(aux.FechaPublicacionDiarioOficial.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[FECHAPUBLICACIONDIARIOOFICIAL]",string.Format("{0:dd-MM-yyyy}", aux.FechaPublicacionDiarioOficial));
+                }
+
+                if(aux.FechaEscrituraPublica.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[FECHAESCRITURAPUBLICA]",string.Format("{0:dd-MM-yyyy}", aux.FechaEscrituraPublica));
+                }
+
+                if(aux.FechaJuntaSocios.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[FECHAJUNTASOCIOS]", string.Format("{0:dd-MM-yyyy}", aux.FechaJuntaSocios));
+                }
+
+                //TODO COMISION
+
+                if(aux.FechaDisolucion.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[FECHADISOLUCION]", string.Format("{0:dd-MM-yyyy}", aux.FechaDisolucion));
+                }
+
+                if(aux.NumeroNorma.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[NUMERONORMA]", aux.NumeroNorma.ToString());
+                }
+
+                if (aux.FechaNorma.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[FECHANORMA]", string.Format("{0:dd-MM-yyyy}", aux.FechaNorma));
+                }
+
+                if(!string.IsNullOrEmpty(aux.Autorizacion))
+                {
+                    parrafo_uno = parrafo_uno.Replace("[AUTORIZACION]", aux.Autorizacion);
+                }
+
+                if(aux.NumeroFojas.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[NUMEROFOJAS]", aux.NumeroFojas.ToString());
+                }
+
+                if(aux.AñoInscripcion.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[AÑOINSCRIPCION]", aux.AñoInscripcion.ToString());
+                }
+
+                if(!string.IsNullOrEmpty(aux.DatosCBR))
+                {
+                    parrafo_uno = parrafo_uno.Replace("[DATOSCBR]", aux.DatosCBR);
+                }
+
+                if(!string.IsNullOrEmpty(aux.MinistroDeFe))
+                {
+                    parrafo_uno = parrafo_uno.Replace("[MINISTRODEFE]", aux.MinistroDeFe);
+                }
+
+                if (aux.FechaOficio.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[FECHAOFICIO]", string.Format("{0:dd-MM-yyyy}", aux.FechaOficio));
+                }
+
+                if (aux.FechaAsambleaSocios.HasValue)
+                {
+                    parrafo_uno = parrafo_uno.Replace("[FECHAASAMBLEASOCIOS]", string.Format("{0:dd-MM-yyyy}", aux.FechaAsambleaSocios));
+                }
+
+                if (!string.IsNullOrEmpty(aux.NombreNotaria))
+                {
+                    parrafo_uno = parrafo_uno.Replace("[NOMBRENOTARIA]", aux.NombreNotaria);
+                }
+
+                if (!string.IsNullOrEmpty(aux.DatosNotario))
+                {
+                    parrafo_uno = parrafo_uno.Replace("[DATOSNOTARIO]", aux.DatosNotario);
+                }
+
+                // TODO Tipo Norma
+
+                /*if (!string.IsNullOrEmpty(aux.TipoNorma.Nombre))
+                {
+                    parrafo_uno = parrafo_uno.Replace("[TIPONORMA]", aux.TipoNorma.Nombre);
+                }*/
+
+                #endregion
 
                 string parrafo_dos = string.Format(configuracioncertificado.Parrafo2);
                 if (!string.IsNullOrWhiteSpace(parrafo_dos))

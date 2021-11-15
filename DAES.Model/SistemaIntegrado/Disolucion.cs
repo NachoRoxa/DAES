@@ -43,7 +43,7 @@ namespace DAES.Model.SistemaIntegrado
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaJuntaSocios { get; set; }
 
-        [Display(Name = "Comision Liquidadora")]
+        [Display(Name = "¿Tiene Comision Liquidadora?")]
         public bool Comision { get; set; } = false;
 
         [Display(Name = "Fecha Disolución")]
@@ -88,7 +88,7 @@ namespace DAES.Model.SistemaIntegrado
         #region Datos Asociaciones
 
         [Display(Name = "Numero de Oficio")]
-        public string NumeroOficio { get; set; }
+        public int? NumeroOficio { get; set; }
 
         [Display(Name = "Fecha de Oficio")]
         [DataType(DataType.Date)]

@@ -326,10 +326,10 @@
     <div class="panel panel-default">
         <div class="panel-heading">Disolución</div>
         <div class="panel-body">
-            <div id="disolucion" style="overflow-x:auto">                
+            <div id="disolucion" style="overflow-x:auto">
                 @Html.Partial("_DisolucionEdit", Model)
             </div>
-            @Ajax.ActionLink("Agregar disolución", "DisolucionAdd", null, new { Model.OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                @Ajax.ActionLink("Agregar disolución", "DisolucionAdd", null, new { Model.OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })            
         </div>
     </div>
     <input type="submit" value="Guardar" class="btn btn-primary my-3" />

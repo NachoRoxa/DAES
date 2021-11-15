@@ -663,8 +663,6 @@
     <Content Include="Views\Shared\EditorTemplates\Directorio.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Disolucion.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DisolucionAsociacion.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DisolucionAsociacionConsumidores.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DisolucionAsociacionGremial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DisolucionCooperativa.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DisolucionCooperativaAnterior.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DisolucionCooperativaPosterior.cshtml" />

@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using DAES.Model.DTO;
 
 namespace DAES.Web.BackOffice.Controllers
 {
@@ -278,7 +279,7 @@ namespace DAES.Web.BackOffice.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Organizacion model)
+        public ActionResult Edit(Organizacion model, Disolucion disolucion)
         {
             model.FechaActualizacion = DateTime.Now;
 
@@ -478,16 +479,17 @@ namespace DAES.Web.BackOffice.Controllers
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa)
             {
                 ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
-                db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
+                db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId });
                 db.SaveChanges();
-                return PartialView("_DisolucionCooperativaAdd", model);
+                return PartialView("_DisolucionEdit", model);
+                /*return View(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId});*/
             }
             if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial ||
                 model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores)
             {
                 db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId= model.TipoOrganizacionId});
                 db.SaveChanges();
-                return PartialView("_DisolucionAsociacionAdd", model);
+                return PartialView("_DisolucionEdit", model);
             }
             return PartialView("_ErrorMessage", model);
         }

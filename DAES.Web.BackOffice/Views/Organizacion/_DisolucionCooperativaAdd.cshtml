@@ -26,6 +26,8 @@
                     <th>
                         @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
                     </th>
+                </tr>
+                <tr>
                     <th>
                         @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Autorizacion, htmlAttributes: new { @class = "control-label" })
                     </th>
@@ -38,7 +40,6 @@
                     <th>
                         <label>¿Tiene Comision Liquidadora?</label>
                     </th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -46,9 +47,9 @@
                 {
                     <tr>
                         @Html.EditorFor(m => m.Disolucions[i])
-                        <td>
+                        
                             @Html.EditorFor(m => Model.Disolucions.FirstOrDefault().Comision, new { htmlAttributes = new { @name = "comision"} })
-                        </td>
+                        
                         <td>
                             @Ajax.ActionLink("Eliminar", "DisolucionCooperativaDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
                         </td>
@@ -119,7 +120,7 @@
                             @Html.DisplayFor(m => Model.Directorios[i].NombreCompleto)
                         </td>
                     }
-                </tr>                
+                </tr>
             </tbody>
         </table>
     </div>

@@ -38,6 +38,12 @@ namespace DAES.Web.FrontOffice.Controllers
                 query = query.Where(q => q.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa && q.EstadoId == (int)Infrastructure.Enum.Estado.Vigente);
             }
 
+            //Testing PDF Disoluciones, solo para mostrar datos a modo de prueba
+            if(TipoDocumentoId == (int)Infrastructure.Enum.TipoDocumento.Disolucion)
+            {
+                query = query.Where(q => q.EstadoId == (int)Infrastructure.Enum.Estado.Vigente);
+            }
+
             //en el caso de certificado disolucion, organizaciones disueltas
             if (TipoDocumentoId == (int)Infrastructure.Enum.TipoDocumento.Disolucion)
             {
