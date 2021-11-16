@@ -1,139 +1,82 @@
 ﻿@model DAES.Model.SistemaIntegrado.Organizacion
 @Html.HiddenFor(model => model.OrganizacionId)
 
-
-@if (Model.Disolucions != null)
+@*@if (Model.Disolucions.Count() != 0)
+    {*@
+@if (Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores ||
+    Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
 {
-    if (Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores ||
-        Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
-    {
-        <div>
-            <table class="table table-hover table-striped dataTable">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().NumeroOficio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaOficio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaAsambleaSocios)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaEscrituraPublica)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().NombreNotaria)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().DatosNotario)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Disolucions.FirstOrDefault().FechaDisolucion)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (var i = 0; i < Model.Disolucions.Count(); i++)
-                    {
-                        <tr>
-                            @Html.EditorFor(m => m.Disolucions[i])
-                            <td>
-                                @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }
-    else
-    {
-        <div>
-            <table>
-                @if (Model.FechaDisolucion != null)
+    #region Asociaciones
+    <div>
+        <table class="table table-hover table-striped dataTable">
+            @for (var i = 0; i < Model.Disolucions.Count(); i++)
+            {
+            <thead>
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => m.Disolucions[i].NumeroOficio, htmlAttributes: new { @class = "control-label col-md-10" })
+                        @Html.EditorFor(m => Model.Disolucions[i].NumeroOficio, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.Disolucions[i].FechaOficio, htmlAttributes: new { @class = "control-label col-md-10" })
+                        @Html.EditorFor(m => Model.Disolucions[i].FechaOficio, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.Disolucions[i].FechaAsambleaSocios, htmlAttributes: new { @class = "control-label col-md-10" })
+                        @Html.EditorFor(m => Model.Disolucions[i].FechaAsambleaSocios, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => m.Disolucions[i].FechaEscrituraPublica, htmlAttributes: new { @class = "control-label col-md-10" })
+                        @Html.EditorFor(m => Model.Disolucions[i].FechaEscrituraPublica, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.Disolucions[i].FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label col-md-10" })
+                        @Html.EditorFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.Disolucions[i].NombreNotaria, htmlAttributes: new { @class = "control-label col-md-10" })
+                        @Html.EditorFor(m => Model.Disolucions[i].NombreNotaria, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => m.Disolucions[i].DatosNotario, htmlAttributes: new { @class = "control-label col-md-10" })
+                        @Html.EditorFor(m => Model.Disolucions[i].DatosNotario, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.Disolucions[i].FechaDisolucion, htmlAttributes: new { @class = "control-label col-md-10" })
+                        @Html.EditorFor(m => Model.Disolucions[i].FechaDisolucion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            }
+            <tbody>
+                @for (var i = 0; i < Model.Disolucions.Count(); i++)
                 {
-                    if (Model.FechaDisolucion.Value.Year < 2003)
-                    {
-
-                        <table class="table dataTable">
-                            <tr>
-                                <th>
-                                    <label>¿Disolución previa al año 2003?</label>
-                                    <input type="checkbox" name="anterior" id="anterior" value="Anterior al 2003" />
-                                </th>
-                            </tr>
-                        </table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(m => Model.Disolucions.FirstOrDefault().TipoNorma.Nombre)
-                                </th>
-                                <th>
-                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().NumeroNorma, htmlAttributes: new { @class = "control-label" })
-                                </th>
-                                <th>
-                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaNorma, htmlAttributes: new { @class = "control-label" })
-                                </th>
-                                <th>
-                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
-                                </th>
-                                <th>
-                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Autorizacion, htmlAttributes: new { @class = "control-label" })
-                                </th>
-                                <th>
-                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaJuntaSocios, htmlAttributes: new { @class = "control-label" })
-                                </th>
-                                <th>
-                                    @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Comision, htmlAttributes: new { @class = "control-label" })
-                                </th>
-                            </tr>
-                        </thead>
-                    }
-                    else
-                    {
-
-                        <table class="table dataTable">
-                            <tr>
-                                <th>
-                                    <label>¿Disolución previa al año 2003?</label>
-                                    <input type="checkbox" name="anterior" id="anterior" value="Anterior al 2003" />
-                                </th>
-                            </tr>
-                        </table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(m => Model.Disolucions.First().FechaJuntaSocios)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(m => Model.Disolucions.First().FechaEscrituraPublica)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(m => Model.Disolucions.First().MinistroDeFe)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(m => Model.Disolucions.First().FechaPublicacionDiarioOficial)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(m => Model.Disolucions.First().NumeroFojas)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(m => Model.Disolucions.First().AñoInscripcion)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(m => Model.Disolucions.First().DatosCBR)
-                                </th>
-                            </tr>
-                        </thead>
-                    }
+                    @Html.HiddenFor(model => model.Disolucions[i].OrganizacionId)
+                    @Html.HiddenFor(model => model.Disolucions[i].DisolucionId)
+                    <tr>
+                        @*@Html.EditorFor(m => m.Disolucions[i])*@
+                        <td>
+                            @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                        </td>
+                    </tr>
                 }
-                else
+            </tbody>
+        </table>
+    </div>
+    #endregion
+}
+else
+{    
+    <div>
+        <table>
+            @if (Model.FechaDisolucion != null)
+            {
+                if (Model.FechaDisolucion.Value.Year < 2003)
                 {
 
                     <table class="table dataTable">
@@ -144,136 +87,274 @@
                             </th>
                         </tr>
                     </table>
-                    <div style="display:none" id="divAnterior" name="divAnterior">
-                        <table class="table table-hover table-striped dataTable">
+                    for (var i = 0; i < Model.Disolucions.Count(); i++)
+                    {
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].TipoNorma.Nombre, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.DropDownListFor(model => model.Disolucions[i].TipoNormaId, null, "Seleccione... ", htmlAttributes: new { @class = "form-control col-md-10" })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].NumeroNorma, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].NumeroNorma, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].FechaNorma, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].FechaNorma, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].Autorizacion, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].Autorizacion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].FechaJuntaSocios, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].FechaJuntaSocios, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].FechaDisolucion, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].FechaDisolucion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].Comision, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].Comision, new { htmlAttributes = new { @name = "comision", @class = "form-control" } })
+                                </th>
+                            </tr>
+                        </thead>
+                    }
+                }
+                else
+                {
+                    <table class="table dataTable">
+                        <tr>
+                            <th>
+                                <label>¿Disolución previa al año 2003?</label>
+                                <input type="checkbox" name="anterior" id="anterior" value="Anterior al 2003" />
+                            </th>
+                        </tr>
+                    </table>
+                    for (var i = 0; i < Model.Disolucions.Count(); i++)
+                    {
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].FechaJuntaSocios, new { htmlAttributes = new { @class = "control-label col-md-10" } })
+                                    @Html.EditorFor(m => Model.Disolucions[i].FechaJuntaSocios, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].FechaEscrituraPublica, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].FechaEscrituraPublica, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].MinistroDeFe, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].MinistroDeFe, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].NumeroFojas, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].NumeroFojas, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].AñoInscripcion, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].AñoInscripcion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].DatosCBR, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].DatosCBR, new { htmlAttributes = new { @class = "form-control col-md-10", @type = "textarea" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].FechaDisolucion, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].FechaDisolucion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                </th>
+                                <th>
+                                    @Html.LabelFor(m => Model.Disolucions[i].Comision, htmlAttributes: new { @class = "control-label col-md-10" })
+                                    @Html.EditorFor(m => Model.Disolucions[i].Comision, new { htmlAttributes = new { @name = "comision", @class = "form-control" } })
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    }
+                }
+            }
+            else
+            {
+                <table class="table dataTable">
+                    <tr>
+                        <th>
+                            <label>¿Disolución previa al año 2003?</label>
+                            <input type="checkbox" name="anterior" id="anterior" value="Anterior al 2003" />
+                        </th>
+                    </tr>
+                </table>
+                #region Cooperativa anterior 2003
+
+                <div style="display:none" id="divAnterior" name="divAnterior">
+                    <table class="table table-hover table-striped dataTable">
+                       @for (var i = 0; i < Model.Disolucions.Count(); i++)
+                       {
                             <thead>
                                 <tr>
-                                    <th scope="col">
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().TipoNorma.Nombre, htmlAttributes: new { @class = "control-label" })
-                                    </th>
-                                    <td>
-                                        @Html.DropDownListFor(model => model.Disolucions.FirstOrDefault().TipoNormaId, null, "Seleccione... ", htmlAttributes: new { @class = "form-control" })
-                                    </td>
-                                    <th scope="row">
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().NumeroNorma, htmlAttributes: new { @class = "control-label" })
-                                    </th>
-                                    <td>
-                                        @Html.EditorFor(m => Model.Disolucions.FirstOrDefault().NumeroNorma, new { htmlAttributes = new { @class = "form-control" } })
-                                    </td>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaNorma, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].TipoNorma.Nombre, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.DropDownListFor(model => model.Disolucions.FirstOrDefault().TipoNormaId, null, "Seleccione... ", htmlAttributes: new { @class = "form-control col-md-10" })                                        
                                     </th>
-                                    <td>
-                                        @Html.EditorFor(m => Model.Disolucions.FirstOrDefault().FechaNorma, new { htmlAttributes = new { @class = "form-control" } })
-                                    </td>
-                                </tr>
-                                <tr>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].NumeroNorma, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].NumeroNorma, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                    </th>
+                                    <th>
+                                        @Html.LabelFor(m => Model.Disolucions[i].FechaNorma, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].FechaNorma, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                 </tr>
                                 <tr>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Autorizacion, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaJuntaSocios, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].Autorizacion, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].Autorizacion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaDisolucion, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].FechaJuntaSocios, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].FechaJuntaSocios, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        @Html.LabelFor(m => Model.Disolucions[i].FechaDisolucion, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].FechaDisolucion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Comision, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].Comision, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].Comision, new { htmlAttributes = new { @name = "comision", @class = "form-control" } })
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @for (var i = 0; i < Model.Disolucions.Count(); i++)
-                                {
-                                    <tr>
-                                        @*@Html.EditorFor(m => m.Disolucions[i])*@
-                                        <td>
-                                            @Html.EditorFor(m => Model.Disolucions.FirstOrDefault().Comision, new { htmlAttributes = new { @name = "comision" } })
-                                        </td>
-                                        <td>
-                                            @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <div name="divPosterior" id="divPosterior">
-                        <table class="table table-hover table-striped dataTable">
+                       }
+                    <tbody>
+                        @for (var i = 0; i < Model.Disolucions.Count(); i++)
+                        {
+                            @Html.HiddenFor(model => model.Disolucions[i].OrganizacionId)
+                            @Html.HiddenFor(model => model.Disolucions[i].DisolucionId)
+                            <tr>
+                                @*@Html.EditorFor(m => m.Disolucions[i])*@
+                                <td>
+                                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    </table>
+                </div>
+
+                #endregion
+
+                #region Cooperativa posterior 2003
+
+                <div name="divPosterior" id="divPosterior">
+                    <table class="table table-hover table-striped dataTable">
+                        @for (var i = 0; i < Model.Disolucions.Count(); i++)
+                        {
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.First().FechaJuntaSocios, new { htmlAttributes = new { @class = "control-label" } })
+                                        @Html.LabelFor(m => Model.Disolucions[i].FechaJuntaSocios, new { htmlAttributes = new { @class = "control-label col-md-10" } })
+                                        @Html.EditorFor(m => Model.Disolucions[i].FechaJuntaSocios, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.First().FechaEscrituraPublica, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].FechaEscrituraPublica, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].FechaEscrituraPublica, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.First().MinistroDeFe, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].MinistroDeFe, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].MinistroDeFe, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        @Html.LabelFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.First().FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].NumeroFojas, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].NumeroFojas, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.First().NumeroFojas, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].AñoInscripcion, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].AñoInscripcion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        @Html.LabelFor(m => Model.Disolucions[i].DatosCBR, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].DatosCBR, new { htmlAttributes = new { @class = "form-control col-md-10", @type = "textarea" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.First().AñoInscripcion, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(m => Model.Disolucions[i].FechaDisolucion, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].FechaDisolucion, new { htmlAttributes = new { @class = "form-control col-md-10" } })
                                     </th>
                                     <th>
-                                        @Html.LabelFor(m => Model.Disolucions.First().DatosCBR, htmlAttributes: new { @class = "control-label" })
-                                    </th>
-                                    <th>
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaDisolucion, htmlAttributes: new { @class = "control-label" })
-                                    </th>
-                                    <th>
-                                        @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Comision, htmlAttributes: new { @class = "control-label" })@* <label>¿Tiene Comision Liquidadora?</label>*@
+                                        @Html.LabelFor(m => Model.Disolucions[i].Comision, htmlAttributes: new { @class = "control-label col-md-10" })
+                                        @Html.EditorFor(m => Model.Disolucions[i].Comision, new { htmlAttributes = new { @name = "comision", @class = "form-control" } })
                                     </th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @for (var i = 0; i < Model.Disolucions.Count(); i++)
-                                {
-                                    <tr>
-                                        @Html.EditorFor(m => m.Disolucions[i])
-                                        <td>
-                                            @Html.EditorFor(m => Model.Disolucions.FirstOrDefault().Comision, new { htmlAttributes = new { @name = "comision" } })
-                                        </td>
-                                        <td>
-                                            @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-            </table>
-        </div>
-        <div id="divDirectorio" name="divDirectorio" style="display:none">
-            <h4>Comisión Liquidadora</h4>
-            <table class="table dataTable">
-                <tbody>
-                    <tr>
-                        @for (var i = 0; i < Model.Directorios.Count(); i++)
-                        {
-                            <td>
-                                <input type="checkbox" name="directorio[@i]" id="directorio[@i]">
-                                @Html.DisplayFor(m => Model.Directorios[i].NombreCompleto)
-                            </td>
                         }
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    }
+                    <tbody>
+                        @for (var i = 0; i < Model.Disolucions.Count(); i++)
+                        {
+                            @Html.HiddenFor(model => model.Disolucions[i].OrganizacionId)
+                            @Html.HiddenFor(model => model.Disolucions[i].DisolucionId)
+                            <tr>
+                                @*@Html.EditorFor(m => m.Disolucions[i])*@
+                                <td>
+                                    @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    </table>
+                </div>
+                #endregion
+            }
+        </table>
+    </div>
+    <div id="divDirectorio" name="divDirectorio" style="display:none">
+        <h4>Comisión Liquidadora</h4>
+        <table class="table dataTable">
+            <tbody>
+                <tr>
+                    @for (var i = 0; i < Model.Directorios.Count(); i++)
+                    {                        
+                        <th>
+                            <input type="checkbox" name="directorio[@i]" id="directorio[@i]" class="form-control col-md-10">
+                            @Html.DisplayFor(m => Model.Directorios[i].NombreCompleto, new { htmlAttributes = new { @class = "control-label col-md-10" } })
+                        </th>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
 }
+@*}*@
 <script>
     $(document).ready(function () {
         $("#anterior").change(function () {

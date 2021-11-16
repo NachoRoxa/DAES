@@ -14,7 +14,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Organización</div>
         <div class="panel-body">
-            <div class="form-horizontal">
+            <div class="form-horizontal" style="overflow-x:auto">
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.OrganizacionId)
 
@@ -306,7 +306,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Directorio</div>
         <div class="panel-body">
-            <div id="directorio">
+            <div id="directorio" style="overflow-x:auto">
                 @Html.Partial("_DirectorioEdit", Model)
             </div>
             @Ajax.ActionLink("Agregar directorio", "DirectorioAdd", null, new { Model.OrganizacionId }, new AjaxOptions { UpdateTargetId = "directorio" })
@@ -316,7 +316,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Modificación</div>
         <div class="panel-body">
-            <div id="modificacion">
+            <div id="modificacion" style="overflow-x:auto">
                 @Html.Partial("_ModificacionEdit", Model)
             </div>
             @Ajax.ActionLink("Agregar modificación", "ModificacionAdd", null, new { Model.OrganizacionId }, new AjaxOptions { UpdateTargetId = "modificacion" })
@@ -329,7 +329,7 @@
             <div id="disolucion" style="overflow-x:auto">
                 @Html.Partial("_DisolucionEdit", Model)
             </div>
-                @Ajax.ActionLink("Agregar disolución", "DisolucionAdd", null, new { Model.OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })            
+            @Ajax.ActionLink("Agregar disolución", "DisolucionAdd", null, new { Model.OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
         </div>
     </div>
     <input type="submit" value="Guardar" class="btn btn-primary my-3" />

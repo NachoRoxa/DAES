@@ -5,9 +5,9 @@
     <div class="panel-heading">Disolución</div>
     <div class="panel-body">
         <table class="table table-hover table-striped datatable">
-            @if (Model != null)
+            @if (Model.Count() != 0)
             {
-                if (Model.FirstOrDefault().Organizacion.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.Cooperativa)
+                if (Model.FirstOrDefault().TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.Cooperativa)
                 {
                     if (Model.FirstOrDefault().FechaDisolucion != null)
                     {
@@ -136,6 +136,8 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.FirstOrDefault().FechaAsambleaSocios)
                             </th>
+                        </tr>
+                        <tr>
                             <th>
                                 @Html.DisplayNameFor(model => model.FirstOrDefault().FechaEscrituraPublica)
                             </th>
@@ -145,6 +147,8 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.FirstOrDefault().NombreNotaria)
                             </th>
+                        </tr>
+                        <tr>
                             <th>
                                 @Html.DisplayNameFor(model => model.FirstOrDefault().DatosNotario)
                             </th>
@@ -166,6 +170,8 @@
                                 <td>
                                     @string.Format("{0:dd-MM-yyyy}", item.FechaAsambleaSocios)
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     @string.Format("{0:dd-MM-yyyy}", item.FechaEscrituraPublica)
                                 </td>
@@ -175,6 +181,8 @@
                                 <td>
                                     @Html.DisplayFor(model => item.NombreNotaria)
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     @Html.DisplayFor(model => item.DatosNotario)
                                 </td>

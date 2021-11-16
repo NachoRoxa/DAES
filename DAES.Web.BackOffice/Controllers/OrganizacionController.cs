@@ -288,10 +288,9 @@ namespace DAES.Web.BackOffice.Controllers
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
                 _custom.DirectorioUpdate(model.Directorios);
-                _custom.ModificacionUpdate(model.ModificacionEstatutos);
-                /*_custom.DisolucionUpdate(model.Disolucions);*/
+                _custom.ModificacionUpdate(model.ModificacionEstatutos);                
                 _custom.DisolucionUpdate(model.Disolucions);
-                /*_custom.DisolucionAsociacionUpdate(model.Disolucions); */               
+                             
 
                 TempData["Message"] = Properties.Settings.Default.Success;
                 return RedirectToAction("Edit", new { id = model.OrganizacionId });
@@ -479,7 +478,7 @@ namespace DAES.Web.BackOffice.Controllers
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa)
             {
                 ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
-                db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId });
+                db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId, ComisionLiquidadoras = new List<ComisionLiquidadora>() });
                 db.SaveChanges();
                 return PartialView("_DisolucionEdit", model);
                 /*return View(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId});*/
@@ -493,28 +492,6 @@ namespace DAES.Web.BackOffice.Controllers
             }
             return PartialView("_ErrorMessage", model);
         }
-
-
-        //TODO DELETE THIS SHITS
-        /*public ActionResult Anterior(int OrganizacionId)
-        {
-            var model = db.Organizacion.Find(OrganizacionId);
-
-            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaID", "Nombre");
-            db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
-            db.SaveChanges();
-            return PartialView("_DisolucionCooperativaAnterior", model);
-        }
-
-
-        public ActionResult Posterior(int OrganizacionId)
-        {
-            var model = db.Organizacion.Find(OrganizacionId);
-
-            db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
-            db.SaveChanges();
-            return PartialView("_DisolucionCoopertivaPosterior", model);
-        }*/
 
         public ActionResult DisolucionDelete(int DisolucionId, int OrganizacionId)
         {
