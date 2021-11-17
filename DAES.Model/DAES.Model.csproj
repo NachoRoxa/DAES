@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="DTO\DTOActualizacion.cs" />
     <Compile Include="DTO\DTOActualizacionNumeroSociosAsociacion.cs" />
     <Compile Include="DTO\DTOArticulo91.cs" />
@@ -207,6 +208,11 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Content\bootstrap\mixins.less" />
+    <None Include="Content\bootstrap\variables.less" />
+    <None Include="Content\sweetalert\sweet-alert-animations.less" />
+    <None Include="Content\sweetalert\sweet-alert-combine.less" />
+    <None Include="Content\sweetalert\sweet-alert.less" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery-3.3.1.slim.min.map" />
@@ -215,8 +221,13 @@
     <None Include="SistemaIntegrado\Articulo91.cd" />
     <None Include="SistemaIntegrado\Organizacion.cd" />
     <None Include="SistemaIntegrado\Process.cd" />
+    <None Include="Views\Sweet\Alert.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
+    <Content Include="Content\sweetalert\docs.css" />
+    <Content Include="Content\sweetalert\sweet-alert.css" />
+    <Content Include="Content\sweetalert\thumbs-up.jpg" />
     <Content Include="Scripts\expressive.annotations.validate.js" />
     <Content Include="Scripts\expressive.annotations.validate.min.js" />
     <Content Include="Scripts\jquery-3.3.1.intellisense.js" />

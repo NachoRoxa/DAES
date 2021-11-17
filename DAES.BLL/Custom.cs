@@ -197,74 +197,6 @@ namespace DAES.BLL
                 return returnValue;
             }
         }
-        
-        /*public List<string> DisolucionAsociacionUpdate(List<Disolucion> listAsociacion)
-        {
-            using (SistemaIntegradoContext context = new SistemaIntegradoContext())
-            {
-                var returnValue = new List<string>();
-
-                if (context.Organizacion.FirstOrDefault().TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores ||
-                    context.Organizacion.FirstOrDefault().TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
-                {
-                    if (listAsociacion == null)
-                    {
-                        return returnValue;
-                    }
-                }
-                foreach (var item in listAsociacion)
-                {
-                    var disolucion = context.Disolucions.FirstOrDefault(q => q.DisolucionId == item.DisolucionId);
-                    if (disolucion != null)
-                    {
-                        disolucion.NumeroOficio = item.NumeroOficio;
-                        disolucion.FechaOficio = item.FechaOficio;
-                        disolucion.FechaAsambleaSocios = item.FechaAsambleaSocios;
-                        disolucion.FechaEscrituraPublica = item.FechaEscrituraPublica;
-                        disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
-                        disolucion.NombreNotaria = item.NombreNotaria;
-                        disolucion.DatosNotario = item.DatosNotario;
-                        disolucion.FechaDisolucion = item.FechaDisolucion;
-                        context.Organizacion.FirstOrDefault().FechaDisolucion = disolucion.FechaDisolucion;
-                        // en caso de que sea "automatico" el cambio de estado descomentar esta linea
-                        *//*context.Organizacion.FirstOrDefault().EstadoId = (int)Infrastructure.Enum.Estado.Disuelta;*/
-                        /*disolucion.FechaDisolucion = DateTime.Today;*//*
-                    }
-                }
-                context.SaveChanges();
-                return returnValue;
-            }
-        }*/
-
-        // TODO Modificar Update
-
-        /*public List<string> DisolucionUpdate(List<Disolucion> list)
-        {
-            using (SistemaIntegradoContext context = new SistemaIntegradoContext())
-            {
-                var returnValue = new List<string>();
-                
-                if (list == null)
-                {
-                    return returnValue;
-                }
-
-                foreach (var item in list)
-                {
-                    var disolucion = context.Disolucions.FirstOrDefault(q => q.DisolucionId == item.DisolucionId);
-                    if (disolucion != null)
-                    {
-                        disolucion.Fecha = item.Fecha;
-                        disolucion.NumeroOficio = item.NumeroOficio;
-                        disolucion.FechaAsamblea = item.FechaAsamblea;
-                        disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
-                    }
-                }
-                
-                context.SaveChanges();
-                return returnValue;
-            }
-        }*/
 
         public void SignPDF(int documentoid, int TipoOrganizacionId, string NumeroFolio)
         {
@@ -363,98 +295,63 @@ namespace DAES.BLL
                     parrafo_uno = parrafo_uno.Replace("[DOMICIOSOCIAL]", organizacion.Direccion);
                 }
 
-                #region Parrafo 1 Test Rocha
-
-                if(aux.NumeroOficio.HasValue)
+                if (aux != null)
                 {
-                    parrafo_uno = parrafo_uno.Replace("[NUMEROOFICIO]", aux.NumeroOficio.ToString());
+                    #region Parrafo 1 Test Rocha
+                                        
+                    parrafo_uno = parrafo_uno.Replace("[SIGLA]", organizacion.Sigla ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[NUMEROOFICIO]", aux.NumeroOficio.ToString() ?? string.Empty);
+
+                    
+                    parrafo_uno = parrafo_uno.Replace("[FECHAPUBLICACIONDIARIOOFICIAL]", string.Format("{0:dd-MM-yyyy}", aux.FechaPublicacionDiarioOficial) ?? string.Empty);
+             
+
+                    parrafo_uno = parrafo_uno.Replace("[FECHAESCRITURAPUBLICA]", string.Format("{0:dd-MM-yyyy}", aux.FechaEscrituraPublica) ?? string.Empty);
+
+                    parrafo_uno = parrafo_uno.Replace("[FECHAJUNTASOCIOS]", string.Format("{0:dd-MM-yyyy}", aux.FechaJuntaSocios) ?? string.Empty);
+                    
+                    //TODO COMISION Disolucion
+
+                    parrafo_uno = parrafo_uno.Replace("[FECHADISOLUCION]", string.Format("{0:dd-MM-yyyy}", aux.FechaDisolucion) ?? string.Empty);
+
+                    parrafo_uno = parrafo_uno.Replace("[NUMERONORMA]", aux.NumeroNorma.ToString() ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[FECHANORMA]", string.Format("{0:dd-MM-yyyy}", aux.FechaNorma) ?? string.Empty);
+
+                    parrafo_uno = parrafo_uno.Replace("[AUTORIZACION]", aux.Autorizacion ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[NUMEROFOJAS]", aux.NumeroFojas.ToString() ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[AÑOINSCRIPCION]", aux.AñoInscripcion.ToString() ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[DATOSCBR]", aux.DatosCBR ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[MINISTRODEFE]", aux.MinistroDeFe ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[FECHAOFICIO]", string.Format("{0:dd-MM-yyyy}", aux.FechaOficio) ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[FECHAASAMBLEASOCIOS]", string.Format("{0:dd-MM-yyyy}", aux.FechaAsambleaSocios) ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[NOMBRENOTARIA]", aux.NombreNotaria ?? string.Empty);
+                    
+                    parrafo_uno = parrafo_uno.Replace("[DATOSNOTARIO]", aux.DatosNotario ?? string.Empty);
+                    
+                    // TODO Tipo Norma
+
+                    /*if (!string.IsNullOrEmpty(aux.TipoNorma.Nombre))
+                    {
+                        parrafo_uno = parrafo_uno.Replace("[TIPONORMA]", aux.TipoNorma.Nombre);
+                    }*/
+
+                    #endregion
                 }
-
-                if(aux.FechaPublicacionDiarioOficial.HasValue)
+                else
                 {
-                    parrafo_uno = parrafo_uno.Replace("[FECHAPUBLICACIONDIARIOOFICIAL]",string.Format("{0:dd-MM-yyyy}", aux.FechaPublicacionDiarioOficial));
+                    throw new Exception("Aviso: La Organización no cuenta con sus datos actualizados " +
+                        "para una emisión de certificado inmediata. Por favor, para proceder con su requerimiento, seleccione la opción 'Certificado Disolución(Solicitar emisión)'");
+                    
                 }
-
-                if(aux.FechaEscrituraPublica.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[FECHAESCRITURAPUBLICA]",string.Format("{0:dd-MM-yyyy}", aux.FechaEscrituraPublica));
-                }
-
-                if(aux.FechaJuntaSocios.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[FECHAJUNTASOCIOS]", string.Format("{0:dd-MM-yyyy}", aux.FechaJuntaSocios));
-                }
-
-                //TODO COMISION
-
-                if(aux.FechaDisolucion.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[FECHADISOLUCION]", string.Format("{0:dd-MM-yyyy}", aux.FechaDisolucion));
-                }
-
-                if(aux.NumeroNorma.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[NUMERONORMA]", aux.NumeroNorma.ToString());
-                }
-
-                if (aux.FechaNorma.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[FECHANORMA]", string.Format("{0:dd-MM-yyyy}", aux.FechaNorma));
-                }
-
-                if(!string.IsNullOrEmpty(aux.Autorizacion))
-                {
-                    parrafo_uno = parrafo_uno.Replace("[AUTORIZACION]", aux.Autorizacion);
-                }
-
-                if(aux.NumeroFojas.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[NUMEROFOJAS]", aux.NumeroFojas.ToString());
-                }
-
-                if(aux.AñoInscripcion.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[AÑOINSCRIPCION]", aux.AñoInscripcion.ToString());
-                }
-
-                if(!string.IsNullOrEmpty(aux.DatosCBR))
-                {
-                    parrafo_uno = parrafo_uno.Replace("[DATOSCBR]", aux.DatosCBR);
-                }
-
-                if(!string.IsNullOrEmpty(aux.MinistroDeFe))
-                {
-                    parrafo_uno = parrafo_uno.Replace("[MINISTRODEFE]", aux.MinistroDeFe);
-                }
-
-                if (aux.FechaOficio.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[FECHAOFICIO]", string.Format("{0:dd-MM-yyyy}", aux.FechaOficio));
-                }
-
-                if (aux.FechaAsambleaSocios.HasValue)
-                {
-                    parrafo_uno = parrafo_uno.Replace("[FECHAASAMBLEASOCIOS]", string.Format("{0:dd-MM-yyyy}", aux.FechaAsambleaSocios));
-                }
-
-                if (!string.IsNullOrEmpty(aux.NombreNotaria))
-                {
-                    parrafo_uno = parrafo_uno.Replace("[NOMBRENOTARIA]", aux.NombreNotaria);
-                }
-
-                if (!string.IsNullOrEmpty(aux.DatosNotario))
-                {
-                    parrafo_uno = parrafo_uno.Replace("[DATOSNOTARIO]", aux.DatosNotario);
-                }
-
-                // TODO Tipo Norma
-
-                /*if (!string.IsNullOrEmpty(aux.TipoNorma.Nombre))
-                {
-                    parrafo_uno = parrafo_uno.Replace("[TIPONORMA]", aux.TipoNorma.Nombre);
-                }*/
-
-                #endregion
 
                 string parrafo_dos = string.Format(configuracioncertificado.Parrafo2);
                 if (!string.IsNullOrWhiteSpace(parrafo_dos))

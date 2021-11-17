@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Custom.cs" />
     <Compile Include="EventoTitulos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,10 +91,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Content\bootstrap\mixins.less" />
+    <None Include="Content\bootstrap\variables.less" />
+    <None Include="Content\sweetalert\sweet-alert-animations.less" />
+    <None Include="Content\sweetalert\sweet-alert-combine.less" />
+    <None Include="Content\sweetalert\sweet-alert.less" />
     <None Include="packages.config" />
+    <None Include="Views\Sweet\Alert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
+    <Content Include="Content\sweetalert\docs.css" />
+    <Content Include="Content\sweetalert\sweet-alert.css" />
+    <Content Include="Content\sweetalert\thumbs-up.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
