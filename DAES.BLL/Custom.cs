@@ -152,12 +152,13 @@ namespace DAES.BLL
          * asi se puede cambiar el estado de dicha organizacion
          */
 
-        public List<string> DisolucionUpdate(List<Disolucion> listDisolucion /*, List<ComisionLiquidadora> liquidadoras*/)
+        public List<string> DisolucionUpdate(List<Disolucion> listDisolucion, Disolucion disolucionss)
         {
-            var returnValue = new List<string>();
+            
             using(SistemaIntegradoContext context = new SistemaIntegradoContext())
             {
-                if(listDisolucion == null)
+                var returnValue = new List<string>();
+                if (listDisolucion == null)
                 {
                     return returnValue;
                 }
@@ -169,24 +170,64 @@ namespace DAES.BLL
                 {
                     var comisionLiquidadoras = context.Disolucions.Where(q => q.Comision == true);
                     var disolucion = context.Disolucions.FirstOrDefault(q => q.DisolucionId == item.DisolucionId);
-                    if(disolucion != null)
+                    var org = context.Organizacion.FirstOrDefault(q => q.OrganizacionId == item.OrganizacionId);
+                    if (disolucion != null)
                     {
-                        disolucion.TipoNormaId = item.TipoNormaId;
+                        disolucion.TipoNormaId = disolucionss.TipoNormaId;
+
                         disolucion.NumeroNorma = item.NumeroNorma;
+                        
                         disolucion.FechaNorma = item.FechaNorma;
-                        disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
+                        
+                        if(disolucion.FechaPubliAnterior!= null)
+                        {
+                            disolucion.FechaPublicacionDiarioOficial = item.FechaPubliAnterior;
+                        }
+                        else
+                        {
+                            disolucion.FechaPublicacionDiarioOficial = item.FechaPubliPosterior;
+                        }
+                        
+                        /*disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;*/
+                        
                         disolucion.Autorizacion = item.Autorizacion;
-                        disolucion.FechaJuntaSocios = item.FechaJuntaSocios;
+                        
+                        if(disolucion.FechaJuntaAnterior != null)
+                        {
+                            disolucion.FechaJuntaSocios = item.FechaJuntaAnterior;
+                        }
+                        else
+                        {
+                            disolucion.FechaJuntaSocios = item.FechaJuntaPosterior;
+                        }                   
+                        
                         disolucion.Comision = item.Comision;
-                        disolucion.FechaDisolucion = item.FechaDisolucion;
+                        
+                        if(disolucion.FechaDisAnterior != null)
+                        {
+                            disolucion.FechaDisolucion = item.FechaDisAnterior;
+                        }
+                        else
+                        {
+                            disolucion.FechaDisolucion = item.FechaDisPost;
+                        }
+                        
                         disolucion.NumeroOficio = item.NumeroOficio;
+                        
                         disolucion.FechaOficio = item.FechaOficio;
+                        
                         disolucion.FechaAsambleaSocios = item.FechaAsambleaSocios;
+                        
                         disolucion.FechaEscrituraPublica = item.FechaEscrituraPublica;
-                        disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
+                        
                         disolucion.NombreNotaria = item.NombreNotaria;
+                        
                         disolucion.DatosNotario = item.DatosNotario;
+                        
                         disolucion.DatosCBR = item.DatosCBR;
+
+                        /* Agregar fuera del periodo de testing
+                        org.FechaDisolucion = item.FechaDisolucion;*/
                         /*disolucion.ComisionLiquidadoras = item.ComisionLiquidadoras;*/
                         //TODO Agregar datos para la tabla Comision Liquidadora
                         /*disolucion.ComisionLiquidadoraId = item.ComisionLiquidadoraId;*/
@@ -295,7 +336,7 @@ namespace DAES.BLL
                     parrafo_uno = parrafo_uno.Replace("[DOMICIOSOCIAL]", organizacion.Direccion);
                 }
 
-                if (aux != null)
+                if (aux != null && (int)DAES.Infrastructure.Enum.TipoDocumento.CertificadoDisolucionTest == 103) //TODO Modificar el valor "103" por el correspondiente en fase de produccion
                 {
                     #region Parrafo 1 Test Rocha
                                         
@@ -336,7 +377,19 @@ namespace DAES.BLL
                     parrafo_uno = parrafo_uno.Replace("[NOMBRENOTARIA]", aux.NombreNotaria ?? string.Empty);
                     
                     parrafo_uno = parrafo_uno.Replace("[DATOSNOTARIO]", aux.DatosNotario ?? string.Empty);
-                    
+
+                    /*parrafo_uno = parrafo_uno.Replace("[TIPONORMA]", aux.TipoNorma.Nombre ?? string.Empty);*/
+
+                    /*if (aux.ComisionLiquidadoras.Count() == 0)
+                    {
+                        var text = string.Empty;
+                        foreach (var item in aux.ComisionLiquidadoras)
+                        {
+                            text += item.Directorio.NombreCompleto + ", ";
+                        }
+                        parrafo_uno = parrafo_uno.Replace("[COMISIONLIQUIDADORA]", text ?? string.Empty);
+                    }*/
+
                     // TODO Tipo Norma
 
                     /*if (!string.IsNullOrEmpty(aux.TipoNorma.Nombre))
@@ -348,9 +401,10 @@ namespace DAES.BLL
                 }
                 else
                 {
+
                     throw new Exception("Aviso: La Organización no cuenta con sus datos actualizados " +
-                        "para una emisión de certificado inmediata. Por favor, para proceder con su requerimiento, seleccione la opción 'Certificado Disolución(Solicitar emisión)'");
-                    
+                        "para una emisión de certificado inmediata. Por favor, para proceder con su requerimiento, seleccione la opción 'Certificado Disolución (Solicitar emisión)'");
+
                 }
 
                 string parrafo_dos = string.Format(configuracioncertificado.Parrafo2);

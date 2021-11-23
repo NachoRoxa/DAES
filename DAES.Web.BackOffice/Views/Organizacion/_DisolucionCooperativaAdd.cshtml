@@ -10,7 +10,6 @@
         </tr>
     </table>
     <div style="display:none" id="divAnterior" name="divAnterior">
-        @*@Html.Partial("_OrganizacionDisolucionCooperativa", Model.Disolucions)*@ @*Testing change of partials*@
         <table class="table table-hover table-striped dataTable">
             <thead>
                 <tr>
@@ -26,8 +25,6 @@
                     <th>
                         @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().FechaPublicacionDiarioOficial, htmlAttributes: new { @class = "control-label" })
                     </th>
-                </tr>
-                <tr>
                     <th>
                         @Html.LabelFor(m => Model.Disolucions.FirstOrDefault().Autorizacion, htmlAttributes: new { @class = "control-label" })
                     </th>

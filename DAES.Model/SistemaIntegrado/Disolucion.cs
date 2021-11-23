@@ -40,7 +40,7 @@ namespace DAES.Model.SistemaIntegrado
 
         [Display(Name = "Fecha Junta General de Socios")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FechaJuntaSocios { get; set; }
 
         [Display(Name = "¿Tiene Comision Liquidadora?")]
@@ -81,7 +81,7 @@ namespace DAES.Model.SistemaIntegrado
         public string DatosCBR { get; set; }
 
         [Display(Name = "Datos Generales Notario Público y Notaría")]
-        public string MinistroDeFe { get; set; }
+        public string MinistroDeFe { get; set; }        
 
         #endregion
 
@@ -107,6 +107,31 @@ namespace DAES.Model.SistemaIntegrado
         public string DatosNotario { get; set; }
 
         #endregion
+
+        [NotMapped]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaPubliAnterior { get; set; }
+        [NotMapped]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaPubliPosterior { get; set; }
+        [NotMapped]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaJuntaAnterior { get; set; }
+        [NotMapped]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaJuntaPosterior { get; set; }
+        [NotMapped]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaDisAnterior { get; set; }
+        [NotMapped]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaDisPost { get; set; }
 
         public virtual List<ComisionLiquidadora> ComisionLiquidadoras { get; set; }
     }

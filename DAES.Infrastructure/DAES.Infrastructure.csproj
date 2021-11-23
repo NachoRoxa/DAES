@@ -63,7 +63,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Docured\DocuredContext.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="ExtensionesString.cs" />
@@ -124,6 +123,9 @@
     <Content Include="Content\sweetalert\docs.css" />
     <Content Include="Content\sweetalert\sweet-alert.css" />
     <Content Include="Content\sweetalert\thumbs-up.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

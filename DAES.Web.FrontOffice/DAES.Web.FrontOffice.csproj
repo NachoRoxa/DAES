@@ -479,6 +479,7 @@
     <Content Include="Views\Disolucion\AsociacionGremial.cshtml" />
     <Content Include="Views\Disolucion\AsociacionConsumidores.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\Shared\_ErrorDisolucion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />

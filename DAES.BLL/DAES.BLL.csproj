@@ -74,7 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Custom.cs" />
     <Compile Include="EventoTitulos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,6 +106,9 @@
     <Content Include="Content\sweetalert\docs.css" />
     <Content Include="Content\sweetalert\sweet-alert.css" />
     <Content Include="Content\sweetalert\thumbs-up.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -102,7 +102,8 @@
             EstadosFinancierosDebidamenteAprobadosPorAsamblea = 99,
             FichaDetalladaFuentesFinancieros = 100,
             FichaDatos = 101,
-            InformeComisionRevisodoraCuentas = 102
+            InformeComisionRevisodoraCuentas = 102,
+            CertificadoDisolucionTest = 103
         }
 
         public enum TipoOrganizacion

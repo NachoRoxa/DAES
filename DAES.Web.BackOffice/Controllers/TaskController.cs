@@ -285,7 +285,7 @@ namespace DAES.Web.BackOffice.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarOrganizacion(TaskModel model)
+        public ActionResult EditarOrganizacion(TaskModel model, Disolucion disolucion)
         {
             if (ModelState.IsValid)
             {
@@ -294,7 +294,7 @@ namespace DAES.Web.BackOffice.Controllers
                 _custom.DirectorioUpdate(model.Directorios);
                 _custom.ModificacionUpdate(model.ModificacionEstatutos);
                 /*_custom.DisolucionUpdate(model.Disolucions);*/
-                _custom.DisolucionUpdate(model.Disolucions);
+                _custom.DisolucionUpdate(model.Disolucions, disolucion);
                 /*_custom.DisolucionAsociacionUpdate(model.Disolucions);*/
 
                 TempData["Message"] = Properties.Settings.Default.Success;

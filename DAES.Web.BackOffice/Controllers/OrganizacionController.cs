@@ -271,7 +271,7 @@ namespace DAES.Web.BackOffice.Controllers
             ViewBag.SituacionId = new SelectList(db.Situacion.OrderBy(q => q.Nombre), "SituacionId", "Nombre", organizacion.SituacionId);
             ViewBag.CargoId = new SelectList(db.Cargo.OrderBy(q => q.Nombre), "CargoId", "Nombre");
             ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre), "GeneroId", "Nombre");
-            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
+            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
 
 
             return View(organizacion);
@@ -289,7 +289,7 @@ namespace DAES.Web.BackOffice.Controllers
                 db.SaveChanges();
                 _custom.DirectorioUpdate(model.Directorios);
                 _custom.ModificacionUpdate(model.ModificacionEstatutos);                
-                _custom.DisolucionUpdate(model.Disolucions);
+                _custom.DisolucionUpdate(model.Disolucions, disolucion);
                              
 
                 TempData["Message"] = Properties.Settings.Default.Success;
@@ -306,7 +306,7 @@ namespace DAES.Web.BackOffice.Controllers
             ViewBag.SituacionId = new SelectList(db.Situacion.OrderBy(q => q.Nombre), "SituacionId", "Nombre", model.SituacionId);
             ViewBag.CargoId = new SelectList(db.Cargo.OrderBy(q => q.Nombre), "CargoId", "Nombre");
             ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre), "GeneroId", "Nombre");
-            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
+            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
 
             return View("Edit", model);
         }
@@ -469,19 +469,16 @@ namespace DAES.Web.BackOffice.Controllers
         #region Disolucion
         public ActionResult DisolucionAdd(int OrganizacionId)
         {
-
-           /* db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId });
-            db.SaveChanges();*/
-
             var model = db.Organizacion.Find(OrganizacionId);
 
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa)
             {
-                ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
+                ViewBag.CargoId = new SelectList(db.Cargo.OrderBy(q => q.Nombre).ToList(), "CargoId", "Nombre");
+                ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre).ToList(), "GeneroId", "Nombre");
+                ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
                 db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId, ComisionLiquidadoras = new List<ComisionLiquidadora>() });
                 db.SaveChanges();
                 return PartialView("_DisolucionEdit", model);
-                /*return View(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId});*/
             }
             if(model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionGremial ||
                 model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores)
@@ -503,40 +500,10 @@ namespace DAES.Web.BackOffice.Controllers
             }
 
             var model = db.Organizacion.Find(OrganizacionId);
-            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
+            ViewBag.CargoId = new SelectList(db.Cargo.OrderBy(q => q.Nombre).ToList(), "CargoId", "Nombre");
+            ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre).ToList(), "GeneroId", "Nombre");
+            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
             return PartialView("_DisolucionEdit", model);
-        }
-
-        /*Metodo para eliminar una Disolucion de una Cooperativa de la lista en el View*/
-        public ActionResult DisolucionCooperativaDelete(int OrganizacionId, int DisolucionId)
-        {
-            var disolucionCooperativa = db.Disolucions.FirstOrDefault(q => q.DisolucionId == DisolucionId);
-
-            if (disolucionCooperativa != null)
-            {
-                db.Disolucions.Remove(disolucionCooperativa);
-                db.SaveChanges();
-            }
-
-            var model = db.Organizacion.Find(OrganizacionId);
-            ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre), "TipoNormaId", "Nombre");
-            return PartialView("_DisolucionCooperativaAdd", model);
-        }
-
-        
-        /*Metodo para eliminar cualquiera de los dos tipos de Asociaciones*/
-        public ActionResult DisolucionAsociacionDelete(int OrganizacionId, int DisolucionId)
-        {
-            var disolucionAsociacion = db.Disolucions.FirstOrDefault(q => q.DisolucionId == DisolucionId);
-
-            if (disolucionAsociacion != null)
-            {
-                db.Disolucions.Remove(disolucionAsociacion);
-                db.SaveChanges();
-            }
-
-            var model = db.Organizacion.Find(OrganizacionId);
-            return PartialView("_DisolucionAsociacionAdd", model);
         }
 
         #endregion
