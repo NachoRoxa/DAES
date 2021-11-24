@@ -15,8 +15,7 @@ namespace DAES.Web.FrontOffice.Controllers
 
         public ActionResult Index()
         {
-            var disolucionAC = _db.DisolucionConsumidores.Include("").Include("");
-            return View(disolucionAC.ToList());
+            return null;
         }
     }
 }

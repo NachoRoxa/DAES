@@ -22,7 +22,7 @@ namespace DAES.Model.SistemaIntegrado
         public virtual Disolucion Disolucion { get; set; }
 
         
-        public int? DirecitorioId { get; set; }
+        public int DirectorioId { get; set; }
         public virtual Directorio Directorio { get; set; }
 
         public string Rut { get; set; }
@@ -34,6 +34,7 @@ namespace DAES.Model.SistemaIntegrado
         public virtual Genero Genero { get; set; }
         public DateTime? FechaInicio { get; set; }
         public DateTime? FechaTermino { get; set; }
+        public bool EsMiembro { get; set; }
 
     }
 }

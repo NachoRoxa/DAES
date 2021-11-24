@@ -294,7 +294,7 @@ namespace DAES.Web.BackOffice.Controllers
                 _custom.DirectorioUpdate(model.Directorios);
                 _custom.ModificacionUpdate(model.ModificacionEstatutos);
                 /*_custom.DisolucionUpdate(model.Disolucions);*/
-                _custom.DisolucionUpdate(model.Disolucions, disolucion);
+                /*_custom.DisolucionUpdate(model.Disolucions, disolucion);*/
                 /*_custom.DisolucionAsociacionUpdate(model.Disolucions);*/
 
                 TempData["Message"] = Properties.Settings.Default.Success;

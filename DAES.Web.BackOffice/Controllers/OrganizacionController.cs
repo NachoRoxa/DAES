@@ -273,6 +273,13 @@ namespace DAES.Web.BackOffice.Controllers
             ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre), "GeneroId", "Nombre");
             ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
 
+            /*if(organizacion.Directorios.Any())
+            {
+                var dir = db.Directorio.Find(organizacion.OrganizacionId);
+                var comiLiq = db.ComisionLiquidadora.ToList();
+                comiLiq.
+                var disolucion = new Disolucion() { ComisionLiquidadoras = comiLiq };
+            }*/
 
             return View(organizacion);
         }
@@ -289,7 +296,7 @@ namespace DAES.Web.BackOffice.Controllers
                 db.SaveChanges();
                 _custom.DirectorioUpdate(model.Directorios);
                 _custom.ModificacionUpdate(model.ModificacionEstatutos);                
-                _custom.DisolucionUpdate(model.Disolucions, disolucion);
+                _custom.DisolucionUpdate(model.Disolucions, disolucion, disolucion.ComisionLiquidadoras);
                              
 
                 TempData["Message"] = Properties.Settings.Default.Success;
@@ -469,7 +476,7 @@ namespace DAES.Web.BackOffice.Controllers
         #region Disolucion
         public ActionResult DisolucionAdd(int OrganizacionId)
         {
-            var model = db.Organizacion.Find(OrganizacionId);
+            var model = db.Organizacion.Find(OrganizacionId);            
 
             if (model.TipoOrganizacionId == (int)Infrastructure.Enum.TipoOrganizacion.Cooperativa)
             {

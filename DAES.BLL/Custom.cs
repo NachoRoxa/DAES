@@ -152,7 +152,7 @@ namespace DAES.BLL
          * asi se puede cambiar el estado de dicha organizacion
          */
 
-        public List<string> DisolucionUpdate(List<Disolucion> listDisolucion, Disolucion disolucionss)
+        public List<string> DisolucionUpdate(List<Disolucion> listDisolucion, Disolucion disolucionss, List<ComisionLiquidadora> comisionLiquidadoras)
         {
             
             using(SistemaIntegradoContext context = new SistemaIntegradoContext())
@@ -166,11 +166,13 @@ namespace DAES.BLL
                 {
                     return returnValue;
                 }*/
+
+                
                 foreach(var item in listDisolucion)
-                {
-                    var comisionLiquidadoras = context.Disolucions.Where(q => q.Comision == true);
+                {                    
                     var disolucion = context.Disolucions.FirstOrDefault(q => q.DisolucionId == item.DisolucionId);
                     var org = context.Organizacion.FirstOrDefault(q => q.OrganizacionId == item.OrganizacionId);
+                    var comisionLiqui = context.Directorio.Where(q => q.OrganizacionId == org.OrganizacionId).ToList();
                     if (disolucion != null)
                     {
                         disolucion.TipoNormaId = disolucionss.TipoNormaId;
@@ -225,6 +227,19 @@ namespace DAES.BLL
                         disolucion.DatosNotario = item.DatosNotario;
                         
                         disolucion.DatosCBR = item.DatosCBR;
+
+                        if(disolucion.Comision)
+                        {
+                            foreach(var aux in comisionLiqui)
+                            {
+                                if (comisionLiquidadoras.FirstOrDefault().EsMiembro == true)
+                                {
+
+                                }
+                            }                            
+                        }
+
+
 
                         /* Agregar fuera del periodo de testing
                         org.FechaDisolucion = item.FechaDisolucion;*/

@@ -1,5 +1,6 @@
 ﻿@model DAES.Model.SistemaIntegrado.Organizacion
 @Html.HiddenFor(model => model.OrganizacionId)
+@Html.HiddenFor(model=>model.Directorios.FirstOrDefault().DirectorioId)
 
 @if (Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores ||
     Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
@@ -277,13 +278,22 @@ else
                                     </th>
                                     <th>
                                         @Html.LabelFor(m => Model.Disolucions[i].Comision, htmlAttributes: new { @class = "control-label col-md-10" })
-                                        @Html.EditorFor(m => Model.Disolucions[i].Comision, new { htmlAttributes = new { @id = "comisionPosterior", @class = "form-control", @style = "height: 20px;" } })
+                                        @Html.EditorFor(m => Model.Disolucions[i].Comision, new { htmlAttributes = new { @id = "comisionPosterior", @class = "form-control", @style = "height: 20px;", @onclick="CheckboxCheck()" } })
                                     </th>
                                     <td>
                                         @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
                                     </td>
                                 </tr>
                             </thead>
+                            @functions{
+                                private DAES.Infrastructure.SistemaIntegrado.SistemaIntegradoContext db = new DAES.Infrastructure.SistemaIntegrado.SistemaIntegradoContext();
+                                public void CheckboxCheck(int DisolucionId, int DirectorioId)
+                                {
+                                    var aux = db.Organizacion.Find(DisolucionId);
+                                    db.Disolucions.FirstOrDefault().ComisionLiquidadoras.Add(new DAES.Model.SistemaIntegrado.ComisionLiquidadora() { DisolucionId = DisolucionId, DirectorioId = DirectorioId });
+                                    db.SaveChanges();
+                                }
+                            }
                         }
                         @*<tbody>
                             @for (var i = 0; i < Model.Disolucions.Count(); i++)
@@ -297,8 +307,8 @@ else
                             </td>
                         }
                             </tbody>*@
-                        </table>
-                    </div>
+                    </table>
+                </div>
 
                     #endregion
 
@@ -431,10 +441,11 @@ else
                     @Html.HiddenFor(model => model.Directorios[i].GeneroId)
                 <tr>
                     <th>
-                        <input type="checkbox" name="directorio[@i]" id="directorio[@i]" value="@i">
+                        @*<input type="checkbox" name="directorio[@i]" id="directorio[@i]" value="@i">*@
+                        @Html.EditorFor(m=>Model.Disolucions.FirstOrDefault().ComisionLiquidadoras[i].EsMiembro, new {htmlAttributes = new {@class = "form-control", @style = "height: 20px;" } })
                     </th>
                     <th>
-                        @Html.EditorFor(m => Model.Directorios[i].NombreCompleto, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        @Html.EditorFor(m => Model.Disolucions.FirstOrDefault().ComisionLiquidadoras[i].NombreCompleto, new { htmlAttributes = new { @class = "form-control col-6" } })
                     </th>
                     <th>
                         @Html.EditorFor(m => Model.Directorios[i].Rut, new { htmlAttributes = new { @class = "form-control col-6" } })
