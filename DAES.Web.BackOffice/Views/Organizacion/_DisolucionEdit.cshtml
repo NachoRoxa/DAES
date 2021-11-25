@@ -1,6 +1,5 @@
 ﻿@model DAES.Model.SistemaIntegrado.Organizacion
 @Html.HiddenFor(model => model.OrganizacionId)
-@Html.HiddenFor(model=>model.Directorios.FirstOrDefault().DirectorioId)
 
 @if (Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionConsumidores ||
     Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.AsociacionGremial)
@@ -278,7 +277,7 @@ else
                                     </th>
                                     <th>
                                         @Html.LabelFor(m => Model.Disolucions[i].Comision, htmlAttributes: new { @class = "control-label col-md-10" })
-                                        @Html.EditorFor(m => Model.Disolucions[i].Comision, new { htmlAttributes = new { @id = "comisionPosterior", @class = "form-control", @style = "height: 20px;", @onclick="CheckboxCheck()" } })
+                                        @Html.EditorFor(m => Model.Disolucions[i].Comision, new { htmlAttributes = new { @id = "comisionAnterior", @class = "form-control", @style = "height: 20px;", @onclick="CheckboxCheck()" } })
                                     </th>
                                     <td>
                                         @Ajax.ActionLink("Eliminar", "DisolucionDelete", null, new { Model.Disolucions.ToArray()[i].DisolucionId, Model.Disolucions.ToArray()[i].OrganizacionId }, new AjaxOptions { UpdateTargetId = "disolucion" })
@@ -409,62 +408,62 @@ else
     <div id="divDirectorio" name="divDirectorio" style="display:none">
         <h4>Comisión Liquidadora</h4>
         <table class="table table-striped dataTable">
-            <thead>
-                <tr>
-                    <th>
-                        <label class="control-label col-6">Miembro Comisión</label>
-                    </th>
-                    <th>
-                        @Html.LabelFor(m => Model.Directorios.FirstOrDefault().NombreCompleto, new { htmlAttributes = new { @class = "control-label col-6" } })
-                    </th>
-                    <th>
-                        @Html.LabelFor(m => Model.Directorios.FirstOrDefault().Rut, new { htmlAttributes = new { @class = "control-label col-6" } })
-                    </th>
-                    <th>
-                        @Html.LabelFor(m => Model.Directorios.FirstOrDefault().Cargo.Nombre, new { htmlAttributes = new { @class = "control-label col-6" } })
-                    </th>
-                    <th>
-                        @Html.LabelFor(m => Model.Directorios.FirstOrDefault().Genero.Nombre, new { htmlAttributes = new { @class = "control-label col-6" } })
-                    </th>
-                    <th>
-                        @Html.LabelFor(m => Model.Directorios.FirstOrDefault().FechaInicio, new { htmlAttributes = new { @class = "control-label col-6" } })
-                    </th>
-                    <th>
-                        @Html.LabelFor(m => Model.Directorios.FirstOrDefault().FechaTermino, new { htmlAttributes = new { @class = "control-label col-6" } })
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (var i = 0; i < Model.ComisionLiquidadoras.Count(); i++)
-                {
+            @for (var i = 0; i < Model.ComisionLiquidadoras.Count(); i++)
+            {
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(m=> Model.ComisionLiquidadoras[i].EsMiembro, new { htmlAttributes = new { @class = "control-label col-6" } })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => Model.ComisionLiquidadoras[i].NombreCompleto, new { htmlAttributes = new { @class = "control-label col-6" } })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => Model.ComisionLiquidadoras[i].Rut, new { htmlAttributes = new { @class = "control-label col-6" } })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => Model.ComisionLiquidadoras[i].Cargo.Nombre, new { htmlAttributes = new { @class = "control-label col-6" } })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => Model.ComisionLiquidadoras[i].Genero.Nombre, new { htmlAttributes = new { @class = "control-label col-6" } })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => Model.ComisionLiquidadoras[i].FechaInicio, new { htmlAttributes = new { @class = "control-label col-6" } })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => Model.ComisionLiquidadoras[i].FechaTermino, new { htmlAttributes = new { @class = "control-label col-6" } })
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
                     @Html.HiddenFor(model => model.ComisionLiquidadoras[i].CargoId)
                     @Html.HiddenFor(model => model.ComisionLiquidadoras[i].GeneroId)
-                <tr>
-                    <th>
-                        @*<input type="checkbox" name="directorio[@i]" id="directorio[@i]" value="@i">*@
-                        @Html.EditorFor(m=>Model.ComisionLiquidadoras[i].EsMiembro, new {htmlAttributes = new {@class = "form-control", @style = "height: 20px;" } })
-                    </th>
-                    <th>
-                        @Html.EditorFor(m => Model.ComisionLiquidadoras[i].NombreCompleto, new { htmlAttributes = new { @class = "form-control col-6" } })
-                    </th>
-                    <th>
-                        @Html.EditorFor(m => Model.ComisionLiquidadoras[i].Rut, new { htmlAttributes = new { @class = "form-control col-6" } })
-                    </th>
-                    <th>
-                        @Html.DropDownListFor(model => model.ComisionLiquidadoras[i].Cargo, (SelectList)ViewBag.CargoId, "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
-                    </th>
-                    <th>
-                        @Html.DropDownListFor(model => model.ComisionLiquidadoras[i].Genero, (SelectList)ViewBag.GeneroId, "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
-                    </th>
-                    <th>
-                        @Html.EditorFor(m => Model.ComisionLiquidadoras[i].FechaInicio, new { htmlAttributes = new { @class = "form-control col-6" } })
-                    </th>
-                    <th>
-                        @Html.EditorFor(m => Model.ComisionLiquidadoras[i].FechaTermino, new { htmlAttributes = new { @class = "form-control col-6" } })
-                    </th>
-                </tr>
-                }
-            </tbody>
+                    <tr>
+                        <th>
+                            @*<input type="checkbox" name="directorio[@i]" id="directorio[@i]" value="@i">*@
+                            @Html.EditorFor(m => Model.ComisionLiquidadoras[i].EsMiembro, new { htmlAttributes = new { @class = "form-control", @style = "height: 20px; margin: 14px 0;" } })
+                        </th>
+                        <th>
+                            @Html.EditorFor(m => Model.ComisionLiquidadoras[i].NombreCompleto, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        </th>
+                        <th>
+                            @Html.EditorFor(m => Model.ComisionLiquidadoras[i].Rut, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        </th>
+                        <th>
+                            @Html.DropDownListFor(model => model.ComisionLiquidadoras[i].CargoId, new SelectList(ViewBag.CargoId, "Value", "Text", Model.ComisionLiquidadoras[i].CargoId), "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
+                        </th>
+                        <th>
+                            @Html.DropDownListFor(model => model.ComisionLiquidadoras[i].GeneroId, new SelectList(ViewBag.GeneroId, "Value", "Text", Model.ComisionLiquidadoras[i].GeneroId), "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
+                        </th>
+                        <th>
+                            @Html.EditorFor(m => Model.ComisionLiquidadoras[i].FechaInicio, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        </th>
+                        <th>
+                            @Html.EditorFor(m => Model.ComisionLiquidadoras[i].FechaTermino, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        </th>
+                    </tr>
+                </tbody>
+            }
         </table>
     </div>
 }

@@ -292,8 +292,9 @@ namespace DAES.Web.BackOffice.Controllers
                         GeneroId = dir.GeneroId,
                         NombreCompleto = dir.NombreCompleto
                     };
-                    
-                    list.Add(comiLiqui); // No se Refleja en la ComisionLiquidadora
+
+                    /*db.ComisionLiquidadora.Add(comiLiqui); // No se Refleja en la ComisionLiquidadora
+                    db.SaveChanges();*/
                     organizacion.ComisionLiquidadoras.Add(comiLiqui); // Error: Invalid Column name de Organizacion_OrganizacionId
                 }
                 
