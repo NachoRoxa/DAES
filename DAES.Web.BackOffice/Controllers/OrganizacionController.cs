@@ -273,13 +273,31 @@ namespace DAES.Web.BackOffice.Controllers
             ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre), "GeneroId", "Nombre");
             ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
 
-            /*if(organizacion.Directorios.Any())
+            if (organizacion.Directorios.Any())
             {
-                var dir = db.Directorio.Find(organizacion.OrganizacionId);
-                var comiLiq = db.ComisionLiquidadora.ToList();
-                comiLiq.
-                var disolucion = new Disolucion() { ComisionLiquidadoras = comiLiq };
-            }*/
+                List<ComisionLiquidadora> list = new List<ComisionLiquidadora>();
+                for (var i = 0; i< organizacion.Directorios.Count();i++)
+                {
+                    var dir = db.Directorio.Find(organizacion.Directorios[i].DirectorioId);
+                    var diso = db.Disolucions.Find(organizacion.Disolucions.FirstOrDefault().OrganizacionId);
+
+                    ComisionLiquidadora comiLiqui = new ComisionLiquidadora()
+                    {
+                        DirectorioId = dir.DirectorioId,
+                        DisolucionId = organizacion.Disolucions.FirstOrDefault().DisolucionId,
+                        CargoId = dir.CargoId,
+                        Rut = dir.Rut,
+                        FechaInicio = dir.FechaInicio,
+                        FechaTermino = dir.FechaInicio,
+                        GeneroId = dir.GeneroId,
+                        NombreCompleto = dir.NombreCompleto
+                    };
+                    
+                    list.Add(comiLiqui); // No se Refleja en la ComisionLiquidadora
+                    organizacion.ComisionLiquidadoras.Add(comiLiqui); // Error: Invalid Column name de Organizacion_OrganizacionId
+                }
+                
+            }
 
             return View(organizacion);
         }
@@ -296,7 +314,7 @@ namespace DAES.Web.BackOffice.Controllers
                 db.SaveChanges();
                 _custom.DirectorioUpdate(model.Directorios);
                 _custom.ModificacionUpdate(model.ModificacionEstatutos);                
-                _custom.DisolucionUpdate(model.Disolucions, disolucion, disolucion.ComisionLiquidadoras);
+                _custom.DisolucionUpdate(model.Disolucions, disolucion, model.ComisionLiquidadoras);
                              
 
                 TempData["Message"] = Properties.Settings.Default.Success;
@@ -483,7 +501,7 @@ namespace DAES.Web.BackOffice.Controllers
                 ViewBag.CargoId = new SelectList(db.Cargo.OrderBy(q => q.Nombre).ToList(), "CargoId", "Nombre");
                 ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre).ToList(), "GeneroId", "Nombre");
                 ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
-                db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId, ComisionLiquidadoras = new List<ComisionLiquidadora>() });
+                db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId });
                 db.SaveChanges();
                 return PartialView("_DisolucionEdit", model);
             }

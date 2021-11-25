@@ -285,7 +285,7 @@ else
                                     </td>
                                 </tr>
                             </thead>
-                            @functions{
+                            @*@functions{
                                 private DAES.Infrastructure.SistemaIntegrado.SistemaIntegradoContext db = new DAES.Infrastructure.SistemaIntegrado.SistemaIntegradoContext();
                                 public void CheckboxCheck(int DisolucionId, int DirectorioId)
                                 {
@@ -293,7 +293,7 @@ else
                                     db.Disolucions.FirstOrDefault().ComisionLiquidadoras.Add(new DAES.Model.SistemaIntegrado.ComisionLiquidadora() { DisolucionId = DisolucionId, DirectorioId = DirectorioId });
                                     db.SaveChanges();
                                 }
-                            }
+                            }*@
                         }
                         @*<tbody>
                             @for (var i = 0; i < Model.Disolucions.Count(); i++)
@@ -435,32 +435,32 @@ else
                 </tr>
             </thead>
             <tbody>
-                @for (var i = 0; i < Model.Directorios.Count(); i++)
+                @for (var i = 0; i < Model.ComisionLiquidadoras.Count(); i++)
                 {
-                    @Html.HiddenFor(model => model.Directorios[i].CargoId)
-                    @Html.HiddenFor(model => model.Directorios[i].GeneroId)
+                    @Html.HiddenFor(model => model.ComisionLiquidadoras[i].CargoId)
+                    @Html.HiddenFor(model => model.ComisionLiquidadoras[i].GeneroId)
                 <tr>
                     <th>
                         @*<input type="checkbox" name="directorio[@i]" id="directorio[@i]" value="@i">*@
-                        @Html.EditorFor(m=>Model.Disolucions.FirstOrDefault().ComisionLiquidadoras[i].EsMiembro, new {htmlAttributes = new {@class = "form-control", @style = "height: 20px;" } })
+                        @Html.EditorFor(m=>Model.ComisionLiquidadoras[i].EsMiembro, new {htmlAttributes = new {@class = "form-control", @style = "height: 20px;" } })
                     </th>
                     <th>
-                        @Html.EditorFor(m => Model.Disolucions.FirstOrDefault().ComisionLiquidadoras[i].NombreCompleto, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        @Html.EditorFor(m => Model.ComisionLiquidadoras[i].NombreCompleto, new { htmlAttributes = new { @class = "form-control col-6" } })
                     </th>
                     <th>
-                        @Html.EditorFor(m => Model.Directorios[i].Rut, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        @Html.EditorFor(m => Model.ComisionLiquidadoras[i].Rut, new { htmlAttributes = new { @class = "form-control col-6" } })
                     </th>
                     <th>
-                        @Html.DropDownListFor(model => model.Directorios[i].Cargo, (SelectList)ViewBag.CargoId, "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
+                        @Html.DropDownListFor(model => model.ComisionLiquidadoras[i].Cargo, (SelectList)ViewBag.CargoId, "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
                     </th>
                     <th>
-                        @Html.DropDownListFor(model => model.Directorios[i].Genero, (SelectList)ViewBag.GeneroId, "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
+                        @Html.DropDownListFor(model => model.ComisionLiquidadoras[i].Genero, (SelectList)ViewBag.GeneroId, "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
                     </th>
                     <th>
-                        @Html.EditorFor(m => Model.Directorios[i].FechaInicio, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        @Html.EditorFor(m => Model.ComisionLiquidadoras[i].FechaInicio, new { htmlAttributes = new { @class = "form-control col-6" } })
                     </th>
                     <th>
-                        @Html.EditorFor(m => Model.Directorios[i].FechaTermino, new { htmlAttributes = new { @class = "form-control col-6" } })
+                        @Html.EditorFor(m => Model.ComisionLiquidadoras[i].FechaTermino, new { htmlAttributes = new { @class = "form-control col-6" } })
                     </th>
                 </tr>
                 }

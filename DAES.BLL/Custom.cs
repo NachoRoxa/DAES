@@ -228,7 +228,7 @@ namespace DAES.BLL
                         
                         disolucion.DatosCBR = item.DatosCBR;
 
-                        if(disolucion.Comision)
+                        /*if(disolucion.Comision)
                         {
                             foreach(var aux in comisionLiqui)
                             {
@@ -237,7 +237,7 @@ namespace DAES.BLL
 
                                 }
                             }                            
-                        }
+                        }*/
 
 
 

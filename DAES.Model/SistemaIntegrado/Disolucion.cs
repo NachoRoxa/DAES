@@ -10,7 +10,7 @@ namespace DAES.Model.SistemaIntegrado
     {
         public Disolucion()
         {
-            ComisionLiquidadoras = new List<ComisionLiquidadora>();
+            
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -133,6 +133,6 @@ namespace DAES.Model.SistemaIntegrado
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaDisPost { get; set; }
 
-        public virtual List<ComisionLiquidadora> ComisionLiquidadoras { get; set; }
+        
     }
 }
