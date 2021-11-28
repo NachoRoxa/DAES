@@ -936,6 +936,7 @@
     <Content Include="Views\Shared\_OrganizacionDisolucionCooperativa.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\Organizacion\_ComisionLiquidadora.cshtml" />
+    <Content Include="Views\Shared\_OrganizacionComision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAES.BLL\DAES.BLL.csproj">

@@ -17,13 +17,14 @@ namespace DAES.Model.SistemaIntegrado
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int? ComisionLiquidadoraId { get; set; }
+        [Key]
+        public int ComisionLiquidadoraId { get; set; }
 
         public int? DisolucionId { get; set; }
         public virtual Disolucion Disolucion { get; set; }
 
         public int? OrganizacionId { get; set; }
-        public virtual Organizacion Organizacion { get; set; }
+        /*public virtual Organizacion Organizacion { get; set; }*/
         public int DirectorioId { get; set; }
         public virtual Directorio Directorio { get; set; }
 

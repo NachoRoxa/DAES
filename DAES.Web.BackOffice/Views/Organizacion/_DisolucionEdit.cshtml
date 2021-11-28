@@ -410,10 +410,12 @@ else
         <table class="table table-striped dataTable">
             @for (var i = 0; i < Model.ComisionLiquidadoras.Count(); i++)
             {
+                @Html.HiddenFor(model => model.ComisionLiquidadoras[i].OrganizacionId)
+                @Html.HiddenFor(model => model.ComisionLiquidadoras[i].ComisionLiquidadoraId)
                 <thead>
                     <tr>
                         <th>
-                            @Html.LabelFor(m=> Model.ComisionLiquidadoras[i].EsMiembro, new { htmlAttributes = new { @class = "control-label col-6" } })
+                            @Html.LabelFor(m => Model.ComisionLiquidadoras[i].EsMiembro, new { htmlAttributes = new { @class = "control-label col-6" } })
                         </th>
                         <th>
                             @Html.LabelFor(m => Model.ComisionLiquidadoras[i].NombreCompleto, new { htmlAttributes = new { @class = "control-label col-6" } })

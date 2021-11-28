@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using DAES.Model.DTO;
+using System.Dynamic;
 
 namespace DAES.Web.BackOffice.Controllers
 {
@@ -273,32 +274,38 @@ namespace DAES.Web.BackOffice.Controllers
             ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre), "GeneroId", "Nombre");
             ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
 
-            if (organizacion.Directorios.Any())
+            if(organizacion.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.Cooperativa)
             {
-                List<ComisionLiquidadora> list = new List<ComisionLiquidadora>();
-                for (var i = 0; i< organizacion.Directorios.Count();i++)
+                if (organizacion.Directorios.Any())
                 {
-                    var dir = db.Directorio.Find(organizacion.Directorios[i].DirectorioId);
-                    var diso = db.Disolucions.Find(organizacion.Disolucions.FirstOrDefault().OrganizacionId);
-
-                    ComisionLiquidadora comiLiqui = new ComisionLiquidadora()
+                    if (organizacion.ComisionLiquidadoras.Count() == 0)
                     {
-                        DirectorioId = dir.DirectorioId,
-                        DisolucionId = organizacion.Disolucions.FirstOrDefault().DisolucionId,
-                        CargoId = dir.CargoId,
-                        Rut = dir.Rut,
-                        FechaInicio = dir.FechaInicio,
-                        FechaTermino = dir.FechaInicio,
-                        GeneroId = dir.GeneroId,
-                        NombreCompleto = dir.NombreCompleto
-                    };
+                        for (var i = 0; i < organizacion.Directorios.Count(); i++)
+                        {
+                            var dir = db.Directorio.Find(organizacion.Directorios[i].DirectorioId);
+                            /*var diso = db.ComisionLiquidadora.Find(organizacion.ComisionLiquidadoras.FirstOrDefault().OrganizacionId);*/
 
-                    /*db.ComisionLiquidadora.Add(comiLiqui); // No se Refleja en la ComisionLiquidadora
-                    db.SaveChanges();*/
-                    organizacion.ComisionLiquidadoras.Add(comiLiqui); // Error: Invalid Column name de Organizacion_OrganizacionId
+                            ComisionLiquidadora comiLiqui = new ComisionLiquidadora()
+                            {
+                                DirectorioId = dir.DirectorioId,
+                                /*DisolucionId = organizacion.Disolucions.FirstOrDefault().DisolucionId,*/
+                                CargoId = dir.CargoId,
+                                Rut = dir.Rut,
+                                FechaInicio = dir.FechaInicio,
+                                FechaTermino = dir.FechaInicio,
+                                GeneroId = dir.GeneroId,
+                                NombreCompleto = dir.NombreCompleto,
+                                OrganizacionId = organizacion.OrganizacionId
+                            };
+
+                            /*db.ComisionLiquidadora.Add(comiLiqui);*/
+                            organizacion.ComisionLiquidadoras.Add(comiLiqui);
+                            organizacion.Disolucions.FirstOrDefault().ComisionLiquidadoras.Add(comiLiqui);
+                            db.SaveChanges();
+                        }
+                    }
                 }
-                
-            }
+            }            
 
             return View(organizacion);
         }
