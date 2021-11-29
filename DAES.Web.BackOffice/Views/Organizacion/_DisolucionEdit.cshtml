@@ -86,7 +86,7 @@ else
                                     <tr>
                                         <th>
                                             @Html.LabelFor(m => Model.Disolucions[i].TipoNorma.Nombre, htmlAttributes: new { @class = "control-label col-md-10" })
-                                            @Html.DropDownListFor(m => m.Disolucions[i].TipoNormaId, (SelectList)ViewBag.TipoNormaId, "Seleccione...", new { @class = "form-control col-md-10" })
+                                            @Html.DropDownListFor(m => m.Disolucions[i].TipoNormaId, new SelectList(ViewBag.TipoNormaId, "Value", "Text", Model.Disolucions[i].TipoNormaId), "Seleccione...", new { @class = "form-control col-md-10" })
                                         </th>
                                         <th>
                                             @Html.LabelFor(m => Model.Disolucions[i].NumeroNorma, htmlAttributes: new { @class = "control-label col-md-10" })
@@ -222,7 +222,8 @@ else
                                 <tr>
                                     <th>
                                         @Html.LabelFor(m => Model.Disolucions[i].TipoNorma.Nombre, htmlAttributes: new { @class = "control-label col-md-10" })
-                                        @Html.DropDownListFor(model => model.Disolucions[i].TipoNormaId, (SelectList)ViewBag.TipoNormaId, "Seleccione... ", htmlAttributes: new { @class = "form-control col-md-10" })
+                                        @*@Html.DropDownListFor(model => model.Disolucions[i].TipoNormaId, (SelectList)ViewBag.TipoNormaId, "Seleccione... ", htmlAttributes: new { @class = "form-control col-md-10" })*@
+                                        @Html.DropDownListFor(model => model.Disolucions[i].TipoNormaId, new SelectList(ViewBag.TipoNormaId, "Value", "Text", Model.Disolucions[i].TipoNormaId), "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })
                                     </th>
                                     <th>
                                         @Html.LabelFor(m => Model.Disolucions[i].NumeroNorma, htmlAttributes: new { @class = "control-label col-md-10" })
@@ -391,6 +392,7 @@ else
                                 {
                                     @Html.HiddenFor(model => model.Disolucions[i].OrganizacionId)
                                     @Html.HiddenFor(model => model.Disolucions[i].DisolucionId)
+                                    
 
                                     @*@Html.EditorFor(m => m.Disolucions[i])*@
                                     @*<td>

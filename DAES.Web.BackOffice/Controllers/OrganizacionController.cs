@@ -274,7 +274,7 @@ namespace DAES.Web.BackOffice.Controllers
             ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre), "GeneroId", "Nombre");
             ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
 
-            if(organizacion.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.Cooperativa)
+            /*if(organizacion.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.Cooperativa)
             {
                 if (organizacion.Directorios.Any())
                 {
@@ -283,12 +283,12 @@ namespace DAES.Web.BackOffice.Controllers
                         for (var i = 0; i < organizacion.Directorios.Count(); i++)
                         {
                             var dir = db.Directorio.Find(organizacion.Directorios[i].DirectorioId);
-                            /*var diso = db.ComisionLiquidadora.Find(organizacion.ComisionLiquidadoras.FirstOrDefault().OrganizacionId);*/
+                            *//*var diso = db.ComisionLiquidadora.Find(organizacion.ComisionLiquidadoras.FirstOrDefault().OrganizacionId);*//*
 
                             ComisionLiquidadora comiLiqui = new ComisionLiquidadora()
                             {
                                 DirectorioId = dir.DirectorioId,
-                                /*DisolucionId = organizacion.Disolucions.FirstOrDefault().DisolucionId,*/
+                                *//*DisolucionId = organizacion.Disolucions.FirstOrDefault().DisolucionId,*//*
                                 CargoId = dir.CargoId,
                                 Rut = dir.Rut,
                                 FechaInicio = dir.FechaInicio,
@@ -298,14 +298,18 @@ namespace DAES.Web.BackOffice.Controllers
                                 OrganizacionId = organizacion.OrganizacionId
                             };
 
-                            /*db.ComisionLiquidadora.Add(comiLiqui);*/
+                            *//*db.ComisionLiquidadora.Add(comiLiqui);*//*
                             organizacion.ComisionLiquidadoras.Add(comiLiqui);
-                            organizacion.Disolucions.FirstOrDefault().ComisionLiquidadoras.Add(comiLiqui);
+                            if(organizacion.Disolucions.Count == 0)
+                            {
+                                *//*organizacion.Disolucions.FirstOrDefault().ComisionLiquidadoras.Add(comiLiqui);*//*
+                            }
+                            
                             db.SaveChanges();
                         }
                     }
                 }
-            }            
+            }*/            
 
             return View(organizacion);
         }
@@ -510,6 +514,24 @@ namespace DAES.Web.BackOffice.Controllers
                 ViewBag.GeneroId = new SelectList(db.Genero.OrderBy(q => q.Nombre).ToList(), "GeneroId", "Nombre");
                 ViewBag.TipoNormaId = new SelectList(db.TipoNorma.OrderBy(q => q.Nombre).ToList(), "TipoNormaId", "Nombre");
                 db.Disolucions.Add(new Disolucion() { OrganizacionId = OrganizacionId, TipoOrganizacionId = model.TipoOrganizacionId });
+                foreach(var item in model.Directorios)
+                {
+                    var aux = db.ComisionLiquidadora.Add(new ComisionLiquidadora()
+                    {
+                        OrganizacionId = item.OrganizacionId,
+                        CargoId = item.CargoId,
+                        GeneroId = item.GeneroId,
+                        FechaInicio = item.FechaInicio,
+                        FechaTermino = item.FechaTermino,
+                        /*EsMiembro = model.ComisionLiquidadoras.FirstOrDefault().EsMiembro,*/
+                        Rut = item.Rut,
+                        DirectorioId = item.DirectorioId,
+                        NombreCompleto = item.NombreCompleto
+                    });
+                    /*model.Disolucions.FirstOrDefault().ComisionLiquidadoras.Add(aux);*/
+                }
+
+                
                 db.SaveChanges();
                 return PartialView("_DisolucionEdit", model);
             }
@@ -526,9 +548,16 @@ namespace DAES.Web.BackOffice.Controllers
         public ActionResult DisolucionDelete(int DisolucionId, int OrganizacionId)
         {
             var disolucion = db.Disolucions.FirstOrDefault(q => q.DisolucionId == DisolucionId);
+            var comision = db.ComisionLiquidadora.Where(q => q.OrganizacionId == OrganizacionId).ToList();
+
             if (disolucion != null)
             {
                 db.Disolucions.Remove(disolucion);
+                db.SaveChanges();
+            }
+            foreach(var item in comision)
+            {
+                db.ComisionLiquidadora.Remove(item);
                 db.SaveChanges();
             }
 

@@ -177,13 +177,13 @@ namespace DAES.BLL
                     
                     if (disolucion != null)
                     {
-                        disolucion.TipoNormaId = disolucionss.TipoNormaId;
+                        disolucion.TipoNormaId = item.TipoNormaId;
 
                         disolucion.NumeroNorma = item.NumeroNorma;
                         
                         disolucion.FechaNorma = item.FechaNorma;
                         
-                        if(disolucion.FechaPubliAnterior!= null)
+                        if(item.FechaPubliAnterior!= null)
                         {
                             disolucion.FechaPublicacionDiarioOficial = item.FechaPubliAnterior;
                         }
@@ -196,7 +196,7 @@ namespace DAES.BLL
                         
                         disolucion.Autorizacion = item.Autorizacion;
                         
-                        if(disolucion.FechaJuntaAnterior != null)
+                        if(item.FechaJuntaAnterior != null)
                         {
                             disolucion.FechaJuntaSocios = item.FechaJuntaAnterior;
                         }
@@ -207,7 +207,7 @@ namespace DAES.BLL
                         
                         disolucion.Comision = item.Comision;
                         
-                        if(disolucion.FechaDisAnterior != null)
+                        if(item.FechaDisAnterior != null)
                         {
                             disolucion.FechaDisolucion = item.FechaDisAnterior;
                         }
@@ -230,7 +230,7 @@ namespace DAES.BLL
                         
                         disolucion.DatosCBR = item.DatosCBR;
 
-                        if (disolucion.Comision)
+                        if (item.Comision)
                         {
                             foreach(var help in comisionLiquidadoras)
                             {

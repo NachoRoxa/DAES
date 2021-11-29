@@ -4,7 +4,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Disolución</div>
     <div class="panel-body">
-        <table class="table table-hover table-striped datatable">
+        <table class="table table-hover table-striped">
             @if (Model.Count() != 0)
             {
                 if (Model.FirstOrDefault().TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.Cooperativa)
@@ -77,7 +77,6 @@
                                     <th>@Html.DisplayNameFor(model => model.FirstOrDefault().NumeroFojas)</th>
                                     <th>@Html.DisplayNameFor(model => model.FirstOrDefault().AñoInscripcion)</th>
                                     <th>@Html.DisplayNameFor(model => model.FirstOrDefault().DatosCBR)</th>
-                                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Comision)</th>
                                     <th>@Html.DisplayNameFor(model => model.FirstOrDefault().FechaDisolucion)</th>
                                 </tr>
                             </thead>
