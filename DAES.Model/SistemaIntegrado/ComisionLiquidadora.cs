@@ -25,7 +25,7 @@ namespace DAES.Model.SistemaIntegrado
 
         public int? OrganizacionId { get; set; }
         /*public virtual Organizacion Organizacion { get; set; }*/
-        public int DirectorioId { get; set; }
+        public int? DirectorioId { get; set; }
         public virtual Directorio Directorio { get; set; }
 
         [Display(Name="RUN")]
