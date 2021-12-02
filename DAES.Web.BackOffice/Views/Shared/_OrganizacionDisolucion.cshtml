@@ -106,65 +106,70 @@
                                         <td>
                                             @string.Format("{0:dd-MM-yyyy}", item.FechaDisolucion)
                                         </td>
-                                    </tr>
+                                    </tr>                                    
                                     if (item.Comision)
-                                    {   
-                                        
-                                        <table class="table table-striped dataTable">
-                                            <h4>Comisión Liquidadora</h4>
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().EsMiembro)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().NombreCompleto)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().Rut)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().Cargo.Nombre)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().Genero.Nombre)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().FechaInicio)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().FechaTermino)
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>                                                               
-                                                        @Html.DisplayFor(model => item.ComisionLiquidadoras.FirstOrDefault().EsMiembro)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayFor(model => item.ComisionLiquidadoras.FirstOrDefault().NombreCompleto)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayFor(model => item.ComisionLiquidadoras.FirstOrDefault().Rut)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayFor(model => item.ComisionLiquidadoras.FirstOrDefault().CargoId)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayFor(model =>item.ComisionLiquidadoras.FirstOrDefault().GeneroId)
-                                                    </th>
-                                                    <th>
-                                                        @string.Format("{0:dd-MM-yyyy}",item.ComisionLiquidadoras.FirstOrDefault().FechaInicio)
-                                                        @*@Html.DisplayFor(model => item.ComisionLiquidadoras.FirstOrDefault().FechaInicio)*@
-                                                    </th>
-                                                    <th>
-                                                        @string.Format("{0:dd-MM-yyyy}", item.ComisionLiquidadoras.FirstOrDefault().FechaTermino)
-                                                        @*@Html.DisplayFor(model => item.ComisionLiquidadoras.FirstOrDefault().FechaTermino)*@
-                                                    </th>
-                                                </tr>
-                                            </tbody>                                                
-                                        </table>
+                                    {
+                                        foreach(var aux in item.ComisionLiquidadoras)
+                                        {
+                                            if(aux.EsMiembro)
+                                            {
+                                                <table class="table table-striped dataTable">
+                                                    <h4>Comisión Liquidadora</h4>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().EsMiembro)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().NombreCompleto)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().Rut)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().Cargo.Nombre)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().Genero.Nombre)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().FechaInicio)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayNameFor(m => m.ComisionLiquidadoras.FirstOrDefault().FechaTermino)
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>                                                               
+                                                                Si
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayFor(model => aux.NombreCompleto)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayFor(model => aux.Rut)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayFor(model => aux.Cargo.Nombre)
+                                                            </th>
+                                                            <th>
+                                                                @Html.DisplayFor(model =>aux.Genero.Nombre)
+                                                            </th>
+                                                            <th>
+                                                                @string.Format("{0:dd-MM-yyyy}",aux.FechaInicio)
+                                                                @*@Html.DisplayFor(model => item.ComisionLiquidadoras.FirstOrDefault().FechaInicio)*@
+                                                            </th>
+                                                            <th>
+                                                                @string.Format("{0:dd-MM-yyyy}", aux.FechaTermino)
+                                                                @*@Html.DisplayFor(model => item.ComisionLiquidadoras.FirstOrDefault().FechaTermino)*@
+                                                            </th>
+                                                        </tr>
+                                                    </tbody>                                                
+                                                </table>
+                                            }
+                                        }
                                     }
                                 }
                             </tbody>
