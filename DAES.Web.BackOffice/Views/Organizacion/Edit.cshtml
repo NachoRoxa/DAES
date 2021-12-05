@@ -325,14 +325,13 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">Disolución</div>
-        <div class="panel-body">
-            @Ajax.ActionLink("Agregar disolución", "DisolucionAdd", null, Model, new AjaxOptions { UpdateTargetId = "disolucion" })
+        <div class="panel-body">            
             <div id="disolucion" style="overflow-x:auto">
                 @Html.Partial("_DisolucionEdit", Model)
             </div>
         </div>
     </div>
-
+@*
     if (Model.TipoOrganizacionId == (int)DAES.Infrastructure.Enum.TipoOrganizacion.Cooperativa)
     {
         <div class="panel panel-default">
@@ -341,7 +340,7 @@
                 @Html.Partial("_ComisionEdit", Model)
             </div>
         </div>
-    }
+    }*@
 
     <input type="submit" value="Guardar" class="btn btn-primary my-3" />
     <p></p>
