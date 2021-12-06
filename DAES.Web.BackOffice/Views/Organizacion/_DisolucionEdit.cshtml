@@ -81,21 +81,25 @@ else
 {
     <div>
         <table class="table table-hover table-striped dataTable">
-
-            <table class="table dataTable">
-                <tr>
-                    <th>
-                        <label>¿Disolución anterior al año 2003?</label>
-                        <h5></h5>
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="anterior" id="anterior" class="si" checked /> Si
-                        <input type="radio" name="posterior" id="posterior" class="no" /> No
-                    </td>
-                </tr>
-            </table>
+            @for (var i = 0; i < Model.Disolucions.Count(); i++)
+            {
+                <table class="table dataTable">
+                    <tr>
+                        <th>
+                            <label>¿Disolución anterior al año 2003?</label>
+                            <h5></h5>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @*<span>Si: </span> @Html.RadioButtonFor(m => Model.Disolucions[i].AñoDisolucion, "Si",new { @class = "anterior", @checked = "checked"  } )
+                            <span>No: </span> @Html.RadioButtonFor(m => Model.Disolucions[i].AñoDisolucion, "No",new { @class = "posterior" } )*@
+                            <input type="radio" name="anterior" id="anterior" class="si" checked /> Si
+                            <input type="radio" name="posterior" id="posterior" class="no" /> No
+                        </td>
+                    </tr>
+                </table>
+            }
 
             <div id="divAnterior" name="divAnterior">
                 <table class="table table-hover table-striped dataTable">
@@ -324,15 +328,15 @@ else
 }
 <script>
     $(document).ready(function () {
-        $("#anterior").change(function () {
-            if ($("#anterior").is(':checked')) {
+        $(".anterior").change(function () {
+            if ($(".anterior").is(':checked')) {
                 $("#divAnterior").show();
                 $("#divPosterior").hide();
                 $("#posterior").prop("checked", false);
             }
         });
-        $("#posterior").change(function () {
-            if ($("#posterior").is(':checked')) {
+        $(".posterior").change(function () {
+            if ($(".posterior").is(':checked')) {
                 $("#divPosterior").show();
                 $("#divAnterior").hide();
                 $("#anterior").prop("checked", false);

@@ -182,6 +182,12 @@ namespace DAES.BLL
                         disolucion.NumeroNorma = item.NumeroNorma;
                         
                         disolucion.FechaNorma = item.FechaNorma;
+
+                        disolucion.NumeroFojas = item.NumeroFojas;
+
+                        disolucion.AñoInscripcion = item.AñoInscripcion;
+
+                        disolucion.MinistroDeFe = item.MinistroDeFe;
                         
                         if(item.FechaPubliAnterior!= null)
                         {
@@ -263,28 +269,7 @@ namespace DAES.BLL
                                     comisionLiqui.FirstOrDefault().EsMiembro = help.EsMiembro;
                                 }
                             }
-                            /*foreach (var aux in comisionLiquidadoras)
-                            {
-                                if (aux.EsMiembro)
-                                {
-                                    comiLiqui.Rut = aux.Rut;
-                                    comiLiqui.CargoId = aux.CargoId;
-                                    comiLiqui.GeneroId = aux.GeneroId;
-                                    comiLiqui.NombreCompleto = aux.NombreCompleto;
-                                    comiLiqui.FechaInicio = aux.FechaInicio;
-                                    comiLiqui.FechaTermino = aux.FechaTermino;
-                                    comiLiqui.EsMiembro = aux.EsMiembro;
-                                }                                
-                            }*/
                         }
-
-
-
-                        /* Agregar fuera del periodo de testing
-                        org.FechaDisolucion = item.FechaDisolucion;*/
-                        /*disolucion.ComisionLiquidadoras = item.ComisionLiquidadoras;*/
-                        //TODO Agregar datos para la tabla Comision Liquidadora
-                        /*disolucion.ComisionLiquidadoraId = item.ComisionLiquidadoraId;*/
                     }
                 }                
 
@@ -469,6 +454,25 @@ namespace DAES.BLL
                         parrafo_dos = parrafo_dos.Replace("[FECHACELEBRACION]", string.Format("{0:dd-MM-yyyy}", organizacion.FechaCelebracion.Value));
                     }
                 }
+
+                /*if (aux.Comision)
+                {                    
+                    foreach(var item in organizacion.ComisionLiquidadoras)
+                    {
+                        string parrafo_test = string.Format(configuracioncertificado.Parrafo2);
+                        var comi = context.ComisionLiquidadora.FirstOrDefault(q => q.ComisionLiquidadoraId == item.ComisionLiquidadoraId);
+                        parrafo_test = parrafo_test.Replace("[COMISION]", comi.NombreCompleto ?? string.Empty);
+                        Paragraph paragraphTEST = new Paragraph(parrafo_test, _fontStandard);
+
+                        paragraphTEST.Alignment = Element.ALIGN_JUSTIFIED;
+                        doc.Add(paragraphTEST);
+
+                    }
+                }
+                else
+                {
+                    parrafo_dos = parrafo_dos.Replace("[COMISION]", "No existe Comisión Liquidadora vigente a esta fecha, registrada por este Departamento.");
+                }*/
 
                 doc.Open();
                 doc.AddTitle(configuracioncertificado.Titulo);

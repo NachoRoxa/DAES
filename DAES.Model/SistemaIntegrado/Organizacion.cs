@@ -50,9 +50,6 @@ namespace DAES.Model.SistemaIntegrado
         public int? RegionId { get; set; }
         public virtual Region Region { get; set; }
 
-
-
-
         [Display(Name = "Comuna")]
         public int? ComunaId { get; set; }
         public virtual Comuna Comuna { get; set; }

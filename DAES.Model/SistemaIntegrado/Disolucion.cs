@@ -106,6 +106,9 @@ namespace DAES.Model.SistemaIntegrado
         [Display(Name = "Datos del Notario")]
         public string DatosNotario { get; set; }
 
+        /*[NotMapped]
+        public string AñoDisolucion { get; set; }*/
+
         #endregion
 
         [NotMapped]
