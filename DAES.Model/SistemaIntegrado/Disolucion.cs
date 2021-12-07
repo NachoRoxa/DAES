@@ -72,7 +72,7 @@ namespace DAES.Model.SistemaIntegrado
         #region Datos Cooperativa Posterior
 
         [Display(Name = "Fojas; Número")]
-        public int? NumeroFojas { get; set; }
+        public string NumeroFojas { get; set; }
 
         [Display(Name = "Año de inscripción")]
         public int? AñoInscripcion { get; set; }

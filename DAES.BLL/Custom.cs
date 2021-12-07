@@ -399,16 +399,30 @@ namespace DAES.BLL
                     
                     parrafo_uno = parrafo_uno.Replace("[FECHANORMA]", string.Format("{0:dd-MM-yyyy}", aux.FechaNorma) ?? string.Empty);
 
-                    parrafo_uno = parrafo_uno.Replace("[AUTORIZACION]", aux.Autorizacion ?? string.Empty);
-                    
-                    parrafo_uno = parrafo_uno.Replace("[NUMEROFOJAS]", aux.NumeroFojas.ToString() ?? string.Empty);
+                    if(!string.IsNullOrEmpty(aux.Autorizacion))
+                    {
+                        parrafo_uno = parrafo_uno.Replace("[AUTORIZACION]", "autorizado por: " + aux.Autorizacion);
+                    }
+                    else
+                    {
+                        parrafo_uno = parrafo_uno.Replace("[AUTORIZACION]", string.Empty);
+                    }
+
+                    parrafo_uno = parrafo_uno.Replace("[NUMEROFOJAS]", aux.NumeroFojas ?? string.Empty);
                     
                     parrafo_uno = parrafo_uno.Replace("[AÑOINSCRIPCION]", aux.AñoInscripcion.ToString() ?? string.Empty);
                     
                     parrafo_uno = parrafo_uno.Replace("[DATOSCBR]", aux.DatosCBR ?? string.Empty);
-                    
-                    parrafo_uno = parrafo_uno.Replace("[MINISTRODEFE]", aux.MinistroDeFe ?? string.Empty);
-                    
+
+                    if(!string.IsNullOrEmpty(aux.MinistroDeFe))
+                    {
+                        parrafo_uno = parrafo_uno.Replace("[MINISTRODEFE]", "ante el " + aux.MinistroDeFe);
+                    }
+                    else
+                    {
+                        parrafo_uno = parrafo_uno.Replace("[MINISTRODEFE]", string.Empty);
+                    }
+                                        
                     parrafo_uno = parrafo_uno.Replace("[FECHAOFICIO]", string.Format("{0:dd-MM-yyyy}", aux.FechaOficio) ?? string.Empty);
                     
                     parrafo_uno = parrafo_uno.Replace("[FECHAASAMBLEASOCIOS]", string.Format("{0:dd-MM-yyyy}", aux.FechaAsambleaSocios) ?? string.Empty);
@@ -416,26 +430,7 @@ namespace DAES.BLL
                     parrafo_uno = parrafo_uno.Replace("[NOMBRENOTARIA]", aux.NombreNotaria ?? string.Empty);
                     
                     parrafo_uno = parrafo_uno.Replace("[DATOSNOTARIO]", aux.DatosNotario ?? string.Empty);
-
-                    /*parrafo_uno = parrafo_uno.Replace("[TIPONORMA]", aux.TipoNorma.Nombre ?? string.Empty);*/
-
-                    /*if (aux.ComisionLiquidadoras.Count() == 0)
-                    {
-                        var text = string.Empty;
-                        foreach (var item in aux.ComisionLiquidadoras)
-                        {
-                            text += item.Directorio.NombreCompleto + ", ";
-                        }
-                        parrafo_uno = parrafo_uno.Replace("[COMISIONLIQUIDADORA]", text ?? string.Empty);
-                    }*/
-
-                    // TODO Tipo Norma
-
-                    /*if (!string.IsNullOrEmpty(aux.TipoNorma.Nombre))
-                    {
-                        parrafo_uno = parrafo_uno.Replace("[TIPONORMA]", aux.TipoNorma.Nombre);
-                    }*/
-
+                    
                     #endregion
                 }
                 else
@@ -455,24 +450,28 @@ namespace DAES.BLL
                     }
                 }
 
-                /*if (aux.Comision)
-                {                    
-                    foreach(var item in organizacion.ComisionLiquidadoras)
+                if (aux.Comision)
+                {
+                    foreach (var item in organizacion.ComisionLiquidadoras)
                     {
-                        string parrafo_test = string.Format(configuracioncertificado.Parrafo2);
+                        var last = organizacion.ComisionLiquidadoras.Last();
                         var comi = context.ComisionLiquidadora.FirstOrDefault(q => q.ComisionLiquidadoraId == item.ComisionLiquidadoraId);
-                        parrafo_test = parrafo_test.Replace("[COMISION]", comi.NombreCompleto ?? string.Empty);
-                        Paragraph paragraphTEST = new Paragraph(parrafo_test, _fontStandard);
-
-                        paragraphTEST.Alignment = Element.ALIGN_JUSTIFIED;
-                        doc.Add(paragraphTEST);
-
+                        parrafo_dos = parrafo_dos.Replace("[COMISION]", "La última Comisión Liquidadora, registrada por este Departamento, estaba integrada por las siguientes personas: ");
+                        if (!item.Equals(last))
+                        {
+                            parrafo_dos += item.NombreCompleto + ", ";
+                        }
+                        else
+                        {
+                            parrafo_dos += item.NombreCompleto + ".";
+                        }
                     }
                 }
                 else
                 {
                     parrafo_dos = parrafo_dos.Replace("[COMISION]", "No existe Comisión Liquidadora vigente a esta fecha, registrada por este Departamento.");
-                }*/
+                }
+
 
                 doc.Open();
                 doc.AddTitle(configuracioncertificado.Titulo);
@@ -487,6 +486,7 @@ namespace DAES.BLL
 
                 Paragraph paragraphDOS = new Paragraph(parrafo_dos, _fontStandard);
                 paragraphDOS.Alignment = Element.ALIGN_JUSTIFIED;
+                
 
                 var logo = context.Configuracion.FirstOrDefault(q => q.ConfiguracionId == (int)Infrastructure.Enum.Configuracion.URLImagenLogo);
                 if (logo == null)
@@ -545,6 +545,7 @@ namespace DAES.BLL
                 doc.Add(SaltoLinea);
                 doc.Add(paragraphUNO);
                 doc.Add(SaltoLinea);
+                doc.Add(paragraphDOS);
 
                 if (configuracioncertificado.TieneDirectorio)
                 {
