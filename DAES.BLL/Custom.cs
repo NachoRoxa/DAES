@@ -390,16 +390,12 @@ namespace DAES.BLL
                     parrafo_uno = parrafo_uno.Replace("[SIGLA]", organizacion.Sigla ?? string.Empty);
                     
                     parrafo_uno = parrafo_uno.Replace("[NUMEROOFICIO]", aux.NumeroOficio.ToString() ?? string.Empty);
-
-                    
+                                        
                     parrafo_uno = parrafo_uno.Replace("[FECHAPUBLICACIONDIARIOOFICIAL]", string.Format("{0:dd-MM-yyyy}", aux.FechaPublicacionDiarioOficial) ?? string.Empty);
-             
 
                     parrafo_uno = parrafo_uno.Replace("[FECHAESCRITURAPUBLICA]", string.Format("{0:dd-MM-yyyy}", aux.FechaEscrituraPublica) ?? string.Empty);
 
                     parrafo_uno = parrafo_uno.Replace("[FECHAJUNTASOCIOS]", string.Format("{0:dd-MM-yyyy}", aux.FechaJuntaSocios) ?? string.Empty);
-                    
-                    //TODO COMISION Disolucion
 
                     parrafo_uno = parrafo_uno.Replace("[FECHADISOLUCION]", string.Format("{0:dd-MM-yyyy}", aux.FechaDisolucion) ?? string.Empty);
 
@@ -443,10 +439,8 @@ namespace DAES.BLL
                 }
                 else
                 {
-
                     throw new Exception("Aviso: La Organización no cuenta con sus datos actualizados " +
                         "para una emisión de certificado inmediata. Por favor, para proceder con su requerimiento, seleccione la opción 'Certificado Disolución (Solicitar emisión)'");
-
                 }
 
                 string parrafo_dos = string.Format(configuracioncertificado.Parrafo2);
@@ -554,6 +548,7 @@ namespace DAES.BLL
                 doc.Add(paragraphUNO);
                 doc.Add(SaltoLinea);
                 doc.Add(paragraphDOS);
+                doc.Add(SaltoLinea);
 
                 if (configuracioncertificado.TieneDirectorio)
                 {
