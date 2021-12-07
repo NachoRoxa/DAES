@@ -193,9 +193,13 @@ namespace DAES.BLL
                         {
                             disolucion.FechaPublicacionDiarioOficial = item.FechaPubliAnterior;
                         }
-                        else
+                        else if(item.FechaPubliPosterior != null)
                         {
                             disolucion.FechaPublicacionDiarioOficial = item.FechaPubliPosterior;
+                        }
+                        else
+                        {
+                            disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;
                         }
                         
                         /*disolucion.FechaPublicacionDiarioOficial = item.FechaPublicacionDiarioOficial;*/
@@ -206,10 +210,14 @@ namespace DAES.BLL
                         {
                             disolucion.FechaJuntaSocios = item.FechaJuntaAnterior;
                         }
-                        else
+                        else if(item.FechaJuntaPosterior != null)
                         {
                             disolucion.FechaJuntaSocios = item.FechaJuntaPosterior;
-                        }                   
+                        }
+                        else
+                        {
+                            disolucion.FechaJuntaSocios = item.FechaJuntaSocios;
+                        }
                         
                         disolucion.Comision = item.Comision;
                         
