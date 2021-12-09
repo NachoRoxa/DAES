@@ -209,6 +209,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActualizacionSupervisorController.cs" />
     <Compile Include="Controllers\AsambleaExtraOrdinariaAsociacionController.cs" />
     <Compile Include="Controllers\AsociacionConsumidorController.cs" />
     <Compile Include="Controllers\DocumentoController.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Controllers\DAESController.cs" />
     <Compile Include="Controllers\InformacionSemestralController.cs" />
     <Compile Include="Controllers\InformacionAnualController.cs" />
+    <Compile Include="Controllers\RegistroSupervisorController.cs" />
     <Compile Include="Controllers\SupervisorAuxiliarController.cs" />
     <Compile Include="Controllers\VerificarDocumentoController.cs" />
     <Compile Include="Controllers\PublicacionFinancieraController.cs" />
@@ -461,6 +463,9 @@
     <Content Include="Views\InformacionSemestral\Index.cshtml" />
     <Content Include="Views\InformacionSemestral\Search.cshtml" />
     <Content Include="Views\AsociacionConsumidor\Index.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\Index.cshtml" />
+    <Content Include="Views\ActualizacionSupervisor\Index.cshtml" />
+    <Content Include="Views\RegistroSupervisor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />
@@ -510,9 +515,7 @@
       <Name>DAES.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\SupervisoresAuxiliares\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>

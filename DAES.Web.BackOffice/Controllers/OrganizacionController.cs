@@ -376,7 +376,7 @@ namespace DAES.Web.BackOffice.Controllers
                 worksheet.Cells[fila, 29].Value = organizacion.EmailContacto;
                 worksheet.Cells[fila, 30].Value = organizacion.FechaCreacion;
                 worksheet.Cells[fila, 31].Value = organizacion.FechaCelebracion;
-                worksheet.Cells[fila, 32].Value = organizacion.FechaPubliccionDiarioOficial;
+                worksheet.Cells[fila, 32].Value = organizacion.FechaPublicacionDiarioOficial;
                 worksheet.Cells[fila, 33].Value = organizacion.EsImportanciaEconomica;
                 worksheet.Cells[fila, 34].Value = organizacion.FechaActualizacion;
             }

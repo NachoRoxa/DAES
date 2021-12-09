@@ -120,7 +120,7 @@
     <Compile Include="SistemaIntegrado\ActaFiscalizacionFiscalizadorContable.cs" />
     <Compile Include="SistemaIntegrado\ActaFiscalizacionHechoLegal.cs" />
     <Compile Include="SistemaIntegrado\EscrituraConstitucion.cs" />
-    <Compile Include="SistemaIntegrado\Extracto.cs" />
+    <Compile Include="SistemaIntegrado\ExtractoAuxiliar.cs" />
     <Compile Include="SistemaIntegrado\PersonaFacultada.cs" />
     <Compile Include="SistemaIntegrado\RepresentanteLegal.cs" />
     <Compile Include="SistemaIntegrado\SupervisorAuxiliar.cs" />
@@ -161,6 +161,7 @@
     <Compile Include="SistemaIntegrado\OrganizacionLog.cs" />
     <Compile Include="SistemaIntegrado\Proceso.cs" />
     <Compile Include="SistemaIntegrado\TipoAprobacion.cs" />
+    <Compile Include="SistemaIntegrado\TipoPersonaJuridica.cs" />
     <Compile Include="SistemaIntegrado\TipoPrivacidad.cs" />
     <Compile Include="SistemaIntegrado\TipoWorkflow.cs" />
     <Compile Include="SistemaIntegrado\Workflow.cs" />
