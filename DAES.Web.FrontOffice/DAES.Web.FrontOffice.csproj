@@ -218,6 +218,7 @@
     <Compile Include="Controllers\DAESController.cs" />
     <Compile Include="Controllers\InformacionSemestralController.cs" />
     <Compile Include="Controllers\InformacionAnualController.cs" />
+    <Compile Include="Controllers\SupervisorAuxiliarController.cs" />
     <Compile Include="Controllers\VerificarDocumentoController.cs" />
     <Compile Include="Controllers\PublicacionFinancieraController.cs" />
     <Compile Include="Controllers\Articulo91Controller.cs" />
@@ -509,7 +510,9 @@
       <Name>DAES.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\SupervisoresAuxiliares\" />
+  </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
