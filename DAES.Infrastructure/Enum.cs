@@ -188,5 +188,13 @@
         {
             Defecto = 135,
         }
+
+        public enum TipoPersonaJuridica
+        {
+            EIRL = 1,
+            SociedadAnonima = 2,
+            SociedadPorAcciones = 3,
+            SociedadComercialLtda = 4
+        }
     }
 }

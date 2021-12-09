@@ -1,4 +1,5 @@
 ﻿using DAES.Web.FrontOffice.Helper;
+using DAES.Model.SistemaIntegrado;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace DAES.Web.FrontOffice.Controllers
         {
             public Search()
             {
-                Supervisores = new List<SupervisorAuxiliar>();
+                
             }
         }
 

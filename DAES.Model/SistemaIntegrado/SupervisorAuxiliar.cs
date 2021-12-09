@@ -20,19 +20,35 @@ namespace DAES.Model.SistemaIntegrado
         [Display(Name="Id")]
         public int SupervisorAuxiliarId { get; set; }
 
+        [Display(Name ="Razon Social")]
+        public string RazonSocial { get; set; }
+
+        [Display(Name ="Tipo de Persona Jurídica")]
+        public int TipoPersonaJuridicaId { get; set; }
+        public virtual TipoPersonaJuridica TipoPersonaJuridica { get; set; }
+
+        [Display(Name ="RUT")]
         public string Rut { get; set; }
+        
+        [Display(Name ="Domicilio Legal")]
         public string DomicilioLegal { get; set; }
+        
+        [Display(Name ="Telefono")]
         public string Telefono { get; set; }
+        
+        [Display(Name ="Correo Electronico")]
         public string CorreoElectronico { get; set; }
 
         /*Lista Representante Legal*/
+        public virtual List<RepresentanteLegal> RepresentanteLegals { get; set; }
 
         /*Lista escritura constitucion y modificacion*/
-
+        public virtual List<EscrituraConstitucion> EscrituraConstitucionModificaciones { get; set; }
         /*Lista Modificaciones*/
 
         /*Lista extracto*/
-
+        public virtual List<ExtractoAuxiliar> ExtractoAuxiliars { get; set; }
         /*Lista personas facultadas de supervision*/
+        public virtual List<PersonaFacultada> PersonaFacultadas { get; set; }
     }
 }
