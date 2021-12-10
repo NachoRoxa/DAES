@@ -13,7 +13,10 @@ namespace DAES.Model.SistemaIntegrado
     {
         public SupervisorAuxiliar()
         {
-
+            RepresentanteLegals = new List<RepresentanteLegal>();
+            EscrituraConstitucionModificaciones = new List<EscrituraConstitucion>();
+            ExtractoAuxiliars = new List<ExtractoAuxiliar>();
+            PersonaFacultadas = new List<PersonaFacultada>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

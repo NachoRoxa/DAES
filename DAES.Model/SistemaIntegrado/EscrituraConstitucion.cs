@@ -17,6 +17,9 @@ namespace DAES.Model.SistemaIntegrado
         [Display(Name ="Id")]
         public int EscrituraConstitucionId { get; set; }
 
+        [Display(Name ="Notaría")]
+        public string Notaria { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         [Display(Name ="Fecha")]

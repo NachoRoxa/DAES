@@ -36,7 +36,18 @@ namespace DAES.Web.FrontOffice.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var super = new SupervisorAuxiliar() { };
+            var representante = new RepresentanteLegal() { };
+            var extracto = new ExtractoAuxiliar() { };
+            var escritura = new EscrituraConstitucion() { };
+            var facultadas = new PersonaFacultada() { };
+
+            ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.NombrePersonaJuridica).ToList(), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
+            super.RepresentanteLegals.Add(representante);
+            super.ExtractoAuxiliars.Add(extracto);
+            super.EscrituraConstitucionModificaciones.Add(escritura);
+            super.PersonaFacultadas.Add(facultadas);
+            return View(super);
         }
 
         [HttpPost]
