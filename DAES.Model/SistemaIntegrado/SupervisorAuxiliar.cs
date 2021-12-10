@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DAES.Model.SistemaIntegrado
 {
     [Table("SupervisorAuxiliar")]
-    class SupervisorAuxiliar
+    public class SupervisorAuxiliar
     {
         public SupervisorAuxiliar()
         {

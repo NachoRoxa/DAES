@@ -22,7 +22,8 @@ namespace DAES.Web.FrontOffice.Controllers
         // GET: SupervisoresAuxiliares
         public ActionResult Index()
         {
-            return View();
+            var super = new SupervisorAuxiliar();
+            return View(super);
         }
     }
 }

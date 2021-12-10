@@ -33,5 +33,7 @@ namespace DAES.Model.SistemaIntegrado
         [Display(Name ="Nacionalidad")]
         public string Nacionalidad { get; set; }
 
+        public int SupervisorAuxiliarId { get; set; }
+
     }
 }

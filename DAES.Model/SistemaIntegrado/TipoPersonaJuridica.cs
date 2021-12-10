@@ -20,6 +20,6 @@ namespace DAES.Model.SistemaIntegrado
         [Display(Name = "Id")]
         public int TipoPersonaJuridicaId { get; set; }
 
-        public int NombrePersonaJuridica { get; set; }
+        public string NombrePersonaJuridica { get; set; }
     }
 }

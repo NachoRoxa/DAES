@@ -68,6 +68,9 @@ namespace DAES.Infrastructure.SistemaIntegrado
         public virtual DbSet<TipoMateria> TipoMateria { get; set; }
         public virtual DbSet<TipoCriterio> TipoCriterio { get; set; }
         public virtual DbSet<TipoOficio> TipoOficio { get; set; }
+        public virtual DbSet<TipoPersonaJuridica> TipoPersonaJuridicas { get; set; }
+        public virtual DbSet<SupervisorAuxiliar> SupervisorAuxiliars { get; set; }
+        public virtual DbSet<RepresentanteLegal> RepresentantesLegals { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
