@@ -37,31 +37,31 @@
                         <div class="card-body">
                             <h5 class="card-title" style="text-align:center">Identificación</h5>
                             <hr />
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-4">
                                 @Html.LabelFor(m => Model.RazonSocial, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.RazonSocial, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                @Html.EditorFor(m => Model.RazonSocial, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-4">
                                 @Html.LabelFor(m => Model.TipoPersonaJuridica, new { @class = "font-weight-bold" })<br />
                                 @*@Html.DropDownListFor(model => model.TipoPersonaJuridica.TipoPersonaJuridicaId, new SelectList(ViewBag.TipoPersonaJuridicaId,
-            "Value", "Text", Model.TipoPersonaJuridica.TipoPersonaJuridicaId), "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })*@
+                                    "Value", "Text", Model.TipoPersonaJuridica.TipoPersonaJuridicaId), "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })*@
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-4">
                                 @Html.LabelFor(m => Model.Rut, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.Rut, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                @Html.EditorFor(m => Model.Rut, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             <div class="col-md-4 mb-3">
                                 @Html.LabelFor(m => Model.DomicilioLegal, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.DomicilioLegal, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                @Html.EditorFor(m => Model.DomicilioLegal, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             <div class="col-md-4 mb-3">
                                 @Html.LabelFor(m => Model.DomicilioLegal, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.Telefono, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                                @Html.EditorFor(m => Model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             <div class="col-md-4 mb-3">
                                 @Html.LabelFor(m => Model.DomicilioLegal, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.CorreoElectronico, new { htmlAttributes = new { @class = "form-control col-md-10" } })
-                            </div>                            
+                                @Html.EditorFor(m => Model.CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,22 +72,57 @@
                         <div class="card-body" id="representantes">
                             <h5 class="card-title" style="text-align:center">Representantes Legales</h5>
                             <hr />
-                            @if (Model.RepresentanteLegals.Count() != 0)
-                            {
-                                @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })
-                            }
-                            else
-                            {
-                                foreach (var item in Model.RepresentanteLegals)
+                            @*@if (Model.RepresentanteLegals.Count() != 0)
                                 {
-                                    <div class="col-md-4"> @Html.LabelFor(m => item.NombreCompleto) </div>
-                                    <div class="col-md-4"> @Html.LabelFor(m => item.RUN) </div>
-                                    <div class="col-md-4"> @Html.LabelFor(m => item.Profesion) </div>
-                                    <div class="col-md-4"> @Html.LabelFor(m => item.Domicilio) </div>
-                                    <div class="col-md-4"> @Html.LabelFor(m => item.Nacionalidad) </div>
                                     @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })
                                 }
-                            }
+                                else
+                                {
+                                    foreach (var item in Model.RepresentanteLegals)
+                                    {
+                                        <div class="col-md-4"> @Html.LabelFor(m => item.NombreCompleto) </div>
+                                        <div class="col-md-4"> @Html.LabelFor(m => item.RUN) </div>
+                                        <div class="col-md-4"> @Html.LabelFor(m => item.Profesion) </div>
+                                        <div class="col-md-4"> @Html.LabelFor(m => item.Domicilio) </div>
+                                        <div class="col-md-4"> @Html.LabelFor(m => item.Nacionalidad) </div>
+                                        @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })
+                                    }
+                                }*@
+                            @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" id="constitucion">
+                            <h5 class="card-title" style="text-align:center">Escritura de Constitución</h5>
+                            <hr />
+                        </div>
+                        <div class="card-body" id="modificaciones">
+                            <h6 class="card-title" style="text-align:center">Modificaciones</h6>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" id="extracto">
+                            <h5 class="card-title" style="text-align:center">Extracto</h5>
+                            <hr />                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body" id="personasFacultadas">
+                            <h5 class="card-title" style="text-align:center">Personas Facultadas para firmar Informes de supervisión</h5>
+                            <hr />                    
                         </div>
                     </div>
                 </div>

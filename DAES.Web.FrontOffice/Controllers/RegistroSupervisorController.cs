@@ -14,6 +14,7 @@ namespace DAES.Web.FrontOffice.Controllers
         private SistemaIntegradoContext db = new SistemaIntegradoContext();
         public ActionResult Start()
         {
+            //TODO Aplicar Clave unica en modo produccion
             Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method = "Create";
 
             /*Global.CurrentClaveUnica.ClaveUnicaUser.name = new Name
@@ -33,16 +34,25 @@ namespace DAES.Web.FrontOffice.Controllers
             /*return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);*/
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(SupervisorAuxiliar SuperAux)
         {
-            /*if(ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 db.SupervisorAuxiliars.Add(SuperAux);
                 db.SaveChanges();
-            }*/
+                return RedirectToAction("Index");
+            }
+
             ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.NombrePersonaJuridica).ToList(), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
 
-            return View();
+            return View(SuperAux);
         }
 
         public ActionResult RepresentanteAdd(int SuperId)
