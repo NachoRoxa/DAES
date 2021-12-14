@@ -928,11 +928,7 @@
     <Content Include="Views\TipoOficio\Index.cshtml" />
     <Content Include="Views\Fiscalizacion\Inbox.cshtml" />
     <Content Include="Views\Fiscalizacion\Change.cshtml" />
-    <Content Include="Views\Organizacion\_DisolucionCooperativaAnterior.cshtml" />
-    <Content Include="Views\Organizacion\_DisolucionCooperativaPosterior.cshtml" />
-    <Content Include="Views\Organizacion\_DisolucionAsociacionAdd.cshtml" />
     <Content Include="Views\Shared\_OrganizacionDisolucionAsociaciones.cshtml" />
-    <Content Include="Views\Organizacion\_DisolucionCooperativaAdd.cshtml" />
     <Content Include="Views\Shared\_OrganizacionDisolucionCooperativa.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\Organizacion\_ComisionLiquidadora.cshtml" />

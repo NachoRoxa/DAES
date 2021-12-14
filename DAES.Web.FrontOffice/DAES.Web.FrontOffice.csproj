@@ -368,10 +368,6 @@
     <Content Include="Views\AsambleaOrdinariaAsociacion\Search.cshtml" />
     <Content Include="Views\ModificacionEstatutoAsociacion\Create.cshtml" />
     <Content Include="Views\ModificacionEstatutoAsociacion\Search.cshtml" />
-    <Content Include="Views\DisolucionAsociacion\Create.cshtml" />
-    <Content Include="Views\DisolucionAsociacion\Search.cshtml" />
-    <Content Include="Views\DisolucionCooperativa\Create.cshtml" />
-    <Content Include="Views\DisolucionCooperativa\Search.cshtml" />
     <Content Include="Views\ActualizacionNumeroSociosAsociacion\Create.cshtml" />
     <Content Include="Views\ActualizacionNumeroSociosAsociacion\Search.cshtml" />
     <Content Include="Views\JuntaGeneralSociosObligatoriaCooperativa\Create.cshtml" />
@@ -423,8 +419,6 @@
     <Content Include="Views\VerificarDocumento\Finish.cshtml" />
     <Content Include="Views\VerificarDocumento\Search.cshtml" />
     <Content Include="Views\VerificarDocumento\Index.cshtml" />
-    <Content Include="Views\DisolucionCooperativa\Index.cshtml" />
-    <Content Include="Views\DisolucionCooperativa\Finish.cshtml" />
     <Content Include="Views\Constitucion\Index.cshtml" />
     <Content Include="Views\Constitucion\Finish.cshtml" />
     <Content Include="Views\Actualizacion\Finish.cshtml" />
@@ -448,8 +442,6 @@
     <Content Include="Views\FusionCooperativa\Finish.cshtml" />
     <Content Include="Views\AsambleaOrdinariaAsociacion\Index.cshtml" />
     <Content Include="Views\AsambleaOrdinariaAsociacion\Finish.cshtml" />
-    <Content Include="Views\DisolucionAsociacion\Finish.cshtml" />
-    <Content Include="Views\DisolucionAsociacion\Index.cshtml" />
     <Content Include="Views\JuntaGeneralSociosObligatoriaCooperativa\Finish.cshtml" />
     <Content Include="Views\JuntaGeneralSociosObligatoriaCooperativa\Index.cshtml" />
     <Content Include="Views\SupervisionCAC\Index.cshtml" />
@@ -471,13 +463,6 @@
     <Content Include="Views\InformacionSemestral\Index.cshtml" />
     <Content Include="Views\InformacionSemestral\Search.cshtml" />
     <Content Include="Views\AsociacionConsumidor\Index.cshtml" />
-    <Content Include="Views\Disolucion\Index.cshtml" />
-    <Content Include="Views\Disolucion\Search.cshtml" />
-    <Content Include="Views\Disolucion\Create.cshtml" />
-    <Content Include="Views\Disolucion\CooperativaPrevia.cshtml" />
-    <Content Include="Views\Disolucion\CooperativaPosterior.cshtml" />
-    <Content Include="Views\Disolucion\AsociacionGremial.cshtml" />
-    <Content Include="Views\Disolucion\AsociacionConsumidores.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\Shared\_ErrorDisolucion.cshtml" />
   </ItemGroup>
