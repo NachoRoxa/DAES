@@ -23,11 +23,13 @@ namespace DAES.Model.SistemaIntegrado
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         [Display(Name ="Fecha")]
-        public DateTime Fecha { get; set; }
+        public DateTime? Fecha { get; set; }
 
 
         [Display(Name ="Numero de Repertorio")]
-        public int NumeroRepertorio { get; set; }
+        public int? NumeroRepertorio { get; set; }
+
+        public int SupervisorAuxiliarId { get; set; }
 
     }
 }

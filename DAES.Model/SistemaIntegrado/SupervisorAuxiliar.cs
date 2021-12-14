@@ -27,7 +27,7 @@ namespace DAES.Model.SistemaIntegrado
         public string RazonSocial { get; set; }
 
         [Display(Name ="Tipo de Persona Jurídica")]
-        public int TipoPersonaJuridicaId { get; set; }
+        public int? TipoPersonaJuridicaId { get; set; }
         public virtual TipoPersonaJuridica TipoPersonaJuridica { get; set; }
 
         [Display(Name ="RUT")]

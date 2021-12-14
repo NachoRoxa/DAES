@@ -467,6 +467,7 @@
     <Content Include="Views\ActualizacionSupervisor\Index.cshtml" />
     <Content Include="Views\RegistroSupervisor\Index.cshtml" />
     <Content Include="Views\RegistroSupervisor\Create.cshtml" />
+    <Content Include="Views\RegistroSupervisor\_Representantes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />

@@ -1,8 +1,9 @@
-﻿@model DAES.Model.SistemaIntegrado.SupervisorAuxiliar
+﻿
+@model DAES.Model.SistemaIntegrado.SupervisorAuxiliar
 
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-4">Registro de Supervisor Auxiliar</h1>
+        <h1 class="display-4">Registro de Supervisores Auxiliar</h1>
     </div>
 </div>
 <div class="container my-3">
@@ -30,38 +31,57 @@
         @Html.HiddenFor(model => model.EsImportanciaEconomica)*@
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         
-        <form>
+        
+            <div class="panel panel-default">
+                <div class="panel-heading">Representantes Legales</div>
+                    <div class="panel-body">
+                        <div id="representantes">
+                            <h5 class="card-title">Representantes Legales</h5>
+                            @Html.Partial("_Representantes", Model)
+                            @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })
+                        </div>
+                    </div>                
+            </div>
             <div class="row">
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title" style="text-align:center">Identificación</h5>
                             <hr />
-                            <div class="col-md-4">
-                                @Html.LabelFor(m => Model.RazonSocial, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.RazonSocial, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="col-md-4">
-                                @Html.LabelFor(m => Model.TipoPersonaJuridica, new { @class = "font-weight-bold" })<br />
-                                @*@Html.DropDownListFor(model => model.TipoPersonaJuridica.TipoPersonaJuridicaId, new SelectList(ViewBag.TipoPersonaJuridicaId,
-                                    "Value", "Text", Model.TipoPersonaJuridica.TipoPersonaJuridicaId), "Seleccione...", htmlAttributes: new { @class = "form-control col-6" })*@
-                            </div>
-                            <div class="col-md-4">
-                                @Html.LabelFor(m => Model.Rut, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.Rut, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                @Html.LabelFor(m => Model.DomicilioLegal, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.DomicilioLegal, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                @Html.LabelFor(m => Model.DomicilioLegal, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                @Html.LabelFor(m => Model.DomicilioLegal, new { @class = "font-weight-bold" })<br />
-                                @Html.EditorFor(m => Model.CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>@Html.LabelFor(m => Model.RazonSocial, new { @class = "font-weight-bold control-label" })</th>
+                                        <th>@Html.LabelFor(m => Model.TipoPersonaJuridica, new { @class = "font-weight-bold" })</th>
+                                        <th>@Html.LabelFor(m => Model.Rut, new { @class = "font-weight-bold" })</th>
+                                        <th>@Html.LabelFor(m => Model.DomicilioLegal, new { @class = "font-weight-bold" })</th>
+                                        <th>@Html.LabelFor(m => Model.Telefono, new { @class = "font-weight-bold" })</th>
+                                        <th>@Html.LabelFor(m => Model.CorreoElectronico, new { @class = "font-weight-bold" })</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.EditorFor(m => Model.RazonSocial, new { htmlAttributes = new { @class = "form-control col-11" } })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => Model.TipoPersonaJuridica.TipoPersonaJuridicaId, (SelectList)ViewBag.TipoPersonaJuridicaId, "Seleccione...", htmlAttributes: new { @class = "form-control col-11" })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(m => Model.Rut, new { htmlAttributes = new { @class = "form-control col-11" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(m => Model.DomicilioLegal, new { htmlAttributes = new { @class = "form-control col-11" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(m => Model.Telefono, new { htmlAttributes = new { @class = "form-control col-11" } })
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(m => Model.CorreoElectronico, new { htmlAttributes = new { @class = "form-control col-11", @type = "email" } })
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -72,30 +92,8 @@
                         <div class="card-body" id="representantes">
                             <h5 class="card-title" style="text-align:center">Representantes Legales</h5>
                             <hr />
-                            @foreach (var item in Model.RepresentanteLegals)
-                            {
-                                <div class="col-md-4">
-                                    @Html.LabelFor(m => item.NombreCompleto, new { @class = "font-weight-bold" })
-                                    @Html.EditorFor(m => item.NombreCompleto, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="col-md-4">
-                                    @Html.LabelFor(m => item.RUN, new { @class = "font-weight-bold" })
-                                    @Html.EditorFor(m => item.RUN, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="col-md-4">
-                                    @Html.LabelFor(m => item.Profesion, new { @class = "font-weight-bold" })
-                                    @Html.EditorFor(m => item.Profesion, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="col-md-4">
-                                    @Html.LabelFor(m => item.Domicilio, new { @class = "font-weight-bold" })
-                                    @Html.EditorFor(m => item.Domicilio, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="col-md-4">
-                                    @Html.LabelFor(m => item.Nacionalidad, new { @class = "font-weight-bold" })
-                                    @Html.EditorFor(m => item.Nacionalidad, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })
-                            }
+                            @Html.Partial("_Representantes",Model)
+                            @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })
                         </div>
                     </div>
                 </div>
@@ -108,15 +106,15 @@
                             <hr />
                             @foreach (var item in Model.EscrituraConstitucionModificaciones)
                             {
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.Notaria, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.Notaria, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.Fecha, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.Fecha, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.NumeroRepertorio, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.NumeroRepertorio, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
@@ -125,6 +123,7 @@
                         <div class="card-body" id="modificaciones">
                             <h6 class="card-title" style="text-align:center">Modificaciones</h6>
                             <hr />
+                            @Ajax.ActionLink("Agregar Modificacion", "ConstitucionAdd", null, new {Model.SupervisorAuxiliarId}, new AjaxOptions { UpdateTargetId="constitucion"})
                         </div>
                     </div>
                 </div>
@@ -137,27 +136,27 @@
                             <hr />
                             @foreach (var item in Model.ExtractoAuxiliars)
                             {
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.ConservadorComercio, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.ConservadorComercio, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.FechaInscripcion, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.FechaInscripcion, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.Foja, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.Foja, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.Numero, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.Numero, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.FechaPublicacionDiarioOficial, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.FechaPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.NumeroPublicacionDiarioOficial, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.NumeroPublicacionDiarioOficial, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
@@ -174,32 +173,32 @@
                             <hr />
                             @foreach (var item in Model.PersonaFacultadas)
                             {
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.NombreCompleto, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.NombreCompleto, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.RUN, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.RUN, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.Profesion, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.Profesion, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.Domicilio, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.Domicilio, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-3">
                                     @Html.LabelFor(m => item.Nacionalidad, new { @class = "font-weight-bold" })
                                     @Html.EditorFor(m => item.Nacionalidad, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
                             }
+                            @Ajax.ActionLink("Agregar Persona Facultada","PersonaFacultadaAdd", null, new {Model.SupervisorAuxiliarId},new AjaxOptions { UpdateTargetId="personasFacultadas"})
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
             
         <p></p>
         <button class="btn btn-primary btn-rounded" type="submit">Enviar solicitud</button>

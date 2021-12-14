@@ -16,6 +16,7 @@ namespace DAES.Web.FrontOffice.Controllers
         {
             //TODO Aplicar Clave unica en modo produccion
             Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method = "Create";
+            /*Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller = "SupervisionAuxiliar";*/
 
             /*Global.CurrentClaveUnica.ClaveUnicaUser.name = new Name
             {
@@ -42,7 +43,7 @@ namespace DAES.Web.FrontOffice.Controllers
             var escritura = new EscrituraConstitucion() { };
             var facultadas = new PersonaFacultada() { };
 
-            ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.NombrePersonaJuridica).ToList(), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
+            ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.NombrePersonaJuridica), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
             super.RepresentanteLegals.Add(representante);
             super.ExtractoAuxiliars.Add(extracto);
             super.EscrituraConstitucionModificaciones.Add(escritura);
@@ -69,12 +70,31 @@ namespace DAES.Web.FrontOffice.Controllers
         public ActionResult RepresentanteAdd(int SuperId)
         {
             var model = db.SupervisorAuxiliars.Find(SuperId);
-            
             var repre = new RepresentanteLegal() { SupervisorAuxiliarId = model.SupervisorAuxiliarId };
 
             db.RepresentantesLegals.Add(repre);
             db.SaveChanges();
-            return null;
+            return PartialView("Create", model);
+        }
+
+        public ActionResult ConstitucionAdd(int SuperId)
+        {
+            var model = db.SupervisorAuxiliars.Find(SuperId);
+            var modificacion = new EscrituraConstitucion() { SupervisorAuxiliarId = model.SupervisorAuxiliarId };
+            db.EscrituraConstitucions.Add(modificacion);
+            db.SaveChanges();
+
+            return PartialView("Create", model);
+        }
+
+        public ActionResult PersonaFacultadaAdd(int SuperId)
+        {
+            var model = db.SupervisorAuxiliars.Find(SuperId);
+            var facultada = new PersonaFacultada() { SupervisorAuxiliarId = model.SupervisorAuxiliarId };
+            db.PersonaFacultadas.Add(facultada);
+            db.SaveChanges();
+
+            return PartialView("Create", model);
         }
 
         // GET: RegistroSupervisor

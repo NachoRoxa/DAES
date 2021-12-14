@@ -29,18 +29,20 @@ namespace DAES.Model.SistemaIntegrado
         public string Foja { get; set; }
         
         [Display(Name ="Número")]
-        public int Numero { get; set; }
+        public int? Numero { get; set; }
         
         [Display(Name ="Año")]
-        public int Año { get; set; }
+        public int? Año { get; set; }
                 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         [Display(Name ="Fecha de Publicación en el Diario Oficial")]
-        public DateTime FechaPublicacionDiarioOficial { get; set; }
+        public DateTime? FechaPublicacionDiarioOficial { get; set; }
 
         [Display(Name ="Numero de Publicación en el Diario Oficial")]
-        public int NumeroPublicacionDiarioOficial { get; set; }
+        public int? NumeroPublicacionDiarioOficial { get; set; }
+
+        public int SupervisorAuxiliarId { get; set; }
 
     }
 }
