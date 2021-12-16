@@ -45,7 +45,7 @@ namespace DAES.Web.FrontOffice.Controllers
             super.ExtractoAuxiliars.Add(extracto);
             super.EscrituraConstitucionModificaciones.Add(escritura);
             super.PersonaFacultadas.Add(facultadas);
-            return View(super);
+            return View();
         }
 
         public ActionResult RepresentanteAdd(int SuperId)
@@ -67,7 +67,6 @@ namespace DAES.Web.FrontOffice.Controllers
 
             return PartialView("Create", model);
         }
-
         public ActionResult PersonaFacultadaAdd(int SuperId)
         {
             var model = db.PersonaFacultadas.Find(SuperId);

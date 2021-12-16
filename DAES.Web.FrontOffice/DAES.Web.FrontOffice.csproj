@@ -468,6 +468,8 @@
     <Content Include="Views\RegistroSupervisor\Index.cshtml" />
     <Content Include="Views\RegistroSupervisor\Create.cshtml" />
     <Content Include="Views\RegistroSupervisor\_Representantes.cshtml" />
+    <Content Include="Views\RegistroSupervisor\_Constitucion.cshtml" />
+    <Content Include="Views\RegistroSupervisor\_PersonasFacultadas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />

@@ -53,5 +53,8 @@ namespace DAES.Model.SistemaIntegrado
         public virtual List<ExtractoAuxiliar> ExtractoAuxiliars { get; set; }
         /*Lista personas facultadas de supervision*/
         public virtual List<PersonaFacultada> PersonaFacultadas { get; set; }
+
+        [NotMapped]
+        public virtual List<FileAttach> FileAttaches { get; set; }
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="SistemaIntegrado\ActaFiscalizacionHechoLegal.cs" />
     <Compile Include="SistemaIntegrado\EscrituraConstitucion.cs" />
     <Compile Include="SistemaIntegrado\ExtractoAuxiliar.cs" />
+    <Compile Include="SistemaIntegrado\FileAttach.cs" />
     <Compile Include="SistemaIntegrado\PersonaFacultada.cs" />
     <Compile Include="SistemaIntegrado\RepresentanteLegal.cs" />
     <Compile Include="SistemaIntegrado\SupervisorAuxiliar.cs" />

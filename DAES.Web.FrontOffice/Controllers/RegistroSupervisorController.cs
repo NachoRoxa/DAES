@@ -43,11 +43,19 @@ namespace DAES.Web.FrontOffice.Controllers
             var escritura = new EscrituraConstitucion() { };
             var facultadas = new PersonaFacultada() { };
 
-            ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.NombrePersonaJuridica), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
+            ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.TipoPersonaJuridicaId), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
+            db.SupervisorAuxiliars.Add(super);
+            /*db.RepresentantesLegals.Add(representante);
+            db.ExtractoAuxiliars.Add(extracto);
+            db.EscrituraConstitucions.Add(escritura);
+            db.PersonaFacultadas.Add(facultadas);*/
+            db.SaveChanges();
+
             super.RepresentanteLegals.Add(representante);
             super.ExtractoAuxiliars.Add(extracto);
             super.EscrituraConstitucionModificaciones.Add(escritura);
             super.PersonaFacultadas.Add(facultadas);
+            
             return View(super);
         }
 
@@ -65,18 +73,31 @@ namespace DAES.Web.FrontOffice.Controllers
             ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.NombrePersonaJuridica).ToList(), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
 
             return View(SuperAux);
-        }
+        }        
 
         public ActionResult RepresentanteAdd(int SuperId)
         {
             var model = db.SupervisorAuxiliars.Find(SuperId);
-            var repre = new RepresentanteLegal() { SupervisorAuxiliarId = model.SupervisorAuxiliarId };
-
-            db.RepresentantesLegals.Add(repre);
+            var repre = db.RepresentantesLegals.Add(new RepresentanteLegal() { SupervisorAuxiliarId = SuperId });
+            
             db.SaveChanges();
-            return PartialView("Create", model);
+            return PartialView("_Representantes", model);
         }
 
+        public ActionResult DeleteRepresentante(int RepreId, int SuperId)
+        {
+            var repre = db.RepresentantesLegals.FirstOrDefault(q => q.RepresentanteLegalId == RepreId);
+            var super = db.SupervisorAuxiliars.Find(SuperId);
+
+            if(repre!=null)
+            {
+                db.RepresentantesLegals.Remove(repre);
+                db.SaveChanges();
+            }
+
+
+            return PartialView("_RepresentanteLegal", super);
+        }
         public ActionResult ConstitucionAdd(int SuperId)
         {
             var model = db.SupervisorAuxiliars.Find(SuperId);
@@ -84,7 +105,21 @@ namespace DAES.Web.FrontOffice.Controllers
             db.EscrituraConstitucions.Add(modificacion);
             db.SaveChanges();
 
-            return PartialView("Create", model);
+            return PartialView("_Constitucion", model);
+        }
+
+        public ActionResult ConstitucionDelete(int ConstiId, int SuperId)
+        {
+            var consti = db.EscrituraConstitucions.FirstOrDefault(q => q.EscrituraConstitucionId == ConstiId);
+            var super = db.SupervisorAuxiliars.Find(SuperId);
+
+            if (consti != null)
+            {
+                db.EscrituraConstitucions.Remove(consti);
+                db.SaveChanges();
+            }
+
+            return PartialView("_Constitucion", super);
         }
 
         public ActionResult PersonaFacultadaAdd(int SuperId)
@@ -94,7 +129,22 @@ namespace DAES.Web.FrontOffice.Controllers
             db.PersonaFacultadas.Add(facultada);
             db.SaveChanges();
 
-            return PartialView("Create", model);
+            return PartialView("_PersonasFacultadas", model);
+        }
+
+        public ActionResult DeleteFacultada(int FacultadaId, int SuperId)
+        {
+            var facultada = db.PersonaFacultadas.FirstOrDefault(q => q.PersonaFacultadaId == FacultadaId);
+            var super = db.SupervisorAuxiliars.Find(SuperId);
+
+            if (facultada != null)
+            {
+                db.PersonaFacultadas.Remove(facultada);
+                db.SaveChanges();
+            }
+
+
+            return PartialView("_PersonasFacultadas", super);
         }
 
         // GET: RegistroSupervisor
