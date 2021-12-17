@@ -40,7 +40,13 @@ namespace DAES.Web.FrontOffice.Controllers
         public ActionResult Update()
         {
 
+
             return View();
+        }
+
+        public void Search()
+        {
+
         }
     }
 }

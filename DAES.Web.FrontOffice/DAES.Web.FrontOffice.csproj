@@ -470,6 +470,7 @@
     <Content Include="Views\RegistroSupervisor\_Representantes.cshtml" />
     <Content Include="Views\RegistroSupervisor\_Constitucion.cshtml" />
     <Content Include="Views\RegistroSupervisor\_PersonasFacultadas.cshtml" />
+    <Content Include="Views\ActualizacionSupervisor\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />

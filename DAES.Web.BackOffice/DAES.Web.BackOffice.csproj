@@ -265,6 +265,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DocumentoConsultorController.cs" />
     <Compile Include="Controllers\OrganizacionConsultorController.cs" />
+    <Compile Include="Controllers\SupervisorAuxiliarController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\OrganizacionController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
@@ -916,6 +917,7 @@
     <Content Include="Views\TipoOficio\Index.cshtml" />
     <Content Include="Views\Fiscalizacion\Inbox.cshtml" />
     <Content Include="Views\Fiscalizacion\Change.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAES.BLL\DAES.BLL.csproj">

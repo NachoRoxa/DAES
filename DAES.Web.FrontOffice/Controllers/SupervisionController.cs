@@ -40,6 +40,7 @@ namespace DAES.Web.FrontOffice.Controllers
             var facultadas = new PersonaFacultada() { };
 
             ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.NombrePersonaJuridica), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
+            ViewBag.max_tamano_file = Properties.Settings.Default.max_tamano_file;
             
             super.RepresentanteLegals.Add(representante);
             super.ExtractoAuxiliars.Add(extracto);

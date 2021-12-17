@@ -49,7 +49,7 @@ namespace DAES.Web.FrontOffice.Controllers
             db.ExtractoAuxiliars.Add(extracto);
             db.EscrituraConstitucions.Add(escritura);
             db.PersonaFacultadas.Add(facultadas);*/
-            db.SaveChanges();
+            /*db.SaveChanges();*/
 
             super.RepresentanteLegals.Add(representante);
             super.ExtractoAuxiliars.Add(extracto);

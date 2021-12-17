@@ -41,6 +41,10 @@ namespace DAES.Model.SistemaIntegrado
         
         [Display(Name ="Correo Electronico")]
         public string CorreoElectronico { get; set; }
+        [Required(ErrorMessage = "Es necesario adjuntar un documento")]
+        [Display(Name = "Documento")]
+        [DataType(DataType.Upload)]
+        public byte[] DocumentoAdjunto { get; set; }
 
         /*Lista Representante Legal*/
         public virtual List<RepresentanteLegal> RepresentanteLegals { get; set; }
@@ -52,9 +56,6 @@ namespace DAES.Model.SistemaIntegrado
         /*Lista extracto*/
         public virtual List<ExtractoAuxiliar> ExtractoAuxiliars { get; set; }
         /*Lista personas facultadas de supervision*/
-        public virtual List<PersonaFacultada> PersonaFacultadas { get; set; }
-
-        [NotMapped]
-        public virtual List<FileAttach> FileAttaches { get; set; }
+        public virtual List<PersonaFacultada> PersonaFacultadas { get; set; }        
     }
 }

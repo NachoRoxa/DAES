@@ -67,5 +67,16 @@ namespace DAES.Web.FrontOffice.Properties {
                 return ((string)(this["url_gestion_procesos"]));
             }
         }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("52428800")]
+        public long max_tamano_file
+        {
+            get
+            {
+                return ((long)(this["max_tamano_file"]));
+            }
+        }
     }
 }
