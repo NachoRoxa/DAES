@@ -206,6 +206,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -471,6 +472,10 @@
     <Content Include="Views\RegistroSupervisor\_Constitucion.cshtml" />
     <Content Include="Views\RegistroSupervisor\_PersonasFacultadas.cshtml" />
     <Content Include="Views\ActualizacionSupervisor\Update.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\Create.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\_Constitucion.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\_PersonasFacultadas.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\_Representantes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />

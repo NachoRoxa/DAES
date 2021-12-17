@@ -170,30 +170,30 @@
             </div>
         </div>
         @*<div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title" id="documentos" style="text-align:center">Documentos</h5>
-                        <hr />
-                        @if (Model.FileAttaches != null)
-                        {
-                            for (var i = 0; i < Model.FileAttaches.Count(); i++)
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" id="documentos" style="text-align:center">Documentos</h5>
+                            <hr />
+                            @if (Model.FileAttaches != null)
                             {
+                                for (var i = 0; i < Model.FileAttaches.Count(); i++)
+                                {
 
+                                }
+                                <input type="file" name="name" value="Agregar Documento" />
                             }
-                            <input type="file" name="name" value="Agregar Documento" />
-                        }
-                        else
-                        {
-                            <label>
-                                <span class="btn btn-secondary">Agregar Documento</span>
-                                <input class="btn btn-primary btn-rounded" type="file" name="name" value="Agregar Documento" style="display:none" />
-                            </label>
-                        }
+                            else
+                            {
+                                <label>
+                                    <span class="btn btn-secondary">Agregar Documento</span>
+                                    <input class="btn btn-primary btn-rounded" type="file" name="name" value="Agregar Documento" style="display:none" />
+                                </label>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>*@                
+            </div>*@
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -231,14 +231,14 @@
                         <small class="text-danger">Tamaño máximo por cada archivo: 50 MB</small>
                     </div>
                 </div>
-            </div>                    
+            </div>
         </div>
         <p></p>
         <button class="btn btn-primary btn-rounded" type="submit">Enviar solicitud</button>
     }
 </div>
 
-@*<script type="text/javascript">
+<script type="text/javascript">
     const MAXIMO_TAMANIO_BYTES = @ViewBag.max_tamano_file;
     var max = 10, x = 1, cont = 1;
 
@@ -309,4 +309,4 @@
             console.log(archivo);
         }
     });
-</script>*@
+</script>
