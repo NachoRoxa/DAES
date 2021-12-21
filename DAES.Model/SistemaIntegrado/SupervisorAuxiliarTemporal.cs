@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace DAES.Model.SistemaIntegrado
 {
-    [Table("SupervisorAuxiliar")]
-    public class SupervisorAuxiliar
+    [Table("SupervisorAuxiliarTemporal")]
+    public class SupervisorAuxiliarTemporal
     {
-        public SupervisorAuxiliar()
+        public SupervisorAuxiliarTemporal()
         {
             RepresentanteLegals = new List<RepresentanteLegal>();
             EscrituraConstitucionModificaciones = new List<EscrituraConstitucion>();
@@ -20,33 +20,33 @@ namespace DAES.Model.SistemaIntegrado
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name="Id")]
-        public int SupervisorAuxiliarId { get; set; }
+        [Display(Name = "Id")]
+        [Key]
+        public int SupervisorAuxiliarTempId { get; set; }
 
-        [Display(Name ="Razon Social")]
+        [Display(Name = "Razon Social")]
         public string RazonSocial { get; set; }
 
-        [Display(Name ="Tipo de Persona Jurídica")]
+        [Display(Name = "Tipo de Persona Jurídica")]
         public int? TipoPersonaJuridicaId { get; set; }
         public virtual TipoPersonaJuridica TipoPersonaJuridica { get; set; }
 
-        [Display(Name ="RUT")]
+        [Display(Name = "RUT")]
         public string Rut { get; set; }
-        
-        [Display(Name ="Domicilio Legal")]
+
+        [Display(Name = "Domicilio Legal")]
         public string DomicilioLegal { get; set; }
-        
-        [Display(Name ="Telefono")]
+
+        [Display(Name = "Telefono")]
         public string Telefono { get; set; }
-        
-        [Display(Name ="Correo Electronico")]
+
+        [Display(Name = "Correo Electronico")]
         public string CorreoElectronico { get; set; }
+
         [Required(ErrorMessage = "Es necesario adjuntar un documento")]
         [Display(Name = "Documento")]
         [DataType(DataType.Upload)]
         public byte[] DocumentoAdjunto { get; set; }
-
-        public bool Aprobado { get; set; }
 
         /*Lista Representante Legal*/
         public virtual List<RepresentanteLegal> RepresentanteLegals { get; set; }
@@ -58,6 +58,6 @@ namespace DAES.Model.SistemaIntegrado
         /*Lista extracto*/
         public virtual List<ExtractoAuxiliar> ExtractoAuxiliars { get; set; }
         /*Lista personas facultadas de supervision*/
-        public virtual List<PersonaFacultada> PersonaFacultadas { get; set; }        
+        public virtual List<PersonaFacultada> PersonaFacultadas { get; set; }
     }
 }

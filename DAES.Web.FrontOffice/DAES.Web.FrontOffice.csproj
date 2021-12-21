@@ -61,6 +61,9 @@
     <Reference Include="ErrorHandlerMvc, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ErrorHandlerMvc.1.1.5\lib\net451\ErrorHandlerMvc.dll</HintPath>
     </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -279,6 +282,7 @@
     <Content Include="Content\btn_claveunica_172px.png" />
     <Content Include="Content\btn_claveunica_202px.png" />
     <Content Include="Content\claveunica-medium.png" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\header-social-sprite.png" />
     <Content Include="Content\logo-pagina-web3.png" />
     <Content Include="Content\GUIA_AC.pdf" />
@@ -317,6 +321,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\CAC\CACsMENSUAL%282de2%29 v5.xls" />
     <Content Include="Content\CAC\Balance, AC01, AC03, AC12.xlsx" />
+    <Content Include="Grid.mvc.readme" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Produccion.pubxml" />
     <Content Include="Content\Site.css" />
@@ -331,6 +336,9 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\expressive.annotations.validate.js" />
     <Content Include="Scripts\expressive.annotations.validate.min.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -476,6 +484,10 @@
     <Content Include="Views\SupervisorAuxiliar\_Constitucion.cshtml" />
     <Content Include="Views\SupervisorAuxiliar\_PersonasFacultadas.cshtml" />
     <Content Include="Views\SupervisorAuxiliar\_Representantes.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\UpdateSupervisor.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />

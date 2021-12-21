@@ -74,6 +74,7 @@ namespace DAES.Infrastructure.SistemaIntegrado
         public virtual DbSet<EscrituraConstitucion> EscrituraConstitucions { get; set; }
         public virtual DbSet<ExtractoAuxiliar> ExtractoAuxiliars { get; set; }
         public virtual DbSet<PersonaFacultada> PersonaFacultadas { get; set; }
+        public virtual DbSet<SupervisorAuxiliarTemporal> SupervisorAuxiliarTemporals { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

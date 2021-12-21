@@ -161,6 +161,7 @@
     <Compile Include="SistemaIntegrado\Documento.cs" />
     <Compile Include="SistemaIntegrado\OrganizacionLog.cs" />
     <Compile Include="SistemaIntegrado\Proceso.cs" />
+    <Compile Include="SistemaIntegrado\SupervisorAuxiliarTemporal.cs" />
     <Compile Include="SistemaIntegrado\TipoAprobacion.cs" />
     <Compile Include="SistemaIntegrado\TipoPersonaJuridica.cs" />
     <Compile Include="SistemaIntegrado\TipoPrivacidad.cs" />

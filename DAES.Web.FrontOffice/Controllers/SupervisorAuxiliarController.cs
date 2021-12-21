@@ -18,8 +18,10 @@ namespace DAES.Web.FrontOffice.Controllers
         {
             public Search()
             {
-                
+                SupervisoresAuxiliares = new List<SupervisorAuxiliar>();
             }
+            public string Query { get; set; }
+            public ICollection<SupervisorAuxiliar> SupervisoresAuxiliares { get; set; }
         }
 
         public ActionResult Start()
@@ -44,7 +46,91 @@ namespace DAES.Web.FrontOffice.Controllers
             return RedirectToAction(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method, Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller);
             /*return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);*/
         }
-        // GET: SupervisoresAuxiliares
+
+        public ActionResult UpdateSearch()
+        {
+            //TODO Aplicar Clave unica en modo produccion
+            Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method = "Update";
+            /*Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller = "SupervisionAuxiliar";*/
+
+            /*Global.CurrentClaveUnica.ClaveUnicaUser.name = new Name
+            {
+                nombres = new System.Collections.Generic.List<string> { "IGNACIO", "ALFREDO" },
+                apellidos = new System.Collections.Generic.List<string> { "ROCHA", "PAVEZ" }
+            };
+            Global.CurrentClaveUnica.ClaveUnicaUser = new ClaveUnicaUser();
+
+            Global.CurrentClaveUnica.ClaveUnicaUser.RolUnico = new RolUnico
+            {
+                numero = 17957898,
+                DV = "0",
+                tipo = "RUN"
+            };*/
+            return RedirectToAction(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.method, Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.controller);
+            /*return Redirect(Global.CurrentClaveUnica.ClaveUnicaRequestAutorization.uri);*/
+        }
+
+        [AllowAnonymous]
+        public JsonResult Get(string term, int SupervisorAuxiliarTempId)
+        {
+            IQueryable<SupervisorAuxiliar> query = db.SupervisorAuxiliars;
+            query = query.Where(q => q.SupervisorAuxiliarId == SupervisorAuxiliarTempId);
+            if (!string.IsNullOrEmpty(term))
+            {
+                query = query.Where(q => q.RazonSocial.Contains(term));
+            }
+            var result = query
+                .Select(c => new { id = c.SupervisorAuxiliarId, value = c.TipoPersonaJuridicaId })
+                .Take(25)
+                .ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public JsonResult AutoComplete(string term, int SupervisorAuxiliarTempId)
+        {
+            IQueryable<SupervisorAuxiliar> query = db.SupervisorAuxiliars;
+            query = query.Where(q => q.SupervisorAuxiliarId == SupervisorAuxiliarTempId);
+            if(!string.IsNullOrEmpty(term))
+            {
+                query = query.Where(q => q.RazonSocial.Contains(term));
+            }
+            var result = query
+                .Select(c => new { id = c.SupervisorAuxiliarId, value = c.TipoPersonaJuridicaId })
+                .Take(25)
+                .ToList();
+
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
+        /*Funcion para gestionar la vista del Actualizar Supervisor*/
+        public ActionResult UpdateSupervisor(int id)
+        {
+            SupervisorAuxiliar supervisorAuxiliar = db.SupervisorAuxiliars.Find(id);
+            if(supervisorAuxiliar == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.TipoPersonaJuridicaId), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
+            ViewBag.max_tamano_file = Properties.Settings.Default.max_tamano_file;
+            return View(supervisorAuxiliar);
+        }
+
+        /*Funcion para gestioanr la busqueda de un supervisor para su posterior actualizacion*/
+        public ActionResult Update(Search model)
+        {
+            IQueryable<SupervisorAuxiliar> query = db.SupervisorAuxiliars;
+
+            if(!string.IsNullOrEmpty(model.Query))
+            {
+                query = query.Where(q => q.RazonSocial.Contains(model.Query));
+            }
+
+            model.SupervisoresAuxiliares = query.ToList();
+            return View(model);
+        }
         public ActionResult Index()
         {
             var super = new SupervisorAuxiliar();
@@ -53,20 +139,20 @@ namespace DAES.Web.FrontOffice.Controllers
 
         public ActionResult Create()
         {
-            var super = new SupervisorAuxiliar() { };
-            var representante = new RepresentanteLegal() { };
-            var extracto = new ExtractoAuxiliar() { };
-            var escritura = new EscrituraConstitucion() { };
-            var facultadas = new PersonaFacultada() { };
+            var super = new SupervisorAuxiliarTemporal() { };
+            var representante = new RepresentanteLegal() { SupervisorAuxiliarId = super.SupervisorAuxiliarTempId };
+            var extracto = new ExtractoAuxiliar() { SupervisorAuxiliarId = super.SupervisorAuxiliarTempId };
+            var escritura = new EscrituraConstitucion() { SupervisorAuxiliarId = super.SupervisorAuxiliarTempId };
+            var facultadas = new PersonaFacultada() { SupervisorAuxiliarId = super.SupervisorAuxiliarTempId };
 
             ViewBag.TipoPersonaJuridicaId = new SelectList(db.TipoPersonaJuridicas.OrderBy(q => q.TipoPersonaJuridicaId), "TipoPersonaJuridicaId", "NombrePersonaJuridica");
             ViewBag.max_tamano_file = Properties.Settings.Default.max_tamano_file;
-            db.SupervisorAuxiliars.Add(super);
+            db.SupervisorAuxiliarTemporals.Add(super);
             /*db.RepresentantesLegals.Add(representante);
             db.ExtractoAuxiliars.Add(extracto);
             db.EscrituraConstitucions.Add(escritura);
-            db.PersonaFacultadas.Add(facultadas);*/
-            /*db.SaveChanges();*/
+            db.PersonaFacultadas.Add(facultadas);
+            db.SaveChanges();*/
 
             super.RepresentanteLegals.Add(representante);
             super.ExtractoAuxiliars.Add(extracto);
@@ -97,7 +183,7 @@ namespace DAES.Web.FrontOffice.Controllers
             }
 
 
-            return PartialView("_RepresentanteLegal", super);
+            return PartialView("_Representante", super);
         }
         public ActionResult ConstitucionAdd(int SuperId)
         {
