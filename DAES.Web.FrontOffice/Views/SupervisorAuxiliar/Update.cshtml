@@ -45,27 +45,3 @@
         </div>
     </div>
 }
-
-<script>
-    $(document).ready(function () {
-        $("#RazonSocial").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "/SupervisorAuxiliar/AutoComplete/",
-                    data: { term: request.term, TipoPersonaJuridica: $('select[name=TipoPersonaJuridicaId]').val() },
-                    type: "POST",
-                    success: function (data) {
-                        response($.map(data,
-                            function (item) {
-                                return { id: item.id, value: item.value };
-                            }));
-                    }
-                });
-            },
-            select: function (event, ui) {
-                $("#RazonSocial").val(ui.item.value);
-                $("#SupervisorAuxiliarId").val(ui.item.id);
-                return false;
-            }
-        });
-</script>

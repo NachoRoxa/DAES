@@ -488,6 +488,7 @@
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\SupervisorAuxiliar\Update.cshtml" />
+    <Content Include="Views\SupervisorAuxiliar\_RepresentantesUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\CorreoAutomatico.html" />
