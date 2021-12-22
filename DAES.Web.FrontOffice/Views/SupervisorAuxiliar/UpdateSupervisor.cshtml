@@ -51,13 +51,13 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        @Html.EditorFor(m => m.RazonSocial, new { htmlAttributes = new { @class = "form-control col-11" } })
+                                        @Html.EditorFor(m => m.RazonSocial, new { htmlAttributes = new { @class = "form-control col-11", @disabled = "disabled" } })
                                     </td>
                                     <td>
-                                        @Html.DropDownListFor(model => model.TipoPersonaJuridica.TipoPersonaJuridicaId, (SelectList)ViewBag.TipoPersonaJuridicaId, "Seleccione...", htmlAttributes: new { @class = "form-control col-11" })
+                                        @Html.DropDownListFor(model => model.TipoPersonaJuridica.TipoPersonaJuridicaId, (SelectList)ViewBag.TipoPersonaJuridicaId, "Seleccione...", htmlAttributes: new { @class = "form-control col-11", @disabled = "disabled" })
                                     </td>
                                     <td>
-                                        @Html.EditorFor(m => m.Rut, new { htmlAttributes = new { @class = "form-control col-11" } })
+                                        @Html.EditorFor(m => m.Rut, new { htmlAttributes = new { @class = "form-control col-11", @disabled = "disabled" } })
                                     </td>
                                     <td>
                                         @Html.EditorFor(m => m.DomicilioLegal, new { htmlAttributes = new { @class = "form-control col-11" } })
@@ -81,11 +81,11 @@
                     <div class="card-body" id="representantes">
                         <h5 class="card-title" style="text-align:center">Representantes Legales</h5>
                         <hr />
-                        @if (Model.RepresentanteLegals.Count() != 0 || Model.RepresentanteLegals != null)
+                        @*@if (Model.RepresentanteLegals.Count() != 0 || Model.RepresentanteLegals != null)
                         {
-                            @Html.Partial("_Representantes", Model)
+                            @Html.Partial("_RepresentantesUpdate", Model)
                         }
-                        @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })
+                        @Ajax.ActionLink("Agregar Representante Legal", "RepresentanteAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "representantes" })*@
                     </div>
                 </div>
             </div>
@@ -96,10 +96,10 @@
                     <div class="card-body" id="constitucion">
                         <h5 class="card-title" style="text-align:center">Escritura de Constitución</h5>
                         <hr />
-                        @if (Model.EscrituraConstitucionModificaciones.Count() != 0)
+                        @*@if (Model.EscrituraConstitucionModificaciones.Count() != 0)
                         {
                             @Html.Partial("_Constitucion", Model)
-                        }
+                        }*@
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                         <h5 class="card-title" style="text-align:center">Extracto</h5>
                         <hr />
                         <table class="table table-striped">
-                            @if (Model.ExtractoAuxiliars.Count() != 0)
+                           @* @if (Model.ExtractoAuxiliars.Count() != 0)
                             {
                                 for (var i = 0; i < Model.ExtractoAuxiliars.Count; i++)
                                 {
@@ -160,7 +160,7 @@
                                         </tr>
                                     </tbody>
                                 }
-                            }
+                            }*@
 
                         </table>
                     </div>
@@ -173,51 +173,24 @@
                     <div class="card-body" id="personasFacultadas">
                         <h5 class="card-title" style="text-align:center">Personas Facultadas para firmar Informes de supervisión</h5>
                         <hr />
-                        @if (Model.PersonaFacultadas.Count != 0)
+                        @*@if (Model.PersonaFacultadas.Count != 0)
                         {
                             @Html.Partial("_PersonasFacultadas", Model)
                         }
-                        @Ajax.ActionLink("Agregar Persona Facultada", "PersonaFacultadaAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "personasFacultadas" })
+                        @Ajax.ActionLink("Agregar Persona Facultada", "PersonaFacultadaAdd", null, new { Model.SupervisorAuxiliarId }, new AjaxOptions { UpdateTargetId = "personasFacultadas" })*@
                     </div>
                 </div>
             </div>
-        </div>
-        @*<div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title" id="documentos" style="text-align:center">Documentos</h5>
-                            <hr />
-                            @if (Model.FileAttaches != null)
-                            {
-                                for (var i = 0; i < Model.FileAttaches.Count(); i++)
-                                {
-
-                                }
-                                <input type="file" name="name" value="Agregar Documento" />
-                            }
-                            else
-                            {
-                                <label>
-                                    <span class="btn btn-secondary">Agregar Documento</span>
-                                    <input class="btn btn-primary btn-rounded" type="file" name="name" value="Agregar Documento" style="display:none" />
-                                </label>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+        </div>        
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title text-center font-weight-bold">Adjuntar Documentos</p>
                         <hr />
-                        <ul>
                             <li class="card-title text-info">
                                 Adjunte documentos necesarios para este trámite
                             </li>
-                        </ul>
                         <hr />
 
                         <div class="input_field">
@@ -279,19 +252,14 @@
     function validar(conta) {
         const archivo = document.getElementById('DocumentoAdjunto' + conta).value;
         extension = archivo.substring(archivo.lastIndexOf('.'), archivo.length);
-        //dandoll
+        
         const DocumentoAdjuntadoDI = document.querySelector('#DocumentoAdjunto' + conta).files[0];
         console.log(DocumentoAdjuntadoDI);
 
         if (DocumentoAdjuntadoDI.size > MAXIMO_TAMANIO_BYTES) {
             alert("El tamaño máximo es 50 MB por archivo");
             document.getElementById('DocumentoAdjunto' + conta).value = "";
-        }
-        //if (document.getElementById('DocumentoAdjunto' + conta).getAttribute('accept').split(',').indexOf(extension) < 0) {
-        //    alert('Formato Incorrecto ' + extension + ' Solo se acpetan documentos de tipo Word, Excel o Pdf');
-        //    document.getElementById('DocumentoAdjunto' + conta).value = "";
-        //    cont++;
-        //}
+        }        
     }
 
     $('#re').on("click", function () {
