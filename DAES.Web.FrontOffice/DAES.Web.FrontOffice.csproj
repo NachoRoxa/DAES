@@ -356,6 +356,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="SQL\TablasTramite5.sql" />
     <Content Include="Views\Articulo90IncisoPrimero\Index.cshtml" />
     <Content Include="Views\Articulo90IncisoSegundo\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\cacFactor.cshtml" />
